@@ -1,0 +1,7 @@
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\Login.Resources.resources
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\Login.dll
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\Login.xml
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\Login.pdb

@@ -1,0 +1,177 @@
+.header{
+ /* color:#00cc99; */
+ border-left:solid 5px #ff9900;
+ border-bottom: 1px solid #CCC;
+ top:0;
+ left:0;
+ padding:0px;
+ position:fixed;
+ width:100%;
+ font-size:20px;
+}
+.header li{
+	float:left;
+}
+
+.title{
+	margin-left:5%;
+	margin:23px 0 0 37px;
+	float:left;
+}
+.login1{
+	margin:23px 0 0 37px;
+	clear:both;
+}
+.login2{
+	margin-left:15%;
+
+}
+.logout{
+	margin-left:7%;
+}
+
+li{
+	list-style:none;
+}
+
+
+/*
+
+ #main{
+	margin: 60px 0 0 0;
+	padding:0 0 0 50px;
+	width:100%;
+}
+ #main li{
+	position:relative;
+	float:left;
+	margin: 0;
+	width:20%;
+}
+
+ #main li ul {
+ 	position: absolute;
+ 	z-index: 100;
+ 	top: 100%;
+	left: 0;
+	width:100%;
+	margin: 0;
+	padding: 0;
+}
+
+ #main li ul li {
+	overflow: hidden;
+	width:200%;
+	height: 0;
+	color: #fff;
+	transition: .2s;
+	background: #7c8c0e;
+}
+
+#main > li:hover > ul >li{
+	background-color:#40E0D0;
+	height: 200px; 
+	width:200px;
+	
+}
+*/
+
+/*検索ボタン内*/
+ #main{
+	margin: 60px 0 0 0;
+	padding:0 0 0 50px;
+	width:100%;
+}
+#main li{
+	float:left;
+}
+#main li ol{
+	position: absolute;
+	border:solid 5px #ff9900;
+	display:none;
+	height:300px;
+	width:90%;
+}
+
+/*改行*/
+#id_1l_1{
+	clear:both;
+	margin-left:5.6%;
+}
+#id_1l_2{
+	margin-left:10%;
+}
+
+ #id_2l_1{
+	clear:both;
+	margin-left:1.9%;
+}
+#id_2l_2{
+	margin-left:4.4%;
+}
+
+ #id_3l{
+	clear:both;
+}
+#id_4l_1{
+	clear:both;
+	margin-left:3.7%;
+}
+#id_4l_2{
+	margin-left:4.5%;
+}
+
+#id_5l{
+	clear:both;
+	margin-left:3.7%;
+}
+
+#main li ol li{
+	font-size:150%;
+
+}
+
+ #id_button{
+ 	position:absolute;
+	bottom:7%;
+	left:40%;
+}
+
+.cl_text{
+	margin-left:1%;
+}
+
+/*メニュー項目*/
+button{
+	font-size:20px;
+	font-weight:bold;
+	padding:10px 30px;
+	background-color: #48D1CC;
+	border-style:none;
+	box-shadow: 2px 2px 3px 1px #666;
+	color:#fff;
+}
+.zenken{
+	margin-left:5%;
+}
+.sakujyo{
+	margin-left:5%;
+}
+.IDhakkou{
+	margin-left:35%;
+}
+.kaisyaitiran{
+	margin-left:5%;
+}
+
+
+
+
+
+footer{
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height:100xp;
+	text-align:center;
+}

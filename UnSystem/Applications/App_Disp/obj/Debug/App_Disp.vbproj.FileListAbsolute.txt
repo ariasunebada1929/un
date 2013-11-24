@@ -1,0 +1,14 @@
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\ResolveAssemblyReference.cache
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\App_Disp.Resources.resources
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\GenerateResource.read.1.tlog
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\GenerateResource.write.1.tlog
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\bin\App_Disp.dll
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\bin\App_Disp.pdb
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\bin\App_Disp.xml
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\bin\DB_Access.dll
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\bin\MySql.Data.dll
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\bin\DB_Access.pdb
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\bin\DB_Access.xml
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\App_Disp.dll
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\App_Disp.xml
+C:\Documents and Settings\Administrator\デスクトップ\UnSystem\Applications\App_Disp\obj\Debug\App_Disp.pdb

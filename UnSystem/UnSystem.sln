@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Web Developer Express 2010
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "DB_Access", "Applications\DBAccess\DB_Access.vbproj", "{FA70DB7C-7728-4AE5-9685-D60CA49AC079}"
+EndProject
+Project("{F184B08F-C81C-45F6-A57F-5ABD9991F28F}") = "App_Disp", "Applications\App_Disp\App_Disp.vbproj", "{8EFA6FBB-A4B2-4F41-B35C-9D2CD7680A68}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FA70DB7C-7728-4AE5-9685-D60CA49AC079}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FA70DB7C-7728-4AE5-9685-D60CA49AC079}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FA70DB7C-7728-4AE5-9685-D60CA49AC079}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FA70DB7C-7728-4AE5-9685-D60CA49AC079}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8EFA6FBB-A4B2-4F41-B35C-9D2CD7680A68}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8EFA6FBB-A4B2-4F41-B35C-9D2CD7680A68}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8EFA6FBB-A4B2-4F41-B35C-9D2CD7680A68}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8EFA6FBB-A4B2-4F41-B35C-9D2CD7680A68}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
