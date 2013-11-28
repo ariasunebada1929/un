@@ -77,7 +77,8 @@ Public Class Common
 
             lstitem = New ListItem
             lstitem.Value = CStr(9999)
-            lstitem.Text = iyear.ToString
+            lstitem.Text = "----"
+            lstYear.Items.Add(lstitem)
 
             ' 就業期間には現在の年を選択状態にする
             lstYear.SelectedValue = Now.ToString("yyyy")

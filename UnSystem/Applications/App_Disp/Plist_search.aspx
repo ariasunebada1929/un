@@ -74,7 +74,7 @@
 		
 		<li id="id_4l_1">年齢</li>
 		<li class="cl_text">
-			<asp:TextBox ID="id_Age" name="na_Age" runat="server" MaxLength="2" Height="18px" Width="20px"></asp:TextBox>
+			<asp:DropDownList id="lst_Age" name="na_Age" runat="server" Height="22px" />
 		</li>
 		<li>歳</li>
 

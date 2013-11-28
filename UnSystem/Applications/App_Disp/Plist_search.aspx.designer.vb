@@ -131,13 +131,13 @@ Partial Public Class Plist_search
     Protected WithEvents lstToDay As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''id_Age コントロール。
+    '''lst_Age コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_Age As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lst_Age As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
     '''id_OverUnder コントロール。

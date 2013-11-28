@@ -49,6 +49,9 @@ Public Class Plist_search
         ' 就業期間取得
         clsCommon.GetFromToDate(lstFromYear, lstFromMonth, lstFromDay, lstToYear, lstToMonth, lstToDay)
 
+        ' 年齢
+        'lstworkitem.Value =
+
     End Sub
 
 End Class
