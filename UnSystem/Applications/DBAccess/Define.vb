@@ -16,6 +16,19 @@ Public Class Define
         Work = 1
     End Enum
 
+    ' 閾値
+    Enum ThresholdStatus
+        AndOver
+        AndLess
+        Equal
+    End Enum
+
+    ' 性別
+    Enum Sex
+        Man
+        Woman
+    End Enum
+
     ' メッセージ(※メッセージは全てここに定義)
     Enum Message
         SystemErr

@@ -131,49 +131,49 @@ Partial Public Class Plist_search
     Protected WithEvents lstToDay As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''lst_Age コントロール。
+    '''lstAge コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lst_Age As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lstAge As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''id_OverUnder コントロール。
+    '''lstThreshold コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_OverUnder As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lstThreshold As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''SexList コントロール。
+    '''lstSex コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents SexList As Global.System.Web.UI.WebControls.DropDownList
+    Protected WithEvents lstSex As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''id_Search コントロール。
+    '''btnSearch コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_Search As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnSearch As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''id_Close コントロール。
+    '''btnClose コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_Close As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnClose As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''id_Zenken コントロール。

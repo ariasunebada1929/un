@@ -50,7 +50,39 @@ Public Class Plist_search
         clsCommon.GetFromToDate(lstFromYear, lstFromMonth, lstFromDay, lstToYear, lstToMonth, lstToDay)
 
         ' 年齢
-        'lstworkitem.Value =
+        clsCommon.GetAge(lstAge)
+
+        ' 閾値
+        Dim lstThresholditem As New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndOver)
+        lstThresholditem.Text = " 以上 "
+
+        lstThreshold.Items.Add(lstThresholditem)
+
+        lstThresholditem = New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndLess)
+        lstThresholditem.Text = " 以下 "
+
+        lstThreshold.Items.Add(lstThresholditem)
+
+        lstThresholditem = New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.Equal)
+        lstThresholditem.Text = " 等しい "
+
+        lstThreshold.Items.Add(lstThresholditem)
+
+        ' 性別
+        Dim lstSexitem As New ListItem
+        lstSexitem.Value = CStr(Define.Sex.Man)
+        lstSexitem.Text = " 男 "
+
+        lstSex.Items.Add(lstSexitem)
+
+        lstSexitem = New ListItem
+        lstSexitem.Value = CStr(Define.Sex.Woman)
+        lstSexitem.Text = " 女 "
+
+        lstSex.Items.Add(lstSexitem)
 
     End Sub
 

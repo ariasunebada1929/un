@@ -26,6 +26,26 @@ Public Class Common
     End Function
 
     ''' <summary>
+    ''' 年齢取得関数
+    ''' </summary>
+    ''' <param name="lstAge">年齢</param>
+    ''' <remarks>指定したDefineでメッセージを取得</remarks>
+    Public Sub GetAge(ByRef lstAge As DropDownList)
+
+        ' 就業期間(※現在の日付より未来1年間、過去4年間の日付を取得する。)
+        Dim lstitem As New ListItem
+
+        ' 年のリストを作成
+        For i As Int32 = 15 To 60
+            lstitem = New ListItem
+            lstitem.Value = CStr(i)
+            lstitem.Text = i.ToString
+            lstAge.Items.Add(lstitem)
+        Next
+
+    End Sub
+
+    ''' <summary>
     ''' 期間作成関数(開始年)
     ''' </summary>
     ''' <param name="lstFromYear">期間年</param>
