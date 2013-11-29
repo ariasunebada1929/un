@@ -46,6 +46,71 @@ Public Class Common
     End Sub
 
     ''' <summary>
+    ''' 性別取得
+    ''' </summary>
+    ''' <param name="lstSex">性別</param>
+    ''' <remarks>性別のコンボボックスを取得</remarks>
+    Public Sub GetSex(ByRef lstSex As DropDownList)
+        ' 性別
+        Dim lstSexitem As New ListItem
+        lstSexitem.Value = CStr(Define.Sex.Man)
+        lstSexitem.Text = " 男 "
+
+        lstSex.Items.Add(lstSexitem)
+
+        lstSexitem = New ListItem
+        lstSexitem.Value = CStr(Define.Sex.Woman)
+        lstSexitem.Text = " 女 "
+
+        lstSex.Items.Add(lstSexitem)
+    End Sub
+
+    ''' <summary>
+    ''' 閾値取得
+    ''' </summary>
+    ''' <param name="lstThreshold">閾値</param>
+    ''' <remarks>閾値のコンボボックスを取得</remarks>
+    Public Sub GetThreshold(ByRef lstThreshold As DropDownList)
+        ' 閾値
+        Dim lstThresholditem As New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndOver)
+        lstThresholditem.Text = " 以上 "
+
+        lstThreshold.Items.Add(lstThresholditem)
+
+        lstThresholditem = New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndLess)
+        lstThresholditem.Text = " 以下 "
+
+        lstThreshold.Items.Add(lstThresholditem)
+
+        lstThresholditem = New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.Equal)
+        lstThresholditem.Text = " 等しい "
+
+        lstThreshold.Items.Add(lstThresholditem)
+    End Sub
+
+    ''' <summary>
+    ''' 就業状況取得
+    ''' </summary>
+    ''' <param name="lstWork">就業状況</param>
+    ''' <remarks>就業状況のコンボボックスを取得</remarks>
+    Public Sub GetWork(ByRef lstWork As DropDownList)
+        Dim lstworkitem As New ListItem
+        lstworkitem.Value = CStr(Define.WorkStatus.Free)
+        lstworkitem.Text = " 空き "
+
+        lstWork.Items.Add(lstworkitem)
+
+        lstworkitem = New ListItem
+        lstworkitem.Value = CStr(Define.WorkStatus.Work)
+        lstworkitem.Text = " 就業中 "
+
+        lstWork.Items.Add(lstworkitem)
+    End Sub
+
+    ''' <summary>
     ''' 期間作成関数(開始年)
     ''' </summary>
     ''' <param name="lstFromYear">期間年</param>

@@ -3,6 +3,9 @@
 Public Class Plist_search
     Inherits System.Web.UI.Page
 
+    ''' <summary>
+    ''' ロード処理
+    ''' </summary>
     Protected Sub Page_Load(ByVal sender As Object, ByVal e As System.EventArgs) Handles Me.Load
 
         Dim clsCommon As New Common
@@ -31,66 +34,39 @@ Public Class Plist_search
 
     End Sub
 
+    ''' <summary>
+    ''' 画面項目初期化
+    ''' </summary>
+    ''' <param name="clsCommon">共通取得クラス</param>
+    ''' <remarks>画面情報を初期化</remarks>
     Private Sub InitDisplay(ByVal clsCommon As Common)
 
         ' 就業状況
-        Dim lstworkitem As New ListItem
-        lstworkitem.Value = CStr(Define.WorkStatus.Free)
-        lstworkitem.Text = " 空き "
-
-        lstWork.Items.Add(lstworkitem)
-
-        lstworkitem = New ListItem
-        lstworkitem.Value = CStr(Define.WorkStatus.Work)
-        lstworkitem.Text = " 就業中 "
-
-        lstWork.Items.Add(lstworkitem)
-
+        clsCommon.GetWork(lstWork)
         ' 就業期間取得
         clsCommon.GetFromToDate(lstFromYear, lstFromMonth, lstFromDay, lstToYear, lstToMonth, lstToDay)
-
         ' 年齢
         clsCommon.GetAge(lstAge)
-
         ' 閾値
-        Dim lstThresholditem As New ListItem
-        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndOver)
-        lstThresholditem.Text = " 以上 "
-
-        lstThreshold.Items.Add(lstThresholditem)
-
-        lstThresholditem = New ListItem
-        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndLess)
-        lstThresholditem.Text = " 以下 "
-
-        lstThreshold.Items.Add(lstThresholditem)
-
-        lstThresholditem = New ListItem
-        lstThresholditem.Value = CStr(Define.ThresholdStatus.Equal)
-        lstThresholditem.Text = " 等しい "
-
-        lstThreshold.Items.Add(lstThresholditem)
-
+        clsCommon.GetThreshold(lstThreshold)
         ' 性別
-        Dim lstSexitem As New ListItem
-        lstSexitem.Value = CStr(Define.Sex.Man)
-        lstSexitem.Text = " 男 "
-
-        lstSex.Items.Add(lstSexitem)
-
-        lstSexitem = New ListItem
-        lstSexitem.Value = CStr(Define.Sex.Woman)
-        lstSexitem.Text = " 女 "
-
-        lstSex.Items.Add(lstSexitem)
+        clsCommon.GetSex(lstSex)
 
     End Sub
 
+#Region "ボタンイベント"
+
+    ''' <summary>
+    ''' ID発行ボタンクリック
+    ''' </summary>
+    ''' <remarks>ID発行画面へ遷移する</remarks>
     Protected Sub id_Hakkou_Click(sender As Object, e As EventArgs) Handles id_Hakkou.Click
 
         ' ID発行画面へ遷移
         Response.Redirect("CreateID.aspx", False)
 
     End Sub
+
+#End Region
 
 End Class
