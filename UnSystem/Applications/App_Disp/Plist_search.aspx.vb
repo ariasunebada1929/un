@@ -86,4 +86,11 @@ Public Class Plist_search
 
     End Sub
 
+    Protected Sub id_Hakkou_Click(sender As Object, e As EventArgs) Handles id_Hakkou.Click
+
+        ' ID発行画面へ遷移
+        Response.Redirect("CreateID.aspx", False)
+
+    End Sub
+
 End Class
