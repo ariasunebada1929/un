@@ -53,6 +53,12 @@ Public Class Common
     Public Sub GetSex(ByRef lstSex As DropDownList)
         ' 性別
         Dim lstSexitem As New ListItem
+        lstSexitem.Value = CStr(Define.Sex.None)
+        lstSexitem.Text = " -- "
+
+        lstSex.Items.Add(lstSexitem)
+
+        lstSexitem = New ListItem
         lstSexitem.Value = CStr(Define.Sex.Man)
         lstSexitem.Text = " 男 "
 
@@ -98,6 +104,12 @@ Public Class Common
     ''' <remarks>就業状況のコンボボックスを取得</remarks>
     Public Sub GetWork(ByRef lstWork As DropDownList)
         Dim lstworkitem As New ListItem
+        lstworkitem.Value = CStr(Define.WorkStatus.None)
+        lstworkitem.Text = " -- "
+
+        lstWork.Items.Add(lstworkitem)
+
+        lstworkitem = New ListItem
         lstworkitem.Value = CStr(Define.WorkStatus.Free)
         lstworkitem.Text = " 空き "
 

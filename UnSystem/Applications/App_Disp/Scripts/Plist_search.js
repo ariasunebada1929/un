@@ -1,4 +1,4 @@
-﻿function SearchButton() {
+﻿function SearchInputButton() {
     document.getElementById('na_Search').style.display = 'block';
     return false;
 }
@@ -6,6 +6,29 @@
 function CloseButton() {
     document.getElementById('na_Search').style.display = 'none';
     return false;
+}
+
+/* 検索ボタン処理 */
+function SearchButton() {
+
+    var datefrom;
+    var dateto;
+
+    datefrom = document.getElementById('lstFromYear').value;
+    datefrom += document.getElementById('lstFromMonth').value;
+    datefrom += document.getElementById('lstFromDay').value;
+
+    dateto = document.getElementById('lstToYear').value;
+    dateto += document.getElementById('lstToMonth').value;
+    dateto += document.getElementById('lstToDay').value;
+
+    if (parseInt(dateto) > parseInt(datefrom)) {
+        alert("就業期間の日付が逆転しています");
+        document.getElementById('lstFromYear').focus();
+        return false;
+    }
+
+    return true;
 }
 
 /* 年月(開始)変更時のイベント */

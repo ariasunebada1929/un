@@ -28,7 +28,6 @@ Public Class Plist_search
             End If
 
         Catch ex As Exception
-
             MsgBox(clsCommon.GetMessage(Define.Message.SystemErr))
         End Try
 
@@ -57,10 +56,21 @@ Public Class Plist_search
 #Region "ボタンイベント"
 
     ''' <summary>
+    ''' 検索ボタンクリック
+    ''' </summary>
+    ''' <remarks>入力された条件で検索を行う</remarks>
+    Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+
+        ' 入力情報を取得
+
+
+    End Sub
+
+    ''' <summary>
     ''' ID発行ボタンクリック
     ''' </summary>
     ''' <remarks>ID発行画面へ遷移する</remarks>
-    Protected Sub id_Hakkou_Click(sender As Object, e As EventArgs) Handles id_Hakkou.Click
+    Protected Sub btnHakkou_Click(sender As Object, e As EventArgs) Handles btnHakkou.Click
 
         ' ID発行画面へ遷移
         Response.Redirect("CreateID.aspx", False)

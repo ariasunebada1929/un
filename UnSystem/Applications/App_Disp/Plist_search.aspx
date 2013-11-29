@@ -23,7 +23,7 @@
 	</ol>
 	<ul id ="main">
 	<li class="kesnaku">
-	<asp:Button ID="id_SearchForm" class="button" runat="server" Text="検索" OnClientClick="return SearchButton()"/>
+		<asp:Button ID="btnSearchInput" class="button" runat="server" Text="検索入力" OnClientClick="return SearchInputButton()"/>
 		<ol id="na_Search">
 		<li>検索条件</li>
 			<li id ="id_1l_1">姓</li>
@@ -90,7 +90,7 @@
 		<li id="id_5l">言語</li>
 
 		<li id ="id_button">
-			<asp:Button ID="btnSearch" runat="server" Text="検索"/>
+			<asp:Button ID="btnSearch" runat="server" Text="検索" OnClientClick="return SearchButton()"/>
 			<asp:Button ID="btnClose" runat="server" Text="閉じる" OnClientClick="return CloseButton()"/>
 		</li>
 	</ol>
@@ -98,7 +98,7 @@
 
 	<li class="zenken"><asp:Button ID="id_Zenken" class="button" runat="server" Text="全件表示"/></li>
 	<li class="sakujyo"><asp:Button ID="id_Sakujyo" class="button" runat="server" Text="削除"/></li>
-	<li class="IDhakkou"><asp:Button ID="id_Hakkou" class="button" runat="server" Text="ID発行"/></li>
+	<li class="IDhakkou"><asp:Button ID="btnHakkou" class="button" runat="server" Text="ID発行"/></li>
 	<li class="kaisyaitiran"><asp:Button ID="id_Itiran"  class="button" runat="server" Text="会社一覧"/></li>
 </ul>
 	

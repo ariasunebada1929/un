@@ -32,13 +32,13 @@ Partial Public Class Plist_search
     Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''id_SearchForm コントロール。
+    '''btnSearchInput コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_SearchForm As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnSearchInput As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''id_firstname コントロール。
@@ -194,13 +194,13 @@ Partial Public Class Plist_search
     Protected WithEvents id_Sakujyo As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''id_Hakkou コントロール。
+    '''btnHakkou コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_Hakkou As Global.System.Web.UI.WebControls.Button
+    Protected WithEvents btnHakkou As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''id_Itiran コントロール。
