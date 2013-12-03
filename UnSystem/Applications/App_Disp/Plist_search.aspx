@@ -27,13 +27,13 @@
 		<ol id="na_Search">
 		<li>検索条件</li>
 			<li id ="id_1l_1">姓</li>
-			<li class="cl_text_1l_1"><asp:TextBox ID="id_firstname" name="na_firstname" runat="server" MaxLength="10" Height="17px"></asp:TextBox>
+			<li class="cl_text_1l_1"><asp:TextBox ID="txtfirstname" name="na_firstname" runat="server" MaxLength="10" Height="17px"></asp:TextBox>
 			</li>
 			<li id="id_1l_2">名</li>
-			<li class="cl_text"><asp:TextBox ID="id_lastname" name="na_lastname" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
+			<li class="cl_text"><asp:TextBox ID="txtlastname" name="na_lastname" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
 			</li>
 			<li id="id_2l_1">会社名</li>
-			<li class="cl_text"><asp:TextBox ID="id_company" name="na_company" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
+			<li class="cl_text"><asp:TextBox ID="txtcompany" name="na_company" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
 			</li>
 
 			<li id="id_2l_2">就業状況</li>

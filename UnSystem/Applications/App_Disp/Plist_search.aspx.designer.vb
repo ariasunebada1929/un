@@ -41,31 +41,31 @@ Partial Public Class Plist_search
     Protected WithEvents btnSearchInput As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''id_firstname コントロール。
+    '''txtfirstname コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_firstname As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtfirstname As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''id_lastname コントロール。
+    '''txtlastname コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_lastname As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtlastname As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''id_company コントロール。
+    '''txtcompany コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents id_company As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents txtcompany As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''lstWork コントロール。

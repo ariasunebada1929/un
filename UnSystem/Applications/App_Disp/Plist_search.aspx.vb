@@ -63,7 +63,6 @@ Public Class Plist_search
 
         ' 入力情報を取得
 
-
     End Sub
 
     ''' <summary>
