@@ -14,119 +14,182 @@ Option Explicit On
 Partial Public Class PersonalInput
 
     '''<summary>
-    '''form1 コントロール。
+    '''Head1 コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
+    Protected WithEvents Head1 As Global.System.Web.UI.HtmlControls.HtmlHead
 
     '''<summary>
-    '''lblTitle コントロール。
+    '''form2 コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents form2 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
-    '''lblLoginUserTitle コントロール。
+    '''lblUserName コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblLoginUserTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lblUserName As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblLoginUser コントロール。
+    '''Label1 コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblLoginUser As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Label1 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''ログアウト コントロール。
+    '''Label2 コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents ログアウト As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents Label2 As Global.System.Web.UI.WebControls.Label
 
     '''<summary>
-    '''lblCompanyTitle コントロール。
+    '''id_firstname コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblCompanyTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents id_firstname As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''lblCompany コントロール。
+    '''id_LastName コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblCompany As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents id_LastName As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''lblNameTitle コントロール。
+    '''TextBox1 コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblNameTitle As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''lblName コントロール。
+    '''lstSex コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lstSex As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''lblFirstName コントロール。
+    '''TextBox3 コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblFirstName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''txtFirstName コントロール。
+    '''TextBox4 コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents txtFirstName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents TextBox4 As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''lblUnderName コントロール。
+    '''lstWork コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents lblUnderName As Global.System.Web.UI.WebControls.Label
+    Protected WithEvents lstWork As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''txtUnderName コントロール。
+    '''lstFromYear コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents txtUnderName As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents lstFromYear As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''lstFromMonth コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents lstFromMonth As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''lstFromDay コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents lstFromDay As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''lstToYear コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents lstToYear As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''lstToMonth コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents lstToMonth As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''lstToDay コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents lstToDay As Global.System.Web.UI.WebControls.DropDownList
+
+    '''<summary>
+    '''id_Register コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents id_Register As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''id_Close コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents id_Close As Global.System.Web.UI.WebControls.Button
 End Class
