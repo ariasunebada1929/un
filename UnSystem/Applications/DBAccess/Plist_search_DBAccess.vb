@@ -50,6 +50,11 @@ Public Class Plist_search_DBAccess
                               " WHERE t1.PersonalID = " & strid & _
                               " AND " & " t1.PersonalPW = " & strpass
 
+        ' 認証用データ取得
+        'Command.CommandText = " SELECT * From un.trn_personal t1" & _
+        '                      " WHERE t1.LastName = " & id_lastname
+        '" AND " & " t1.PersonalPW = " & strpass
+
         ' コマンド送信
         DataReader = Command.ExecuteReader
 
