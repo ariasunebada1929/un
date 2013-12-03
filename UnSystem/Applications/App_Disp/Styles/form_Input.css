@@ -14,7 +14,7 @@
 #id_Inputform{
     margin-top:0;
     border:solid 1px #ff9900;
-    width:800px;
+    width:900px;
     height:110px;
     margin-left:15%;
 }
@@ -34,7 +34,7 @@
 
 #id_2l_1{
     clear:both;
-	margin:1% 0 0 1%;
+	margin:1% 0 0 1.5%;
 }
 
 #id_2l_2{
@@ -47,7 +47,7 @@
 }
 
 #id_3l_2{
-   margin:1% 0 0 8%;
+   margin:1% 0 0 8.5%;
 }
 
 #id_4l_1{
@@ -71,7 +71,7 @@
 #id_InputLevel{
     margin-left:15%;
     border:solid 1px #ff9900;
-    width:800px;
+    width:900px;
     height:200px;
 }
 
