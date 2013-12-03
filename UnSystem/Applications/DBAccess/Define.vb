@@ -12,8 +12,23 @@ Public Class Define
 
     ' 就業状況
     Enum WorkStatus
-        Free = 0
-        Work = 1
+        None
+        Free
+        Work
+    End Enum
+
+    ' 閾値
+    Enum ThresholdStatus
+        AndOver
+        AndLess
+        Equal
+    End Enum
+
+    ' 性別
+    Enum Sex
+        None
+        Man
+        Woman
     End Enum
 
     ' メッセージ(※メッセージは全てここに定義)

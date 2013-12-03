@@ -23,7 +23,7 @@
 	</ol>
 	<ul id ="main">
 	<li class="kesnaku">
-	<asp:Button ID="id_SearchForm" class="button" runat="server" Text="検索" OnClientClick="return SearchButton()"/>
+		<asp:Button ID="btnSearchInput" class="button" runat="server" Text="検索入力" OnClientClick="return SearchInputButton()"/>
 		<ol id="na_Search">
 		<li>検索条件</li>
 			<li id ="id_1l_1">姓</li>
@@ -74,42 +74,31 @@
 		
 		<li id="id_4l_1">年齢</li>
 		<li class="cl_text">
-			<asp:TextBox ID="id_Age" name="na_Age" runat="server" MaxLength="2" Height="18px" Width="20px"></asp:TextBox>
+			<asp:DropDownList id="lstAge" name="na_Age" runat="server" Height="22px" />
 		</li>
 		<li>歳</li>
 
 		<li class="cl_dropdown">
-		<asp:DropDownList id="id_OverUnder"　name="na_OverUnder"
-					runat="server"
-					Height="22px">
-					<asp:ListItem Selected="True" Value="Over"> 以上 </asp:ListItem>
-					<asp:ListItem Value="Under"> 以下 </asp:ListItem>
-					<asp:ListItem Value="equal"> と等しい </asp:ListItem>
-			</asp:DropDownList>
+			<asp:DropDownList id="lstThreshold"　name="na_Threshold" runat="server" Height="22px" />
 		</li>
 
 		<li id="id_4l_2">性別</li>
-			<li  class="cl_text">
-			<asp:DropDownList id="SexList"　name="na_Sex"
-					runat="server"
-					Height="22px">
-					<asp:ListItem Selected="True" Value="Man"> 男 </asp:ListItem>
-					<asp:ListItem Value="Woman"> 女 </asp:ListItem>
-			</asp:DropDownList>
-			</li>
+		<li  class="cl_text">
+			<asp:DropDownList id="lstSex"　name="na_Sex" runat="server" Height="22px" />
+		</li>
 
 		<li id="id_5l">言語</li>
 
 		<li id ="id_button">
-			<asp:Button ID="id_Search" runat="server" Text="検索"/>
-			<asp:Button ID="id_Close" runat="server" Text="閉じる" OnClientClick="return CloseButton()"/>
+			<asp:Button ID="btnSearch" runat="server" Text="検索" OnClientClick="return SearchButton()"/>
+			<asp:Button ID="btnClose" runat="server" Text="閉じる" OnClientClick="return CloseButton()"/>
 		</li>
 	</ol>
 	</li>
 
 	<li class="zenken"><asp:Button ID="id_Zenken" class="button" runat="server" Text="全件表示"/></li>
 	<li class="sakujyo"><asp:Button ID="id_Sakujyo" class="button" runat="server" Text="削除"/></li>
-	<li class="IDhakkou"><asp:Button ID="id_Hakkou" class="button" runat="server" Text="ID発行"/></li>
+	<li class="IDhakkou"><asp:Button ID="btnHakkou" class="button" runat="server" Text="ID発行"/></li>
 	<li class="kaisyaitiran"><asp:Button ID="id_Itiran"  class="button" runat="server" Text="会社一覧"/></li>
 </ul>
 	

@@ -92,6 +92,13 @@
     <Import Include="System.Web.UI.HtmlControls" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CreateID.aspx.designer.vb">
+      <DependentUpon>CreateID.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="CreateID.aspx.vb">
+      <DependentUpon>CreateID.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
     <Compile Include="Login.aspx.designer.vb">
       <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
@@ -151,11 +158,14 @@
       <CustomToolNamespace>My</CustomToolNamespace>
       <LastGenOutput>Settings.Designer.vb</LastGenOutput>
     </None>
+    <Content Include="CreateID.aspx" />
     <Content Include="PersonalInput.aspx" />
     <Content Include="Plist_search.aspx" />
     <Content Include="Scripts\login.js" />
     <Content Include="Scripts\Plist_search.js" />
+    <Content Include="Scripts\Radiobutton.js" />
     <Content Include="Styles\form.css" />
+    <Content Include="Styles\form_common.css" />
     <Content Include="Styles\form_Input.css" />
     <Content Include="Styles\form_Main.css" />
     <Content Include="web.config" />

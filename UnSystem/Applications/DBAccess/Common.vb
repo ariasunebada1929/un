@@ -26,6 +26,103 @@ Public Class Common
     End Function
 
     ''' <summary>
+    ''' 年齢取得関数
+    ''' </summary>
+    ''' <param name="lstAge">年齢</param>
+    ''' <remarks>指定したDefineでメッセージを取得</remarks>
+    Public Sub GetAge(ByRef lstAge As DropDownList)
+
+        ' 就業期間(※現在の日付より未来1年間、過去4年間の日付を取得する。)
+        Dim lstitem As New ListItem
+
+        ' 年のリストを作成
+        For i As Int32 = 15 To 60
+            lstitem = New ListItem
+            lstitem.Value = CStr(i)
+            lstitem.Text = i.ToString
+            lstAge.Items.Add(lstitem)
+        Next
+
+    End Sub
+
+    ''' <summary>
+    ''' 性別取得
+    ''' </summary>
+    ''' <param name="lstSex">性別</param>
+    ''' <remarks>性別のコンボボックスを取得</remarks>
+    Public Sub GetSex(ByRef lstSex As DropDownList)
+        ' 性別
+        Dim lstSexitem As New ListItem
+        lstSexitem.Value = CStr(Define.Sex.None)
+        lstSexitem.Text = " -- "
+
+        lstSex.Items.Add(lstSexitem)
+
+        lstSexitem = New ListItem
+        lstSexitem.Value = CStr(Define.Sex.Man)
+        lstSexitem.Text = " 男 "
+
+        lstSex.Items.Add(lstSexitem)
+
+        lstSexitem = New ListItem
+        lstSexitem.Value = CStr(Define.Sex.Woman)
+        lstSexitem.Text = " 女 "
+
+        lstSex.Items.Add(lstSexitem)
+    End Sub
+
+    ''' <summary>
+    ''' 閾値取得
+    ''' </summary>
+    ''' <param name="lstThreshold">閾値</param>
+    ''' <remarks>閾値のコンボボックスを取得</remarks>
+    Public Sub GetThreshold(ByRef lstThreshold As DropDownList)
+        ' 閾値
+        Dim lstThresholditem As New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndOver)
+        lstThresholditem.Text = " 以上 "
+
+        lstThreshold.Items.Add(lstThresholditem)
+
+        lstThresholditem = New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.AndLess)
+        lstThresholditem.Text = " 以下 "
+
+        lstThreshold.Items.Add(lstThresholditem)
+
+        lstThresholditem = New ListItem
+        lstThresholditem.Value = CStr(Define.ThresholdStatus.Equal)
+        lstThresholditem.Text = " 等しい "
+
+        lstThreshold.Items.Add(lstThresholditem)
+    End Sub
+
+    ''' <summary>
+    ''' 就業状況取得
+    ''' </summary>
+    ''' <param name="lstWork">就業状況</param>
+    ''' <remarks>就業状況のコンボボックスを取得</remarks>
+    Public Sub GetWork(ByRef lstWork As DropDownList)
+        Dim lstworkitem As New ListItem
+        lstworkitem.Value = CStr(Define.WorkStatus.None)
+        lstworkitem.Text = " -- "
+
+        lstWork.Items.Add(lstworkitem)
+
+        lstworkitem = New ListItem
+        lstworkitem.Value = CStr(Define.WorkStatus.Free)
+        lstworkitem.Text = " 空き "
+
+        lstWork.Items.Add(lstworkitem)
+
+        lstworkitem = New ListItem
+        lstworkitem.Value = CStr(Define.WorkStatus.Work)
+        lstworkitem.Text = " 就業中 "
+
+        lstWork.Items.Add(lstworkitem)
+    End Sub
+
+    ''' <summary>
     ''' 期間作成関数(開始年)
     ''' </summary>
     ''' <param name="lstFromYear">期間年</param>
@@ -77,7 +174,8 @@ Public Class Common
 
             lstitem = New ListItem
             lstitem.Value = CStr(9999)
-            lstitem.Text = iyear.ToString
+            lstitem.Text = "----"
+            lstYear.Items.Add(lstitem)
 
             ' 就業期間には現在の年を選択状態にする
             lstYear.SelectedValue = Now.ToString("yyyy")

@@ -94,6 +94,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Message.resx</DependentUpon>
     </Compile>
+    <Compile Include="Plist_search_DBAccess.vb" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="My Project\Resources.resx">
