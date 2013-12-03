@@ -13,14 +13,15 @@
 <body>
 	<form id="form1" runat="server">
 	<div>
-	 <ol class="header">
-		<li class="title">企業ID/個人ID発行画面</li>
-		<li class="login1">ログイン者</li>
-		<li class="login2">さん</li>
-		<li class="logout">
-			<a href="http://localhost/UNPJ/login_HTML.php">ログアウト</a>
-		</li> 
-	</ol>
+    <ol class="header">
+        <li class="title">企業ID/個人ID発行画面</li>
+        <li class="logout">
+            <a href="http://localhost/UNPJ/login_HTML.php">ログアウト</a>
+        </li> 
+        <li class="login1">さん</li>
+        <li class="login2"><asp:Label ID="lblUserName" runat="server"></asp:Label></li>
+        <li class="login3">ログイン者</li>
+    </ol>
 	<div id="main">
 		<asp:RadioButton ID="id_SelectCompany" runat="server" Text="企業" GroupName="CreateIDGroup" name="na_Radio" OnClick="return ClickRadio()" checked="true"/>
 		<asp:RadioButton ID="id_SelectPersonal" runat="server" Text="個人名" GroupName="CreateIDGroup" name="na_Radio" OnClick="return ClickRadio()"/>
