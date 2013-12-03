@@ -101,6 +101,17 @@
 	<li class="IDhakkou"><asp:Button ID="btnHakkou" class="button" runat="server" Text="ID発行"/></li>
 	<li class="kaisyaitiran"><asp:Button ID="id_Itiran"  class="button" runat="server" Text="会社一覧"/></li>
 </ul>
+       <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+             Height="128px" DataSourceID="SqlDataSource2">
+            <Columns>
+                <asp:BoundField HeaderText="選択" />
+                <asp:BoundField HeaderText="会社名" />
+                <asp:BoundField HeaderText="氏名" />
+                <asp:BoundField HeaderText="単価" />
+                <asp:BoundField HeaderText="就業期間" />
+                <asp:BoundField HeaderText="変更" />
+            </Columns>
+        </asp:GridView>
 	
 	</div>
 	</form>
