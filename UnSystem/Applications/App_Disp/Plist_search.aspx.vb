@@ -62,6 +62,11 @@ Public Class Plist_search
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
 
         ' 入力情報を取得
+        Dim clsLoginDBAccess As New LoginDBAccess
+        Dim clsCommon As New Common
+        'Dim DataReader_auth As MySqlDataReader = Nothing
+
+        GridView1.UpdateRow(1, True)
 
     End Sub
 
@@ -77,5 +82,20 @@ Public Class Plist_search
     End Sub
 
 #End Region
+    Protected Sub gridview1_rowCreated(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowCreated
+
+        If e.Row.Cells.Count > 1 Then
+
+            e.Row.Cells(0).Style.Add("width", "40px")
+            e.Row.Cells(1).Style.Add("width", "100px")
+            e.Row.Cells(2).Style.Add("width", "")
+            e.Row.Cells(3).Style.Add("width", "")
+            e.Row.Cells(4).Style.Add("width", "")
+            e.Row.Cells(5).Style.Add("width", "")
+            e.Row.Cells(6).Style.Add("width", "")
+
+        End If
+
+    End Sub
 
 End Class
