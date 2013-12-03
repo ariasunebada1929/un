@@ -166,6 +166,7 @@
     <Content Include="Scripts\Radiobutton.js" />
     <Content Include="Styles\form.css" />
     <Content Include="Styles\form_common.css" />
+    <Content Include="Styles\form_ID.css" />
     <Content Include="Styles\form_Input.css" />
     <Content Include="Styles\form_Main.css" />
     <Content Include="web.config" />
