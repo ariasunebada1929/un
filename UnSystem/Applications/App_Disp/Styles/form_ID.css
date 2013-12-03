@@ -1,0 +1,61 @@
+﻿/*body 
+{
+    background-color:#90EE90;
+}
+*/
+#main{
+    margin-top: 5%;
+    margin-left:15%;
+	border:solid 1px #ff9900;
+	}
+
+#id_index_Company1{
+    float:left;
+    padding-top :1%;
+}
+#id_index_Company2{
+    float:left;
+    padding-top :1%;
+}
+
+#id_index_Family{
+    float:left;
+    margin-left:3%;
+    padding-top :1%;
+}
+
+#id_index_First{
+    float:left;
+    margin-left:3%;
+    padding-top :1%;
+}
+
+.cl_text{
+	padding-left:5%;
+	padding-top :1%;
+	height:21px;
+}
+.cl_text2
+{
+    padding-top :1%;
+	height:21px;
+}
+#id_JobButton
+{
+    margin-left:5.5%;
+    padding-top:1%;
+}
+#id_RadioButton1
+{
+    padding-top:1%;
+}
+#id_Button
+{
+   margin-left:8.5%;
+}
+#id_CreateID{
+    background-color:#40E0D0;
+}
+#id_PersonalForm{
+
+}
