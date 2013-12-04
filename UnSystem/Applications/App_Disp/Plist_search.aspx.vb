@@ -1,4 +1,6 @@
-﻿Imports DB_Access
+﻿Imports System.Web
+Imports MySql.Data.MySqlClient
+Imports DB_Access
 
 Public Class Plist_search
     Inherits System.Web.UI.Page
@@ -53,6 +55,33 @@ Public Class Plist_search
 
     End Sub
 
+    ''' <summary>
+    ''' テーブル項目作成
+    ''' </summary>
+    ''' <param name="dt">技術者情報テーブル</param>
+    ''' <remarks>カラム情報を作成</remarks>
+    Private Sub CreateTable(ByRef dt As DataTable)
+
+        dt.Columns.Add("LastName", Type.GetType("System.String"))
+        dt.Columns.Add("FirstName", Type.GetType("System.String"))
+        dt.Columns.Add("CompanyName", Type.GetType("System.String"))
+        dt.Columns.Add("Cont", Type.GetType("System.Int32"))
+        dt.Columns.Add("StatusFrom", Type.GetType("System.String"))
+        dt.Columns.Add("StatusTo", Type.GetType("System.String"))
+
+        '' 就業状況
+        'clsCommon.GetWork(lstWork)
+        '' 就業期間取得
+        'clsCommon.GetFromToDate(lstFromYear, lstFromMonth, lstFromDay, lstToYear, lstToMonth, lstToDay)
+        '' 年齢
+        'clsCommon.GetAge(lstAge)
+        '' 閾値
+        'clsCommon.GetThreshold(lstThreshold)
+        '' 性別
+        'clsCommon.GetSex(lstSex)
+
+    End Sub
+
 #Region "ボタンイベント"
 
     ''' <summary>
@@ -62,11 +91,39 @@ Public Class Plist_search
     Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
 
         ' 入力情報を取得
-        Dim clsLoginDBAccess As New LoginDBAccess
+        Dim clsPlist_search_DBAccess As New Plist_search_DBAccess
         Dim clsCommon As New Common
-        'Dim DataReader_auth As MySqlDataReader = Nothing
+        Dim DataReader_personal As MySqlDataReader = Nothing
+        Dim personaldt As New DataTable
 
-        GridView1.UpdateRow(1, True)
+        'test
+        'Dim row0 As String()
+
+        Try
+            ' 認証チェック用データ取得
+            DataReader_personal = clsPlist_search_DBAccess.GetTBLPersonal(txtlastname.Text)
+
+            CreateTable(personaldt)
+
+            'row0 = {"池田", "a", "iii"}
+            'GridView1.Rows.add(row0)
+
+            'GridView1.SetEditRow()
+            'GridView1.UpdateRow(1, True)
+
+            GridView1.DataSource = personaldt
+            GridView1.DataBind()
+
+        Catch ex As Exception
+            MsgBox(clsCommon.GetMessage(Define.Message.SystemErr))
+        Finally
+            ' クラス破棄
+            clsPlist_search_DBAccess.Dispose()
+            If DataReader_personal IsNot Nothing Then
+                DataReader_personal.Dispose()
+            End If
+        End Try
+
 
     End Sub
 

@@ -50,11 +50,6 @@ Public Class Plist_search_DBAccess
                               " WHERE t1.PersonalID = " & strid & _
                               " AND " & " t1.PersonalPW = " & strpass
 
-        ' 認証用データ取得
-        'Command.CommandText = " SELECT * From un.trn_personal t1" & _
-        '                      " WHERE t1.LastName = " & id_lastname
-        '" AND " & " t1.PersonalPW = " & strpass
-
         ' コマンド送信
         DataReader = Command.ExecuteReader
 
@@ -63,6 +58,30 @@ Public Class Plist_search_DBAccess
 
         Return DataReader
 
+    End Function
+
+    Public Function GetTBLPersonal(ByVal strname As String) As MySqlDataReader
+        ' オープン
+        Connection.Open()
+
+        Command = Connection.CreateCommand
+
+        ' 認証用データ取得
+        'Command.CommandText = " SELECT * From un.trn_personal t1" & _
+        '                      " WHERE t1.LastName = " & id_lastname & _
+        '                    " AND " & " t1.PersonalPW = " & strpass
+
+        ' 検索データ取得
+        Command.CommandText = " SELECT lastname,firstname,cost,statusform,statusto From un.trn_personal t1" & _
+                              " WHERE t1.personalID = 1234"
+
+        ' コマンド送信
+        DataReader = Command.ExecuteReader
+
+        ' データ読み込み
+        DataReader.Read()
+
+        Return DataReader
     End Function
 
 End Class

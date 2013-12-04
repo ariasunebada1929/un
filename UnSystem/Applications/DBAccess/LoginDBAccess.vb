@@ -1,5 +1,5 @@
-﻿Imports MySql.Data.MySqlClient
-Imports System.Configuration
+﻿Imports System.Configuration
+Imports MySql.Data.MySqlClient
 
 ' ログイン用アクセスクラス
 Public Class LoginDBAccess
