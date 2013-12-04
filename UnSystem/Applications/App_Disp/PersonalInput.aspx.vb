@@ -35,6 +35,9 @@ Public Class PersonalInput
         clsCommon.GetWork(lstWork)
         ' 就業期間取得
         clsCommon.GetFromToDate(lstFromYear, lstFromMonth, lstFromDay, lstToYear, lstToMonth, lstToDay)
+
+        lstFromYear.Enabled = False
+
         ' 閾値
         'clsCommon.GetThreshold(lstThreshold)
         ' 性別

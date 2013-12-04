@@ -123,6 +123,27 @@ Public Class Common
     End Sub
 
     ''' <summary>
+    ''' 年齢から比較の生年月日を算出
+    ''' </summary>
+    ''' <param name="iAge">年齢</param>
+    ''' <remarks>渡された年齢から検索対象となる年齢を算出</remarks>
+    Public Function GetBirthDay(ByVal iAge As Int32) As String
+
+        Dim iyear As Int32 = 0
+        Dim strDate As String = String.Empty
+
+        If Int32.TryParse(Now.ToString("yyyy"), iyear) Then
+            ' 現在日から年齢を引く
+            iyear = iyear - iAge
+            ' 現在の月日を合算
+            strDate = CStr(iyear) & Now.ToString("MM") & Now.ToString("dd")
+        End If
+
+        Return strDate
+
+    End Function
+
+    ''' <summary>
     ''' 期間作成関数(開始年)
     ''' </summary>
     ''' <param name="lstFromYear">期間年</param>

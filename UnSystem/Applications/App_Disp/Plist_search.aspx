@@ -1,4 +1,4 @@
-﻿<%@ Page Language="vb" AutoEventWireup="false" CodeBehind="Plist_search.aspx.vb" Inherits="App_Disp.Plist_search" %>
+﻿<%@ Page Language="vb" AutoEventWireup="false" EnableEventValidation="false" CodeBehind="Plist_search.aspx.vb" Inherits="App_Disp.Plist_search" %>
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 
@@ -38,53 +38,53 @@
 
 			<li id="id_2l_2">就業状況</li>
 			<li class="cl_text">
-				<asp:DropDownList id="lstWork" name="na_Work" runat="server" Height="22px" />
+				<asp:DropDownList id="lstWork" runat="server" Height="22px" />
 			</li>
 
 			<li id="id_3l">就業期間</li>
 			<li class="cl_text">
-				<asp:DropDownList id="lstFromYear" name="na_Year" runat="server" Height="22px" OnChange="lstFrom_OnChange()" />
+				<asp:DropDownList id="lstFromYear" runat="server" Height="22px" OnChange="lstFrom_OnChange()" />
 			</li>
 			<li>年</li>
 
 			<li class="cl_text">
-				<asp:DropDownList id="lstFromMonth" name="na_Month" runat="server" Height="22px" OnChange="lstFrom_OnChange()" />
+				<asp:DropDownList id="lstFromMonth" runat="server" Height="22px" OnChange="lstFrom_OnChange()" />
 			</li>
 			<li>月</li>
 
 			<li class="cl_text">
-				<asp:DropDownList id="lstFromDay" name="na_Day" runat="server" Height="22px" />
+				<asp:DropDownList id="lstFromDay" runat="server" Height="22px" />
 			</li>
 			<li>日 ～</li>
 
 			<li class="cl_text">
-				<asp:DropDownList id="lstToYear"　name="na_Year" runat="server" Height="22px"  OnChange="lstTo_OnChange()" />
+				<asp:DropDownList id="lstToYear" runat="server" Height="22px"  OnChange="lstTo_OnChange()" />
 			</li>
 			<li>年</li>
 
 			<li class="cl_text">
-				<asp:DropDownList id="lstToMonth" name="na_Month" runat="server" Height="22px" OnChange="lstTo_OnChange()" />
+				<asp:DropDownList id="lstToMonth" runat="server" Height="22px" OnChange="lstTo_OnChange()" />
 			</li>
 			<li>月</li>
 
 			<li class="cl_text">
-				<asp:DropDownList id="lstToDay" name="na_Day" runat="server" Height="22px" />
+				<asp:DropDownList id="lstToDay" runat="server" Height="22px" />
 			</li>
 			<li>日</li>
 		
 		<li id="id_4l_1">年齢</li>
 		<li class="cl_text">
-			<asp:DropDownList id="lstAge" name="na_Age" runat="server" Height="22px" />
+			<asp:DropDownList id="lstAge" runat="server" Height="22px" />
 		</li>
 		<li>歳</li>
 
 		<li class="cl_dropdown">
-			<asp:DropDownList id="lstThreshold"　name="na_Threshold" runat="server" Height="22px" />
+			<asp:DropDownList id="lstThreshold" runat="server" Height="22px" />
 		</li>
 
 		<li id="id_4l_2">性別</li>
 		<li  class="cl_text">
-			<asp:DropDownList id="lstSex"　name="na_Sex" runat="server" Height="22px" />
+			<asp:DropDownList id="lstSex" runat="server" Height="22px" />
 		</li>
 
 		<li id="id_5l">言語</li>
@@ -123,7 +123,8 @@
             <SortedDescendingCellStyle BackColor="#D4DFE1" />
             <SortedDescendingHeaderStyle BackColor="#15524A" />
         </asp:GridView>
-	
+        <asp:HiddenField ID="hdnOpeLevel" runat="server" Value="0" />
+        <asp:HiddenField ID="hdnPersonalID" runat="server" Value="0" />
 	</div>
 	</form>
 <!-- フッター  -->

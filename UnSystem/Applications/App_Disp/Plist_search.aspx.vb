@@ -22,6 +22,8 @@ Public Class Plist_search
                     ' Session にてログインユーザーの情報を取得する
                     loginInfo = CType(Session(Common.STR_LOGIN), Common.LoginInfo)
                     lblUserName.Text = loginInfo.LoginUserName
+                    hdnOpeLevel.Value = CStr(loginInfo.OpeLevel)
+                    hdnPersonalID.Value = CStr(loginInfo.LoginUserID)
                 End If
 
                 ' 初期表示処理
@@ -52,6 +54,11 @@ Public Class Plist_search
         clsCommon.GetThreshold(lstThreshold)
         ' 性別
         clsCommon.GetSex(lstSex)
+
+        If CType(hdnOpeLevel.Value, Define.OpeLevel) = Define.OpeLevel.Negotiation Then
+            ' 営業の場合は非表示
+            txtcompany.Visible = False
+        End If
 
     End Sub
 
@@ -95,13 +102,36 @@ Public Class Plist_search
         Dim clsCommon As New Common
         Dim DataReader_personal As MySqlDataReader = Nothing
         Dim personaldt As New DataTable
-
-        'test
-        'Dim row0 As String()
+        Dim strBirthDay As String = String.Empty
+        Dim strWorkFrom As String = String.Empty
+        Dim strWorkTo As String = String.Empty
 
         Try
+
+            ' 年齢を算出
+            If Not CInt(lstAge.SelectedValue) = 99 Then
+                strBirthDay = clsCommon.GetBirthDay(CInt(lstAge.SelectedValue))
+            Else
+                strBirthDay = String.Empty
+            End If
+
+            ' 就業期間(開始)を設定
+            If Not CInt(lstFromYear.SelectedValue) = 9999 Then
+                strWorkFrom = lstFromYear.SelectedValue & String.Format("{0:00}", lstFromMonth.SelectedValue) & String.Format("{0:00}", lstFromDay.SelectedValue)
+            Else
+                strWorkFrom = String.Empty
+            End If
+
+            ' 就業期間(終了)を設定
+            If Not CInt(lstToYear.SelectedValue) = 9999 Then
+                strWorkTo = lstToYear.SelectedValue & String.Format("{0:00}", lstToMonth.SelectedValue) & String.Format("{0:00}", lstToDay.SelectedValue)
+            Else
+                strWorkTo = String.Empty
+            End If
+
             ' 認証チェック用データ取得
-            DataReader_personal = clsPlist_search_DBAccess.GetTBLPersonal(txtlastname.Text)
+            DataReader_personal = clsPlist_search_DBAccess.GetTBLPersonal(txtfirstname.Text, txtlastname.Text, strBirthDay, lstThreshold.SelectedValue,
+                                                                          txtcompany.Text, strWorkFrom, strWorkTo, hdnOpeLevel.Value, hdnPersonalID.Value)
 
             CreateTable(personaldt)
 
