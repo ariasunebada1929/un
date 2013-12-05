@@ -31,8 +31,7 @@
 				</li>
 			</ol>
 			<ol id="id_PersonalForm">
-				<li id="id_index_Company2">企業名</li><li class="cl_text"><asp:TextBox ID="TextBox1" name="na_company" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
-				</li>
+				<li id="id_index_Company2">企業名</li><li class="cl_text"><asp:TextBox ID="TextBox1" name="na_company" runat="server" MaxLength="10" Height="17px" ></asp:TextBox></li>
 				<li id="id_index_Family">姓</li>
 				<li class="cl_text"><asp:TextBox ID="TextBox2" name="na_company" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
 				</li>
