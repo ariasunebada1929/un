@@ -9,7 +9,6 @@
     <link rel="stylesheet" type="text/css" href="../Styles/form_common.css" />
     <link rel="stylesheet" type="text/css" href="../Styles/form_Input.css" />
 </head>
-<body style="background-color:#90EE90;">
 <!-- ヘッダー -->
 
     <form id="form2" runat="server">
