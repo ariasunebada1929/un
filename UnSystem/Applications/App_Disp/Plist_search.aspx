@@ -25,12 +25,12 @@
 	<li class="kesnaku">
 		<asp:Button ID="btnSearchInput" class="button" runat="server" Text="検索入力" OnClientClick="return SearchInputButton()"/>
 		<ol id="na_Search">
-		<li>検索条件</li>
+		<li id ="id_Formhead">検索条件</li>
 			<li id ="id_1l_1">姓</li>
-			<li class="cl_text_1l_1"><asp:TextBox ID="txtfirstname" name="na_firstname" runat="server" MaxLength="10" Height="17px"></asp:TextBox>
+			<li class="cl_text_1l_1"><asp:TextBox ID="txtfirstname" name="na_firstname" runat="server" MaxLength="10"></asp:TextBox>
 			</li>
 			<li id="id_1l_2">名</li>
-			<li class="cl_text"><asp:TextBox ID="txtlastname" name="na_lastname" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
+			<li class="cl_text_1l_2"><asp:TextBox ID="txtlastname" name="na_lastname" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
 			</li>
 			<li id="id_2l_1">会社名</li>
 			<li class="cl_text"><asp:TextBox ID="txtcompany" name="na_company" runat="server" MaxLength="10" Height="17px" ></asp:TextBox>
@@ -45,53 +45,53 @@
 			<li class="cl_text">
 				<asp:DropDownList id="lstFromYear" runat="server" Height="22px" OnChange="lstFrom_OnChange()" />
 			</li>
-			<li>年</li>
+			<li class="cl_intend">年</li>
 
 			<li class="cl_text">
 				<asp:DropDownList id="lstFromMonth" runat="server" Height="22px" OnChange="lstFrom_OnChange()" />
 			</li>
-			<li>月</li>
+			<li class="cl_intend">月</li>
 
 			<li class="cl_text">
 				<asp:DropDownList id="lstFromDay" runat="server" Height="22px" />
 			</li>
-			<li>日 ～</li>
+			<li class="cl_intend">日 ～</li>
 
 			<li class="cl_text">
 				<asp:DropDownList id="lstToYear" runat="server" Height="22px"  OnChange="lstTo_OnChange()" />
 			</li>
-			<li>年</li>
+			<li class="cl_intend">年</li>
 
 			<li class="cl_text">
 				<asp:DropDownList id="lstToMonth" runat="server" Height="22px" OnChange="lstTo_OnChange()" />
 			</li>
-			<li>月</li>
+			<li class="cl_intend">月</li>
 
 			<li class="cl_text">
 				<asp:DropDownList id="lstToDay" runat="server" Height="22px" />
 			</li>
-			<li>日</li>
+			<li class="cl_intend">日</li>
 		
 		<li id="id_4l_1">年齢</li>
 		<li class="cl_text">
 			<asp:DropDownList id="lstAge" runat="server" Height="22px" />
 		</li>
-		<li>歳</li>
+		<li class="cl_intend">歳</li>
 
-		<li class="cl_dropdown">
-			<asp:DropDownList id="lstThreshold" runat="server" Height="22px" />
+		<li class="cl_text">
+			<asp:DropDownList id="lstThreshold" runat="server" />
 		</li>
 
 		<li id="id_4l_2">性別</li>
 		<li  class="cl_text">
-			<asp:DropDownList id="lstSex" runat="server" Height="22px" />
+			<asp:DropDownList id="lstSex" runat="server" />
 		</li>
 
 		<li id="id_5l">言語</li>
 
 		<li id ="id_button">
-			<asp:Button ID="btnSearch" runat="server" Text="検索" OnClientClick="return SearchButton()"/>
-			<asp:Button ID="btnClose" runat="server" Text="閉じる" OnClientClick="return CloseButton()"/>
+			<asp:Button ID="btnSearch" runat="server" Text="検索" OnClientClick="return SearchButton()" Height="22px"/>
+			<asp:Button ID="btnClose" runat="server" Text="閉じる" OnClientClick="return CloseButton()" Height="22px"/>
 		</li>
 	</ol>
 	</li>
