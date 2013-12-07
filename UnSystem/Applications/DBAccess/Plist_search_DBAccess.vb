@@ -84,7 +84,7 @@ Public Class Plist_search_DBAccess
         ' 条件文を作成
         If Not Trim(strFirstname) = String.Empty Then
             ' 姓
-            WhereSQL = " t1.Firstname LIKE '%" & strFirstname & "%' "
+            WhereSQL = " WHERE t1.Firstname LIKE '%" & strFirstname & "%' "
             bWhere = True
         End If
 
@@ -102,9 +102,9 @@ Public Class Plist_search_DBAccess
             ' 生年月日 + 閾値
             Select Case CType(strThreshold, Define.ThresholdStatus)
                 Case Define.ThresholdStatus.AndOver
-                    WhereSQL = WhereSQL & CStr(strbirhtDay) & " >= CAST(t1.Birhtday AS UNSIGNED) "
+                    WhereSQL = WhereSQL & CStr(strbirhtDay) & " <= t1.Birthday "
                 Case Define.ThresholdStatus.AndLess
-                    WhereSQL = WhereSQL & CStr(strbirhtDay) & " <= t1.Birhtday "
+                    WhereSQL = WhereSQL & CStr(strbirhtDay) & " >= t1.Birthday "
                 Case Define.ThresholdStatus.Equal
                     WhereSQL = WhereSQL & CStr(strbirhtDay) & " = t1.Birhtday "
             End Select
@@ -115,7 +115,7 @@ Public Class Plist_search_DBAccess
             WhereMake(bWhere, WhereSQL)
 
             ' 就業期間(開始)
-            WhereSQL = WhereSQL & CStr(strWorkFrom) & " >= CAST(t1.StatusFrom AS UNSIGNED) "
+            WhereSQL = WhereSQL & CStr(strWorkFrom) & " >= t1.StatusFrom "
             bWhere = True
         End If
 
@@ -141,7 +141,7 @@ Public Class Plist_search_DBAccess
         Command = Connection.CreateCommand
 
         ' 検索データ取得
-        Command.CommandText = " SELECT t1.lastname, t1.firstname, t1.cost, t1.statusform, t1.statusto From un.trn_personal t1" & _
+        Command.CommandText = " SELECT t1.lastname, t1.firstname, t1.cost, t1.statusfrom, t1.statusto From un.trn_personal t1" & _
                               WhereSQL
 
         ' コマンド送信
@@ -156,7 +156,7 @@ Public Class Plist_search_DBAccess
     Private Sub WhereMake(ByVal bStart As Boolean, ByRef strWhere As String)
 
         If bStart Then
-            strwhere = " AND " & strwhere
+            strWhere = strWhere & " AND "
         Else
             strWhere = " WHERE " & strWhere
         End If

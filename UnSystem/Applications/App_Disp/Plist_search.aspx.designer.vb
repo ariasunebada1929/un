@@ -212,13 +212,13 @@ Partial Public Class Plist_search
     Protected WithEvents id_Itiran As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''GridView1 コントロール。
+    '''grdPesonal コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents GridView1 As Global.System.Web.UI.WebControls.GridView
+    Protected WithEvents grdPesonal As Global.System.Web.UI.WebControls.GridView
 
     '''<summary>
     '''hdnOpeLevel コントロール。

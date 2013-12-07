@@ -54,6 +54,8 @@ Public Class Plist_search
         clsCommon.GetThreshold(lstThreshold)
         ' 性別
         clsCommon.GetSex(lstSex)
+        ' グリッドデザインの初期化
+        'GridInitDisp()
 
         If CType(hdnOpeLevel.Value, Define.OpeLevel) = Define.OpeLevel.Negotiation Then
             ' 営業の場合は非表示
@@ -62,6 +64,16 @@ Public Class Plist_search
 
     End Sub
 
+    ' ''' <summary>
+    ' ''' グリッドデザイン
+    ' ''' </summary>
+    ' ''' <remarks>画面情報を初期化</remarks>
+    'Private Sub GridInitDisp()
+
+    '    Dim column As New DataGridViewCheckBoxColumn
+    '    grdPesonal.Columns.Add(column)
+    'End Sub
+
     ''' <summary>
     ''' テーブル項目作成
     ''' </summary>
@@ -69,12 +81,14 @@ Public Class Plist_search
     ''' <remarks>カラム情報を作成</remarks>
     Private Sub CreateTable(ByRef dt As DataTable)
 
-        dt.Columns.Add("LastName", Type.GetType("System.String"))
-        dt.Columns.Add("FirstName", Type.GetType("System.String"))
-        dt.Columns.Add("CompanyName", Type.GetType("System.String"))
-        dt.Columns.Add("Cont", Type.GetType("System.Int32"))
-        dt.Columns.Add("StatusFrom", Type.GetType("System.String"))
-        dt.Columns.Add("StatusTo", Type.GetType("System.String"))
+        dt.Columns.Add("選択", Type.GetType("System.Int32"))
+        dt.Columns.Add("会社名", Type.GetType("System.String"))
+        dt.Columns.Add("氏名", Type.GetType("System.String"))
+        dt.Columns.Add("単価", Type.GetType("System.Int32"))
+        dt.Columns.Add("就業期間", Type.GetType("System.String"))
+        dt.Columns.Add("変更", Type.GetType("System.String"))
+
+        dt.TableName = "personalDB"
 
         '' 就業状況
         'clsCommon.GetWork(lstWork)
@@ -89,13 +103,22 @@ Public Class Plist_search
 
     End Sub
 
+    ''' <summary>
+    ''' テーブル項目作成
+    ''' </summary>
+    ''' <param name="Reader">技術者情報テーブル</param>
+    ''' <remarks>カラム情報を作成</remarks>
+    Private Sub CreateSchemaTable(ByRef Reader As MySqlDataReader, ByRef dt As DataTable)
+        dt = Reader.GetSchemaTable()
+    End Sub
+
 #Region "ボタンイベント"
 
     ''' <summary>
     ''' 検索ボタンクリック
     ''' </summary>
     ''' <remarks>入力された条件で検索を行う</remarks>
-    Protected Sub btnSearch_Click(sender As Object, e As EventArgs) Handles btnSearch.Click
+    Protected Sub btnSearch_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnSearch.Click
 
         ' 入力情報を取得
         Dim clsPlist_search_DBAccess As New Plist_search_DBAccess
@@ -132,17 +155,31 @@ Public Class Plist_search
             ' 認証チェック用データ取得
             DataReader_personal = clsPlist_search_DBAccess.GetTBLPersonal(txtfirstname.Text, txtlastname.Text, strBirthDay, lstThreshold.SelectedValue,
                                                                           txtcompany.Text, strWorkFrom, strWorkTo, hdnOpeLevel.Value, hdnPersonalID.Value)
-
+            Dim row As DataRow = Nothing
             CreateTable(personaldt)
 
-            'row0 = {"池田", "a", "iii"}
-            'GridView1.Rows.add(row0)
+            If DataReader_personal.HasRows Then
+                Do While DataReader_personal.Read()
 
-            'GridView1.SetEditRow()
-            'GridView1.UpdateRow(1, True)
+                    row = personaldt.NewRow
+                    row("選択") = 0
+                    row("会社名") = String.Empty
+                    row("氏名") = DataReader_personal("firstname").ToString() & DataReader_personal("lastname").ToString()
+                    row("単価") = DataReader_personal("cost").ToString()
+                    row("就業期間") = DataReader_personal("statusfrom").ToString() & DataReader_personal("statusto").ToString()
+                    row("変更") = String.Empty
 
-            GridView1.DataSource = personaldt
-            GridView1.DataBind()
+                    personaldt.Rows.Add(row)
+
+                Loop
+
+                grdPesonal.DataSource = personaldt
+                grdPesonal.DataBind()
+                grdPesonal.Visible = True
+
+            Else
+                MsgBox(clsCommon.GetMessage(Define.Message.SystemErr))
+            End If
 
         Catch ex As Exception
             MsgBox(clsCommon.GetMessage(Define.Message.SystemErr))
@@ -161,7 +198,7 @@ Public Class Plist_search
     ''' ID発行ボタンクリック
     ''' </summary>
     ''' <remarks>ID発行画面へ遷移する</remarks>
-    Protected Sub btnHakkou_Click(sender As Object, e As EventArgs) Handles btnHakkou.Click
+    Protected Sub btnHakkou_Click(ByVal sender As Object, ByVal e As EventArgs) Handles btnHakkou.Click
 
         ' ID発行画面へ遷移
         Response.Redirect("CreateID.aspx", False)
@@ -169,20 +206,5 @@ Public Class Plist_search
     End Sub
 
 #End Region
-    Protected Sub gridview1_rowCreated(ByVal sender As Object, ByVal e As System.Web.UI.WebControls.GridViewRowEventArgs) Handles GridView1.RowCreated
-
-        If e.Row.Cells.Count > 1 Then
-
-            e.Row.Cells(0).Style.Add("width", "40px")
-            e.Row.Cells(1).Style.Add("width", "100px")
-            e.Row.Cells(2).Style.Add("width", "")
-            e.Row.Cells(3).Style.Add("width", "")
-            e.Row.Cells(4).Style.Add("width", "")
-            e.Row.Cells(5).Style.Add("width", "")
-            e.Row.Cells(6).Style.Add("width", "")
-
-        End If
-
-    End Sub
 
 End Class

@@ -100,18 +100,12 @@
 	<li class="sakujyo"><asp:Button ID="id_Sakujyo" class="button" runat="server" Text="削除"/></li>
 	<li class="IDhakkou"><asp:Button ID="btnHakkou" class="button" runat="server" Text="ID発行"/></li>
 	<li class="kaisyaitiran"><asp:Button ID="id_Itiran"  class="button" runat="server" Text="会社一覧"/></li>
-</ul>
-       <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
+	</ul>
+	<ul id ="Ul1">
+    <li >
+       <asp:GridView ID="grdPesonal" runat="server" 
              Height="128px" CellPadding="4" ForeColor="#333333" GridLines="None">
             <AlternatingRowStyle BackColor="White" />
-            <Columns>
-                <asp:CheckBoxField HeaderText="選択" />
-                <asp:BoundField HeaderText="会社名" />
-                <asp:BoundField HeaderText="氏名" />
-                <asp:BoundField HeaderText="単価" />
-                <asp:BoundField HeaderText="就業期間" />
-                <asp:ButtonField HeaderText="変更" Text="..." />
-            </Columns>
             <EditRowStyle BackColor="#7C6F57" />
             <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
             <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
@@ -123,6 +117,8 @@
             <SortedDescendingCellStyle BackColor="#D4DFE1" />
             <SortedDescendingHeaderStyle BackColor="#15524A" />
         </asp:GridView>
+    </li>
+    </ul>
         <asp:HiddenField ID="hdnOpeLevel" runat="server" Value="0" />
         <asp:HiddenField ID="hdnPersonalID" runat="server" Value="0" />
 	</div>

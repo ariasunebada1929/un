@@ -74,6 +74,15 @@ Namespace My.Resources
         End Property
         
         '''<summary>
+        '''  該当するデータがありませんでした。 に類似しているローカライズされた文字列を検索します。
+        '''</summary>
+        Friend Shared ReadOnly Property Nofound() As String
+            Get
+                Return ResourceManager.GetString("Nofound", resourceCulture)
+            End Get
+        End Property
+        
+        '''<summary>
         '''  システム障害が発生しました。
         '''管理者までご連絡下さい。 に類似しているローカライズされた文字列を検索します。
         '''</summary>

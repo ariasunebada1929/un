@@ -120,6 +120,9 @@
   <data name="Login_InputErr" xml:space="preserve">
     <value>入力したユ－ザー情報が間違っています。</value>
   </data>
+  <data name="Nofound" xml:space="preserve">
+    <value>該当するデータがありませんでした。</value>
+  </data>
   <data name="SystemErr" xml:space="preserve">
     <value>システム障害が発生しました。
 管理者までご連絡下さい。</value>

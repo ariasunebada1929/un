@@ -35,6 +35,7 @@ Public Class Define
     Enum Message
         SystemErr
         Login_InputErr
+        Nofound
     End Enum
 
 End Class
