@@ -76,9 +76,9 @@ Namespace My.Resources
         '''<summary>
         '''  該当するデータがありませんでした。 に類似しているローカライズされた文字列を検索します。
         '''</summary>
-        Friend Shared ReadOnly Property Nofound() As String
+        Friend Shared ReadOnly Property Notfound() As String
             Get
-                Return ResourceManager.GetString("Nofound", resourceCulture)
+                Return ResourceManager.GetString("Notfound", resourceCulture)
             End Get
         End Property
         

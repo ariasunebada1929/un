@@ -107,12 +107,8 @@
 			 Height="128px" CellPadding="4" ForeColor="#333333" GridLines="None">
 			<AlternatingRowStyle BackColor="White" />
 			<Columns>
-				<asp:CheckBoxField />
-				<asp:BoundField />
-				<asp:HyperLinkField />
-				<asp:BoundField />
-				<asp:BoundField />
-				<asp:ButtonField Text="ボタン" />
+				<asp:CheckBoxField HeaderText="選択" />
+				<asp:ButtonField Text="..." HeaderText="変更" />
 			</Columns>
 			<EditRowStyle BackColor="#7C6F57" />
 			<FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />

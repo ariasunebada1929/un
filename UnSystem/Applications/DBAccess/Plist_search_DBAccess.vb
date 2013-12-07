@@ -106,7 +106,7 @@ Public Class Plist_search_DBAccess
                 Case Define.ThresholdStatus.AndLess
                     WhereSQL = WhereSQL & CStr(strbirhtDay) & " >= t1.Birthday "
                 Case Define.ThresholdStatus.Equal
-                    WhereSQL = WhereSQL & CStr(strbirhtDay) & " = t1.Birhtday "
+                    WhereSQL = WhereSQL & CStr(strbirhtDay) & " = t1.Birthday "
             End Select
             bWhere = True
         End If
@@ -141,14 +141,11 @@ Public Class Plist_search_DBAccess
         Command = Connection.CreateCommand
 
         ' 検索データ取得
-        Command.CommandText = " SELECT t1.lastname, t1.firstname, t1.cost, t1.statusfrom, t1.statusto From un.trn_personal t1" & _
+        Command.CommandText = " SELECT t1.PeronalID,t1.lastname, t1.firstname, t1.cost, t1.statusfrom, t1.statusto From un.trn_personal t1" & _
                               WhereSQL
 
         ' コマンド送信
         DataReader = Command.ExecuteReader
-
-        ' データ読み込み
-        DataReader.Read()
 
         Return DataReader
     End Function

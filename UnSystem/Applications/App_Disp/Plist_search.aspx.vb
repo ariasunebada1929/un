@@ -79,12 +79,10 @@ Public Class Plist_search
     ''' <remarks>カラム情報を作成</remarks>
     Private Sub CreateTable(ByRef dt As DataTable)
 
-        dt.Columns.Add("選択", Type.GetType("System.Int32"))
         dt.Columns.Add("会社名", Type.GetType("System.String"))
         dt.Columns.Add("氏名", Type.GetType("System.String"))
         dt.Columns.Add("単価", Type.GetType("System.Int32"))
         dt.Columns.Add("就業期間", Type.GetType("System.String"))
-        dt.Columns.Add("変更", Type.GetType("System.String"))
 
         dt.TableName = "personalDB"
 
@@ -161,12 +159,10 @@ Public Class Plist_search
                 Do While DataReader_personal.Read()
 
                     row = personaldt.NewRow
-                    row("選択") = 0
                     row("会社名") = String.Empty
                     row("氏名") = DataReader_personal("firstname").ToString() & DataReader_personal("lastname").ToString()
                     row("単価") = DataReader_personal("cost").ToString()
                     row("就業期間") = DataReader_personal("statusfrom").ToString() & DataReader_personal("statusto").ToString()
-                    row("変更") = String.Empty
 
                     personaldt.Rows.Add(row)
 
@@ -177,7 +173,7 @@ Public Class Plist_search
                 grdPesonal.Visible = True
 
             Else
-                MsgBox(clsCommon.GetMessage(Define.Message.SystemErr))
+                MsgBox(clsCommon.GetMessage(Define.Message.Notfound))
             End If
 
         Catch ex As Exception

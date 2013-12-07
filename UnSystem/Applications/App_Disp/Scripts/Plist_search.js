@@ -1,4 +1,10 @@
-﻿function SearchInputButton() {
+﻿window.onload = function () {
+    lstFrom_OnChange();
+    lstTo_OnChange();
+}
+
+
+function SearchInputButton() {
     document.getElementById('na_Search').style.display = 'block';
     return false;
 }
