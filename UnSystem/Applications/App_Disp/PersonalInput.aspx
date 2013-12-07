@@ -36,9 +36,7 @@
         <li class="cl_text2"><asp:TextBox ID="id_birthday" name="na_Birth" runat="server" MaxLength="10" Height="17px"></asp:TextBox></li>
         <li id="id_2l_2">性別</li>
         <li class="cl_text2"><asp:DropDownList ID="lstSex" name="na_Sex" runat="server" Height="22px"/></li>
-        <li id="id_3l_1">案件名</li>
-        <li class="cl_text2"><asp:TextBox ID="id_PJName" name="na_PJName" runat="server" MaxLength="10" Height="17px"></asp:TextBox></li>
-        <li id="id_3l_2">単価</li>
+        <li id="id_3l_1">単価</li>
         <li class="cl_text2"><asp:TextBox ID="id_Cost" name="na_Price" runat="server" MaxLength="10" Height="17px"></asp:TextBox></li>
         <li id="id_4l_1">就業状況</li>
         <li class="cl_text2">

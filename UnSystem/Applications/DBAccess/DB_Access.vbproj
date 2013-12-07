@@ -72,6 +72,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Common.vb" />
+    <Compile Include="PersonalInput_DBAccess.vb" />
     <Compile Include="Define.vb" />
     <Compile Include="LoginDBAccess.vb" />
     <Compile Include="My Project\AssemblyInfo.vb" />
