@@ -1,37 +1,4 @@
 
-.header{
- /* color:#00cc99; */
- border-left:solid 5px #ff9900;
- border-bottom: 1px solid #CCC;
- top:0;
- left:0;
- padding:0px;
- position:fixed;
- width:100%;
- font-size:20px;
-}
-
-.title{
-	margin-left:5%;
-	float:left;
-}
-.login1{
-	margin-right:3%;
-	float:right;
-}
-.login2{
-	margin-right:2%;
-	float:right;
-}
-.login3{
-	margin-right:3%;
-	float:right;
-}
-.logout{
-	margin-right:3%;
-	float:right;
-}
-
 li{
 	list-style:none;
 }
@@ -45,17 +12,26 @@ li{
 	border-style:none;
 	color:#fff;
 }
-.zenken{
-	margin-left:5%;
+.kensaku{
+    margin-left:5%;
+	float:left;
 }
+
 .sakujyo{
 	margin-left:5%;
 }
 .IDhakkou{
-	margin-left:30%;
+    margin-left:15%;
+	margin-right:3%;
+	float:right;
 }
-.kaisyaitiran{
+.zenken{
 	margin-left:5%;
+}
+.kaisyaitiran
+{
+	margin-right:3%;
+	float:right;
 }
 
 /*åüçıÉ{É^Éìì‡*/
