@@ -6,6 +6,7 @@
 <head runat="server">
 	<title>技術者検索/一覧画面-パートナー情報共有システム</title>
 	<link rel="stylesheet" type="text/css" href="../Styles/form_Main.css" />
+    <link rel="stylesheet" type="text/css" href="../Styles/form_common.css" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<script type="text/javascript" src="../Scripts/Plist_search.js"></script>
 </head>
@@ -96,10 +97,15 @@
 	</ol>
 	</li>
 
-	<li class="zenken"><asp:Button ID="id_Zenken" class="button" runat="server" Text="全件表示"/></li>
-	<li class="sakujyo"><asp:Button ID="id_Sakujyo" class="button" runat="server" Text="削除"/></li>
-	<li class="IDhakkou"><asp:Button ID="btnHakkou" class="button" runat="server" Text="ID発行"/></li>
-	<li class="kaisyaitiran"><asp:Button ID="id_Itiran"  class="button" runat="server" Text="会社一覧"/></li>
+    <li class="zenken"><asp:Button ID="id_Zenken" class="button" runat="server" Text="全件表示"/></li>
+    <li class="sakujyo"><asp:Button ID="id_Sakujyo" class="button" runat="server" Text="削除"/></li>
+    <li class="IDhakkou"><asp:Button ID="btnHakkou" class="button" runat="server" Text="ID発行"/></li>
+    <li class="kaisyaitiran"><asp:Button ID="id_Itiran"  class="button" runat="server" Text="会社一覧"/></li>
+   
+	
+	
+	
+
 </ul>
        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" 
              Height="128px" CellPadding="4" ForeColor="#333333" GridLines="None">

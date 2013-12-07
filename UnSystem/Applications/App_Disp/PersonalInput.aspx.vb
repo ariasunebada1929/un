@@ -36,7 +36,21 @@ Public Class PersonalInput
         ' 就業期間取得
         clsCommon.GetFromToDate(lstFromYear, lstFromMonth, lstFromDay, lstToYear, lstToMonth, lstToDay)
 
+        id_firstname.Attributes.Add("readonly", "true")
+        id_LastName.Attributes.Add("readonly", "true")
+        id_birthday.Attributes.Add("readonly", "true")
+        id_PJName.Attributes.Add("readonly", "true")
+        id_Cost.Attributes.Add("readonly", "true")
         lstFromYear.Enabled = False
+        lstWork.Enabled = False
+        lstFromYear.Enabled = False
+        lstFromMonth.Enabled = False
+        lstFromDay.Enabled = False
+        lstToYear.Enabled = False
+        lstToMonth.Enabled = False
+        lstToDay.Enabled = False
+        lstSex.Enabled = False
+        id_Register.Visible = False
 
         ' 閾値
         'clsCommon.GetThreshold(lstThreshold)

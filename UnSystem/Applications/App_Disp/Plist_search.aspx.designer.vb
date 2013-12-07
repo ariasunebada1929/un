@@ -194,15 +194,6 @@ Partial Public Class Plist_search
     Protected WithEvents id_Sakujyo As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
-    '''btnHakkou コントロール。
-    '''</summary>
-    '''<remarks>
-    '''自動生成されたフィールド。
-    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-    '''</remarks>
-    Protected WithEvents btnHakkou As Global.System.Web.UI.WebControls.Button
-
-    '''<summary>
     '''id_Itiran コントロール。
     '''</summary>
     '''<remarks>
@@ -210,6 +201,15 @@ Partial Public Class Plist_search
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
     Protected WithEvents id_Itiran As Global.System.Web.UI.WebControls.Button
+
+    '''<summary>
+    '''btnHakkou コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents btnHakkou As Global.System.Web.UI.WebControls.Button
 
     '''<summary>
     '''GridView1 コントロール。
