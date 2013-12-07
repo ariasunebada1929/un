@@ -77,13 +77,13 @@ Partial Public Class PersonalInput
     Protected WithEvents id_LastName As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''TextBox1 コントロール。
+    '''id_birthday コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents TextBox1 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents id_birthday As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''lstSex コントロール。
@@ -95,22 +95,22 @@ Partial Public Class PersonalInput
     Protected WithEvents lstSex As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''TextBox3 コントロール。
+    '''id_PJName コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents TextBox3 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents id_PJName As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
-    '''TextBox4 コントロール。
+    '''id_Cost コントロール。
     '''</summary>
     '''<remarks>
     '''自動生成されたフィールド。
     '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
     '''</remarks>
-    Protected WithEvents TextBox4 As Global.System.Web.UI.WebControls.TextBox
+    Protected WithEvents id_Cost As Global.System.Web.UI.WebControls.TextBox
 
     '''<summary>
     '''lstWork コントロール。
