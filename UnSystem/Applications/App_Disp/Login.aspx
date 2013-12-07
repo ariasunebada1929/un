@@ -20,10 +20,10 @@
 	<li class="cl_index">個人ID</li>
 	<li class="cl_index">個人パス</li>
 	<li class="cl_textbox">
-		<asp:TextBox id="txtid" runat="server" MaxLength="5" Height="23px" ></asp:TextBox>
+		<asp:TextBox id="txtid" runat="server" MaxLength="5" Height="23px" width="150px"></asp:TextBox>
 	</li>
 	<li class="cl_textbox">
-		<asp:TextBox id="txtpw" runat="server" MaxLength="15" Height="23px" TextMode="Password"></asp:TextBox>
+		<asp:TextBox id="txtpw" runat="server" MaxLength="15" Height="23px" width="150px" TextMode="Password"></asp:TextBox>
 	</li>
 	<li class="cl_button">
 		<asp:Button ID="btnlogin" runat="server" Text="ログイン" OnClientClick="return btnlogin_Click()" OnClick="btnlogin_Click" />
