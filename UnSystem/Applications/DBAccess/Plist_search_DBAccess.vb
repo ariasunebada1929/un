@@ -147,9 +147,6 @@ Public Class Plist_search_DBAccess
         ' コマンド送信
         DataReader = Command.ExecuteReader
 
-        ' データ読み込み
-        DataReader.Read()
-
         Return DataReader
     End Function
 

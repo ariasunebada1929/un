@@ -95,15 +95,6 @@ Partial Public Class PersonalInput
     Protected WithEvents lstSex As Global.System.Web.UI.WebControls.DropDownList
 
     '''<summary>
-    '''id_PJName コントロール。
-    '''</summary>
-    '''<remarks>
-    '''自動生成されたフィールド。
-    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
-    '''</remarks>
-    Protected WithEvents id_PJName As Global.System.Web.UI.WebControls.TextBox
-
-    '''<summary>
     '''id_Cost コントロール。
     '''</summary>
     '''<remarks>
