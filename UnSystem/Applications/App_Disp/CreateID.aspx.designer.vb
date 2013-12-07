@@ -32,6 +32,15 @@ Partial Public Class CreateID
     Protected WithEvents form1 As Global.System.Web.UI.HtmlControls.HtmlForm
 
     '''<summary>
+    '''likLogout コントロール。
+    '''</summary>
+    '''<remarks>
+    '''自動生成されたフィールド。
+    '''変更するには、フィールドの宣言をデザイナー ファイルから分離コード ファイルに移動します。
+    '''</remarks>
+    Protected WithEvents likLogout As Global.System.Web.UI.WebControls.LinkButton
+
+    '''<summary>
     '''lblUserName コントロール。
     '''</summary>
     '''<remarks>

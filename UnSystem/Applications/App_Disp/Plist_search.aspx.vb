@@ -54,8 +54,6 @@ Public Class Plist_search
         clsCommon.GetThreshold(lstThreshold)
         ' 性別
         clsCommon.GetSex(lstSex)
-        ' グリッドデザインの初期化
-        'GridInitDisp()
 
         If CType(hdnOpeLevel.Value, Define.OpeLevel) = Define.OpeLevel.Negotiation Then
             ' 営業の場合は非表示
@@ -70,7 +68,7 @@ Public Class Plist_search
     ' ''' <remarks>画面情報を初期化</remarks>
     'Private Sub GridInitDisp()
 
-    '    Dim column As New DataGridViewCheckBoxColumn
+    '    Dim column As New DataGridColumnCollectio
     '    grdPesonal.Columns.Add(column)
     'End Sub
 
@@ -159,6 +157,7 @@ Public Class Plist_search
             CreateTable(personaldt)
 
             If DataReader_personal.HasRows Then
+
                 Do While DataReader_personal.Read()
 
                     row = personaldt.NewRow
@@ -202,6 +201,21 @@ Public Class Plist_search
 
         ' ID発行画面へ遷移
         Response.Redirect("CreateID.aspx", False)
+
+    End Sub
+
+    ''' <summary>
+    ''' ログアウトクリック
+    ''' </summary>
+    ''' <remarks>ログイン画面に遷移する。</remarks>
+    Protected Sub likLogout_Click(ByVal sender As Object, ByVal e As EventArgs) Handles likLogout.Click
+
+        ' ログイン画面へ遷移
+        If Not Session(Common.STR_LOGIN) Is Nothing Then
+            Session.Remove(Common.STR_LOGIN)
+        End If
+
+        Response.Redirect("Login.aspx", False)
 
     End Sub
 
