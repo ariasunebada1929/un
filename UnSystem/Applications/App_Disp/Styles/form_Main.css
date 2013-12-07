@@ -1,0 +1,159 @@
+
+.header{
+ /* color:#00cc99; */
+ border-left:solid 5px #ff9900;
+ border-bottom: 1px solid #CCC;
+ top:0;
+ left:0;
+ padding:0px;
+ position:fixed;
+ width:100%;
+ font-size:20px;
+}
+
+.title{
+	margin-left:5%;
+	float:left;
+}
+.login1{
+	margin-right:3%;
+	float:right;
+}
+.login2{
+	margin-right:2%;
+	float:right;
+}
+.login3{
+	margin-right:3%;
+	float:right;
+}
+.logout{
+	margin-right:3%;
+	float:right;
+}
+
+li{
+	list-style:none;
+}
+
+/*メニュー項目*/
+.button{
+	font-size:20px;
+	font-weight:bold;
+	padding:10px 30px;
+	background-color: #48D1CC;
+	border-style:none;
+	color:#fff;
+}
+.zenken{
+	margin-left:5%;
+}
+.sakujyo{
+	margin-left:5%;
+}
+.IDhakkou{
+	margin-left:30%;
+}
+.kaisyaitiran{
+	margin-left:5%;
+}
+
+/*検索ボタン内*/
+ #main{
+	margin: 60px 0 0 0;
+	padding:0 0 0 50px;
+	width:100%;
+}
+#main li{
+	float:left;
+}
+#main li ol{
+	position: absolute;
+	border:solid 5px #ff9900;
+	display:none;
+	height:300px;
+	width:90%;
+}
+
+#id_Formhead{
+    margin-left:25%;
+}
+/*改行*/
+#id_1l_1{
+	clear:both;
+	margin-left:30.5%;
+	font-size: 70%;
+	padding-top :2px;
+}
+#id_1l_2{
+	margin-left:10%;
+	font-size: 70%;
+	padding-top :2px;
+}
+
+ #id_2l_1{
+	clear:both;
+	margin-left:27%;
+	font-size: 70%;
+	padding-top :2px;
+}
+#id_2l_2{
+	margin-left:4.4%;
+	font-size: 70%;
+	padding-top :2px;
+}
+
+ #id_3l{
+	clear:both;
+	margin-left:25%;
+	font-size: 70%;
+	padding-top :2px;
+}
+#id_4l_1{
+	clear:both;
+	margin-left:28.8%;
+	font-size: 70%;
+	padding-top :2px;
+}
+#id_4l_2{
+	margin-left:9%;
+	font-size: 70%;
+	padding-top :2px;
+}
+
+#id_5l{
+	clear:both;
+	margin-left:28.8%;
+}
+
+#main li ol li{
+	font-size:150%;
+}
+
+ #id_button{
+ 	position:absolute;
+	bottom:7%;
+	margin-left:65%;
+}
+
+.cl_text{
+	margin-left:1%;
+}
+.cl_text_1l_1{
+	margin-left:1.2%;
+}
+.cl_text_1l_2{
+	margin-left:1%;
+}
+.cl_intend{
+    font-size: 70%;
+	padding-top :2px;
+}
+
+#footer{
+	position:absolute;
+	bottom:0;
+	width:100%;
+	height:100px;
+	text-align:center;
+}
