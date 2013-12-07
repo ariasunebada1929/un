@@ -16,7 +16,7 @@
 	<ol class="header">
         <li class="title">技術者入力画面</li>
         <li class="logout">
-            <a href="http://localhost/UNPJ/login_HTML.php">ログアウト</a>
+			<asp:LinkButton ID="likLogout" runat="server">ログアウト</asp:LinkButton>
         </li> 
         <li class="login1">さん</li>
         <li class="login2"><asp:Label ID="lblUserName" runat="server"></asp:Label></li>

@@ -6,7 +6,7 @@
 <head runat="server">
 	<title>技術者検索/一覧画面-パートナー情報共有システム</title>
 	<link rel="stylesheet" type="text/css" href="../Styles/form_Main.css" />
-    <link rel="stylesheet" type="text/css" href="../Styles/form_common.css" />
+	<link rel="stylesheet" type="text/css" href="../Styles/form_common.css" />
 	<meta http-equiv="Content-Style-Type" content="text/css" />
 	<script type="text/javascript" src="../Scripts/Plist_search.js"></script>
 </head>
@@ -16,7 +16,7 @@
 	<ol class="header">
 		<li class="title">技術者検索/一覧画面</li>
 		<li class="logout">
-		<a href="http://localhost/UNPJ/login_HTML.php">ログアウト</a>
+			<asp:LinkButton ID="likLogout" runat="server">ログアウト</asp:LinkButton>
 		</li>
 		<li class="login1">さん</li>
 		<li class="login2"><asp:Label ID="lblUserName" runat="server"></asp:Label></li>
@@ -102,25 +102,33 @@
 	<li class="kaisyaitiran"><asp:Button ID="id_Itiran"  class="button" runat="server" Text="会社一覧"/></li>
 	</ul>
 	<ul id ="Ul1">
-    <li >
-       <asp:GridView ID="grdPesonal" runat="server" 
-             Height="128px" CellPadding="4" ForeColor="#333333" GridLines="None">
-            <AlternatingRowStyle BackColor="White" />
-            <EditRowStyle BackColor="#7C6F57" />
-            <FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-            <HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
-            <PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
-            <RowStyle BackColor="#E3EAEB" />
-            <SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
-            <SortedAscendingCellStyle BackColor="#F8FAFA" />
-            <SortedAscendingHeaderStyle BackColor="#246B61" />
-            <SortedDescendingCellStyle BackColor="#D4DFE1" />
-            <SortedDescendingHeaderStyle BackColor="#15524A" />
-        </asp:GridView>
-    </li>
-    </ul>
-        <asp:HiddenField ID="hdnOpeLevel" runat="server" Value="0" />
-        <asp:HiddenField ID="hdnPersonalID" runat="server" Value="0" />
+	<li >
+		<asp:GridView ID="grdPesonal" runat="server" 
+			 Height="128px" CellPadding="4" ForeColor="#333333" GridLines="None">
+			<AlternatingRowStyle BackColor="White" />
+			<Columns>
+				<asp:CheckBoxField />
+				<asp:BoundField />
+				<asp:HyperLinkField />
+				<asp:BoundField />
+				<asp:BoundField />
+				<asp:ButtonField Text="ボタン" />
+			</Columns>
+			<EditRowStyle BackColor="#7C6F57" />
+			<FooterStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+			<HeaderStyle BackColor="#1C5E55" Font-Bold="True" ForeColor="White" />
+			<PagerStyle BackColor="#666666" ForeColor="White" HorizontalAlign="Center" />
+			<RowStyle BackColor="#E3EAEB" />
+			<SelectedRowStyle BackColor="#C5BBAF" Font-Bold="True" ForeColor="#333333" />
+			<SortedAscendingCellStyle BackColor="#F8FAFA" />
+			<SortedAscendingHeaderStyle BackColor="#246B61" />
+			<SortedDescendingCellStyle BackColor="#D4DFE1" />
+			<SortedDescendingHeaderStyle BackColor="#15524A" />
+		</asp:GridView>
+	</li>
+	</ul>
+		<asp:HiddenField ID="hdnOpeLevel" runat="server" Value="0" />
+		<asp:HiddenField ID="hdnPersonalID" runat="server" Value="0" />
 	</div>
 	</form>
 <!-- フッター  -->
