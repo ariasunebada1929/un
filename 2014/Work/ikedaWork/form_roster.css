@@ -1,0 +1,64 @@
+li{
+	list-style:none;
+}
+td{
+	border-top:solid 1px;
+	border-left:solid 1px ;
+	border-bottom:solid 1px ;
+	border-right:solid 1px ;
+	align="left"
+}
+/*ヘッダ要素*/
+#btnView{
+	float:left;
+}
+#btnRegist{
+	float:left;
+}
+#btnOutput{
+	float:left;
+}
+#login_panel{
+	
+}
+
+/*勤務表見出し*/
+#table_caption{
+	float: left;
+}
+#table_personalinfo{
+	padding-left:5%;
+}
+.column_name1{
+	text-align:center;
+	background-color:#D3D3D3;
+}
+.column_name2{
+	text-align:center;
+	background-color:#00CC66;
+}
+/*勤務表*/
+#table_roster{
+	position:absolute;
+	top:35%;
+	width:100%;
+    table-layout:fixed;
+}
+
+#column_youbi{
+	
+}
+#column_zngyo{
+	
+}
+.input-area{
+}
+/*
+memo
+残業調整でグレーから白に
+振休選択で振替日白に
+メール申請届出（休暇、休出/振代休、通院/電遅、A/B変）　振替日　詳細　
+基本勤務時間（出社、退社）　実績勤務時間（出社、退社、休憩）残業調整
+緑
+休日祝日は青,日にちと曜日赤字
+*/

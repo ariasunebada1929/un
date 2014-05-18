@@ -1,0 +1,1822 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<title>勤務表入力 -らくらく勤怠（仮）</title>
+	<link rel="stylesheet" type="text/css" href="form_roster.css">
+</head>
+
+<body>
+<!-- ヘッダー-->
+<div id="header">
+<ul>
+	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
+	<li><button ID="btnRegist"   OnClick="">勤怠情報登録</button></li>
+	<li><button id="btnOutput"   OnClick="">勤務表出力</button></li>
+	<li id="login_panel">ログイン者</li>
+</ul>
+<hr>
+</div>
+<!--勤務表-->
+<h1>5月勤務表</h1>
+<table border="0" cellspacing="0" id="table_caption">
+<!--<caption>5月勤務表</caption>-->
+	<tr>
+		<td class="column_name2">残業調整</td>
+		<td>
+		<select name="zangyo">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+	<tr>
+		<td class="column_name2">時短勤務</td>
+		<td>
+		<select name="jitan">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+</table>
+<table border="0" cellspacing="0" id="table_personalinfo">
+	<tr>
+		<td class="column_name2">社員番号</td>
+		<td>000208</td>
+	</tr>
+	<tr>
+		<td class="column_name1">所属</td>
+		<td>BI課</td>
+	</tr>
+	<tr>
+		<td class="column_name1">氏名</td>
+		<td>池田忠繁</td>
+	</tr>
+</table>
+<!---勤務表各種項目名 -->
+<table border="0" cellspacing="0" id="table_roster">
+	<tr>
+		<td rowspan="2" class="column_name1">日</td>
+		<td rowspan="2" class="column_name1" id="column_youbi">曜日</td>
+		<td colspan="4" class="column_name2">メール届出申請</td>
+		<td rowspan="2" class="column_name2">振替日</td>
+		<td rowspan="2" class="column_name2">詳細</td>
+		<td colspan="2" class="column_name2">基本勤務時間</td>
+		<td colspan="3" class="column_name2">実績勤務時間</td>
+		<td rowspan="2" class="column_name2" id="column_zngyo">残業調整</td>
+			<tr>
+				<td class="column_name2">休暇</td>
+				<td class="column_name2">休出/振代休</td>
+				<td class="column_name2">通院/電遅</td>
+				<td class="column_name2">A/B変</td>
+				<td class="column_name2">出社</td>
+				<td class="column_name2">退社</td>
+				<td class="column_name2">出社</td>
+				<td class="column_name2">退社</td>
+				<td class="column_name2">休憩</td>
+			</tr>
+	</tr>
+	<!---入力フォーム -->
+	<form>
+	
+	<tr>
+		<td>1</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text" class="input-area"></td>
+		<td><textarea name="" rows="1"></textarea></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>2</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>3</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>4</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>5</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>6</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>7</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>8</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	
+	<tr>
+		<td>9</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>10</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>11</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>12</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>13</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>14</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>15</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>16</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>17</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>18</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>19</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>20</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>21</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>22</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>23</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>24</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>25</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>26</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>27</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>28</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>29</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>30</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	<tr>
+		<td>31</td>
+		<td></td>
+		<td>
+			<select name="example1" size="1">
+
+			<option value="サンプル1">サンプル1</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1">
+
+			<option value="サンプル1">サンプル2</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1">
+
+			<option value="サンプル1">サンプル3</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1">
+
+			<option value="サンプル1">サンプル4</option>
+
+			<option value="サンプル2">サンプル2</option>
+
+			<option value="サンプル3">サンプル3</option>
+
+			</select>
+		</td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+		<td><input type="text"></td>
+	</tr>
+	</form>
+</table>
+
+</body>
+
+</html>
