@@ -25,9 +25,11 @@ td{
 /*勤務表見出し*/
 #table_caption{
 	float: left;
+	border-collapse: collapse;
 }
 #table_personalinfo{
-	padding-left:5%;
+	margin-left:10%;
+	border-collapse: collapse;
 }
 .column_name1{
 	text-align:center;
@@ -40,18 +42,89 @@ td{
 /*勤務表*/
 #table_roster{
 	position:absolute;
-	top:35%;
-	width:100%;
+	top:30%;
+	width:960px;
+	border-collapse: collapse;
+	/*width:100%;*/
     table-layout:fixed;
 }
-
+#column_day{
+	width:60px;
+}
 #column_youbi{
-	
+	width:60px;
 }
-#column_zngyo{
-	
+#column_mail{
+	width:240px;
 }
-.input-area{
+#column_Furikae{
+	width:60px;
+}
+#column_detail{
+	width:180px;
+}
+#column_kihon{
+	width:120px;
+}
+#column_jisseki{
+	width:180px;
+}
+#column_zangyo{
+	width:60px;
+}
+/*
+#column_mail1{
+	width:60px;
+}
+#column_mail2{
+	width:60px;
+}
+#column_mail3{
+	width:60px;
+}
+#column_mail4{
+	width:60px;
+}
+#column_kihon1{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+*/
+/*入力フォーム*/
+.input_select{
+	width:50px;
+}
+.input_text1{
+	width:50px;
+}
+.input_text2{
+	width:170px;
+}
+/*日*/
+.row_day{
+	text-align:right;
+}
+/*曜日*/
+.row_youbi{
+	text-align:center;
+}
+/*休日祝日*/
+.row_holiday{
+	text-align:right;
+	margin-bottom:1;
+	color:#ff0000;
+	/*background-color:#1E90FF;*/
 }
 /*
 memo

@@ -54,34 +54,34 @@
 <!---勤務表各種項目名 -->
 <table border="0" cellspacing="0" id="table_roster">
 	<tr>
-		<td rowspan="2" class="column_name1">日</td>
+		<td rowspan="2" class="column_name1" id="column_day">日</td>
 		<td rowspan="2" class="column_name1" id="column_youbi">曜日</td>
-		<td colspan="4" class="column_name2">メール届出申請</td>
-		<td rowspan="2" class="column_name2">振替日</td>
-		<td rowspan="2" class="column_name2">詳細</td>
-		<td colspan="2" class="column_name2">基本勤務時間</td>
-		<td colspan="3" class="column_name2">実績勤務時間</td>
-		<td rowspan="2" class="column_name2" id="column_zngyo">残業調整</td>
+		<td colspan="4" class="column_name2" id="column_mail">メール届出申請</td>
+		<td rowspan="2" class="column_name2" id="column_Furikae">振替日</td>
+		<td rowspan="2" class="column_name2" id="column_detail">詳細</td>
+		<td colspan="2" class="column_name2" id="column_kihon">基本勤務時間</td>
+		<td colspan="3" class="column_name2" id="column_jisseki">実績勤務時間</td>
+		<td rowspan="2" class="column_name2" id="column_zangyo">残業調整</td>
 			<tr>
-				<td class="column_name2">休暇</td>
-				<td class="column_name2">休出/振代休</td>
-				<td class="column_name2">通院/電遅</td>
-				<td class="column_name2">A/B変</td>
-				<td class="column_name2">出社</td>
-				<td class="column_name2">退社</td>
-				<td class="column_name2">出社</td>
-				<td class="column_name2">退社</td>
-				<td class="column_name2">休憩</td>
+				<td class="column_name2" id="column_mail1">休暇</td>
+				<td class="column_name2" id="column_mail2">休出/振代休</td>
+				<td class="column_name2" id="column_mail3">通院/電遅</td>
+				<td class="column_name2" id="column_mail4">A/B変</td>
+				<td class="column_name2" id="column_kihon1">出社</td>
+				<td class="column_name2" id="column_kihon2">退社</td>
+				<td class="column_name2" id="column_jisseki1">出社</td>
+				<td class="column_name2" id="column_jisseki2">退社</td>
+				<td class="column_name2" id="column_jisseki3">休憩</td>
 			</tr>
 	</tr>
 	<!---入力フォーム -->
 	<form>
 	
 	<tr>
-		<td>1</td>
-		<td></td>
+		<td><p class="row_holiday">1</p></td>
+		<td class="row_youbi">木</td>
 		<td>
-			<select name="example1" size="1">
+			<select name="example1" size="1" class="input_select">
 
 			<option value="サンプル1">サンプル1</option>
 
@@ -92,7 +92,7 @@
 			</select>
 		</td>
 		<td>
-			<select name="example2" size="1">
+			<select name="example2" size="1" class="input_select">
 
 			<option value="サンプル1">サンプル2</option>
 
@@ -103,7 +103,7 @@
 			</select>
 		</td>
 		<td>
-			<select name="example3" size="1">
+			<select name="example3" size="1" class="input_select">
 
 			<option value="サンプル1">サンプル3</option>
 
@@ -114,7 +114,7 @@
 			</select>
 		</td>
 		<td>
-			<select name="example4" size="1">
+			<select name="example4" size="1" class="input_select">
 
 			<option value="サンプル1">サンプル4</option>
 
@@ -124,14 +124,14 @@
 
 			</select>
 		</td>
-		<td><input type="text" class="input-area"></td>
-		<td><textarea name="" rows="1"></textarea></td>
-		<td><input type="text"></td>
-		<td><input type="text"></td>
-		<td><input type="text"></td>
-		<td><input type="text"></td>
-		<td><input type="text"></td>
-		<td><input type="text"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
 	</tr>
 	<tr>
 		<td>2</td>
