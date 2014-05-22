@@ -119,13 +119,26 @@ td{
 .row_youbi{
 	text-align:center;
 }
-/*休日祝日*/
-.row_holiday{
-	text-align:right;
-	margin-bottom:1;
-	color:#ff0000;
-	/*background-color:#1E90FF;*/
+/*残業調整*/
+.zangyou_coloumn{
+	width:50px;
+	background-color:#808080;
 }
+/*休日祝日*/
+.holiday_youbi{
+	background-color:#40E0D0;
+	text-align:center;
+}
+.holiday_day{
+	text-align:right;
+	padding-bottom:0.5;
+	margin-top:0.5;
+	color:#ff0000;
+}
+.holiday_color{
+	background-color:#40E0D0;
+}
+
 /*
 memo
 残業調整でグレーから白に
