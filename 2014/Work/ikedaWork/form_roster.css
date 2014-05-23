@@ -1,0 +1,150 @@
+li{
+	list-style:none;
+}
+td{
+	border-top:solid 1px;
+	border-left:solid 1px ;
+	border-bottom:solid 1px ;
+	border-right:solid 1px ;
+	align="left"
+}
+/*ヘッダ要素*/
+#btnView{
+	float:left;
+}
+#btnRegist{
+	float:left;
+}
+#btnOutput{
+	float:left;
+}
+#login_panel{
+	
+}
+
+/*勤務表見出し*/
+#table_caption{
+	float: left;
+	border-collapse: collapse;
+}
+#table_personalinfo{
+	margin-left:10%;
+	border-collapse: collapse;
+}
+.column_name1{
+	text-align:center;
+	background-color:#D3D3D3;
+}
+.column_name2{
+	text-align:center;
+	background-color:#00CC66;
+}
+/*勤務表*/
+#table_roster{
+	position:absolute;
+	top:30%;
+	width:960px;
+	border-collapse: collapse;
+	/*width:100%;*/
+    table-layout:fixed;
+}
+#column_day{
+	width:60px;
+}
+#column_youbi{
+	width:60px;
+}
+#column_mail{
+	width:240px;
+}
+#column_Furikae{
+	width:60px;
+}
+#column_detail{
+	width:180px;
+}
+#column_kihon{
+	width:120px;
+}
+#column_jisseki{
+	width:180px;
+}
+#column_zangyo{
+	width:60px;
+}
+/*
+#column_mail1{
+	width:60px;
+}
+#column_mail2{
+	width:60px;
+}
+#column_mail3{
+	width:60px;
+}
+#column_mail4{
+	width:60px;
+}
+#column_kihon1{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+#column_kihon2{
+	width:60px;
+}
+*/
+/*入力フォーム*/
+.input_select{
+	width:50px;
+}
+.input_text1{
+	width:50px;
+}
+.input_text2{
+	width:170px;
+}
+/*日*/
+.row_day{
+	text-align:right;
+}
+/*曜日*/
+.row_youbi{
+	text-align:center;
+}
+/*残業調整*/
+.zangyou_coloumn{
+	width:50px;
+	background-color:#808080;
+}
+/*休日祝日*/
+.holiday_youbi{
+	background-color:#40E0D0;
+	text-align:center;
+}
+.holiday_day{
+	text-align:right;
+	padding-bottom:0.5;
+	margin-top:0.5;
+	color:#ff0000;
+}
+.holiday_color{
+	background-color:#40E0D0;
+}
+
+/*
+memo
+残業調整でグレーから白に
+振休選択で振替日白に
+メール申請届出（休暇、休出/振代休、通院/電遅、A/B変）　振替日　詳細　
+基本勤務時間（出社、退社）　実績勤務時間（出社、退社、休憩）残業調整
+緑
+休日祝日は青,日にちと曜日赤字
+*/
