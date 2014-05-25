@@ -127,6 +127,7 @@ td{
 }
 .input_text1{
 	width:50px;
+	ime-mode:disabled;
 }
 .input_text2{
 	width:170px;
@@ -159,6 +160,9 @@ td{
 }
 .holiday_color{
 	background-color:#40E0D0;
+}
+#id_zangyou{
+	background-color:#808080;
 }
 /*フッター項目*/
  #footer{
