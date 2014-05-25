@@ -1,0 +1,82 @@
+li{
+	list-style:none;
+}
+#btnView{
+	float:left;
+}
+#btnRegist{
+	float:left;
+}
+#btnOutput{
+	float:left;
+}
+#login_panel{
+	
+}
+#zangyo_panel{
+	float:left;
+}
+td{
+	border-top:solid 1px;
+	border-left:solid 1px ;
+	border-bottom:solid 1px ;
+	border-right:solid 1px ;
+	align="left"
+}
+/*
+#day1{
+	float:left;
+	border:solid 1px;
+}
+#day2{
+	float:left;
+	border:solid 1px;
+}
+#mail{
+	float:left;
+	border:solid 1px;
+	width:25%;
+}
+#furikae{
+	float:left;
+	border:solid 1px;
+}
+#detail{
+	float:left;
+	border:solid 1px;
+	width:20%;
+}
+#work1{
+	float:left;
+	border:solid 1px;
+	width:10%;
+}
+#work2{
+	border:solid 1px;
+	width:20%;
+}
+#start{
+	float:left;
+	border:solid 1px;
+}
+#end{
+	float:left;
+	border:solid 1px;
+}
+#rest{
+	border:solid 1px;
+}
+#zangyo{
+	border:solid 1px;
+}
+*/
+/*
+memo
+残業調整でグレーから白に
+振休選択で振替日白に
+日　曜日　グレー
+メール申請届出（休暇、休出/振代休、通院/電遅、A/B変）　振替日　詳細　
+基本勤務時間（出社、退社）　実績勤務時間（出社、退社、休憩）残業調整
+緑
+休日祝日は青
+*/
