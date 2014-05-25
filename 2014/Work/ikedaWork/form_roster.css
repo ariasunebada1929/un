@@ -127,6 +127,7 @@ td{
 }
 .input_text1{
 	width:50px;
+	ime-mode:disabled;
 }
 .input_text2{
 	width:170px;
