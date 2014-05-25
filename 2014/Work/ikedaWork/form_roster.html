@@ -3,17 +3,17 @@
 <head>
 	<title>勤務表入力 -らくらく勤怠（仮）</title>
 	<link rel="stylesheet" type="text/css" href="form_roster.css">
-	<script type="text/javascript" src="btnRegist.js"></script>
+	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\btnRegist.js"></script>
 </head>
 
 <body>
 <!-- ヘッダー-->
-<form method="post">
 <div id="container">
 <div id="header">
+<form method="post">
 <ul>
 	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
-	<li><button ID="btnRegist"   OnClick="return btnRegist_Click()">勤怠情報登録</button></li>
+	<li><input type="button" value="勤怠情報登録" OnClick="btnRegist_Click();"></li>
 	<li><button id="btnOutput"   OnClick="">勤務表出力</button></li>
 	<li id="login_panel">ログイン者</li>
 </ul>
