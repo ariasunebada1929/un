@@ -4,6 +4,7 @@
 	<title>勤務表入力 -らくらく勤怠（仮）</title>
 	<link rel="stylesheet" type="text/css" href="form_roster.css">
 	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\btnRegist.js"></script>
+	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\zangyoCheck.js"></script>
 </head>
 
 <body>
@@ -13,7 +14,10 @@
 <form method="post">
 <ul>
 	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
+	<!-- html4の場合 
 	<li><input type="button" value="勤怠情報登録" OnClick="return btnRegist_Click();"></li>
+	-->
+	<li><button value="勤怠情報登録" id="btnOutput" OnClick="return btnRegist_Click();">勤務表出力</button></li>
 	<li><button id="btnOutput"   OnClick="">勤務表出力</button></li>
 	<li id="login_panel">ログイン者</li>
 </ul>
@@ -27,7 +31,7 @@
 	<tr>
 		<td class="column_name2">残業調整</td>
 		<td>
-		<select name="zangyo">
+		<select name="zangyo" onChange="zangyou_Change()" id="Zangyo_chousei">
 		<option value="No">×</option>
 		<option value="Yes">○</option>
 		</td>
@@ -120,7 +124,7 @@
 		<td><input type="text" class="input_text1" maxlength="5" id="id_jisseki1"></td>
 		<td><input type="text" class="input_text1" maxlength="5" id="id_jisseki2"></td>
 		<td><input type="text" class="input_text1" maxlength="5" id="id_jisseki3"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou"  readonly="readonly" ></td>
 	</tr>
 	<tr>
 		<td class="row_day">2</td>
