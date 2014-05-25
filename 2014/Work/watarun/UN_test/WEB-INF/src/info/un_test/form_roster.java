@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.awt.*;
+import java.awt.event.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -34,17 +36,28 @@ throws IOException, ServletException
 	
 	/*当月分の日時取得処理*/
     Calendar cal = Calendar.getInstance();        
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMMdd");        
-    //*String strYearDate = sdf.format(cal.getTime());
-    //*String strMonthDate = sdf.format(cal.getTime());
-    String strDayDate = sdf.format(cal.getTime());
+    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+    sdf.applyPattern("yyyy");
+    String strYear = sdf.format(cal.getTime());
+    sdf.applyPattern("MM");
+    String strMonth = sdf.format(cal.getTime());
     
     
-    /* 勤怠データの取得 */
-    //Select * FROM WORK_TRN　WHERE STAFF_ID = userid And YEAR = strDate And MONTH = strDate And DAY = strDate
+    /*初回登録有無の判定*/
+    String strInitSQL = "SELECT COUNT(*) FROM WORK_TRN　" + 
+                    	"WHERE STAFF_ID = " + strUserid + 
+    		            " AND YEAR = " + strYear + 
+    		            " AND MONTH = "  + strMonth;
     
-	/*勤怠データの読込み*/
-	
+    /*個人設定トランの呼出し*/
+    String strPerSQL = "SELECT UNIT_CD, DETAIL, ZANGYO_ADJUST FROM PARSONAL_TRN " + 
+                    	"WHERE STAFF_ID = " + strUserid;
+    
+    /*勤怠トランのデータ呼び出し*/
+    String strWorkSQL = "SELECT * FROM WORK_TRN　" + 
+                    	"WHERE STAFF_ID = " + strUserid + 
+    		            " AND YEAR = " + strYear + 
+    		            " AND MONTH = "  + strMonth;
     
 	/*勤怠フォームの枠を追加*/
     for (int i = 0; i <= iRecordCount; i++) {
@@ -103,3 +116,4 @@ throws ServletException, IOException
 }
 
 }
+
