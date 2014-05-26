@@ -47,7 +47,8 @@ throws IOException, ServletException
 	}
     
     Connection conn = null;
-    String url = "jdbc:mysql://localhost/unserver";
+    String serverName = "unserver";
+    String url = "jdbc:mysql://localhost/" + serverName;
     String user = "root";
     String password = "";
     String msg = "";
@@ -59,38 +60,51 @@ throws IOException, ServletException
         // データベースに対する処理
     	msg = "データベース接続に成功しました";
     
-	 /*当月分の日時取得処理*/
-    Calendar cal = Calendar.getInstance();        
-    SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
-    sdf.applyPattern("yyyy");
-    String strYear = sdf.format(cal.getTime());
-    sdf.applyPattern("MM");
-    String strMonth = sdf.format(cal.getTime());
+	    /*当月分の日時取得処理*/
+        Calendar cal = Calendar.getInstance();        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+        sdf.applyPattern("yyyy");
+        String strYear = sdf.format(cal.getTime());
+        sdf.applyPattern("MM");
+        String strMonth = sdf.format(cal.getTime());
     
-    Statement stmt = conn.createStatement();
+        Statement stmt = conn.createStatement();
     
-    /*初回登録有無の判定*/
-    String strInitsql = "SELECT COUNT(*) FROM unserver.WORK_TRN " + 
-                    	"WHERE STAFF_ID = " + strUserid + 
-    		            " AND YEAR = " + strYear + 
-    		            " AND MONTH = "  + strMonth;
+        /*初回登録有無の判定*/
+        String strInitsql = "SELECT COUNT(*) cnt FROM " + serverName +".WORK_TRN " + 
+        		"WHERE STAFF_ID = " + strUserid + 
+        		" AND YEAR = " + strYear + 
+        		" AND MONTH = "  + strMonth;
     
-    ResultSet rs = stmt.executeQuery(strInitsql);
+        ResultSet rs = stmt.executeQuery(strInitsql);
     
-    /*個人設定トランの呼出し*/
-    String strPerSQL = "SELECT UNIT_CD, DETAIL, ZANGYO_ADJUST FROM PARSONAL_TRN " + 
-                    	"WHERE STAFF_ID = " + strUserid;
+        //レコード数の取得
+        rs.next();
+        int cnt = rs.getInt("cnt");
+        String strPerSQL = "";
     
-    /*勤怠トランのデータ呼び出し*/
-    String strWorkSQL = "SELECT * FROM WORK_TRN　" + 
-                    	"WHERE STAFF_ID = " + strUserid + 
-    		            " AND YEAR = " + strYear + 
-    		            " AND MONTH = "  + strMonth;
-    
-	/*勤怠フォームの枠を追加*/
-    for (int i = 0; i <= iRecordCount; i++) {
+        if (cnt == 0){
+        	/*初回登録の場合*/
+        	/*個人設定トランの呼出し*/
+        	strPerSQL = "SELECT UNIT_CD, DETAIL, ZANGYO_ADJUST FROM " + serverName +".PARSONAL_TRN " + 
+        			"WHERE STAFF_ID = " + strUserid;
+        	ResultSet perrs = stmt.executeQuery(strPerSQL);
+        	/*個人設定トラン情報より枠を追加*/
+        	while(perrs.next()){
 
-	}
+        	}
+        } else {
+        	/*勤怠トランのデータ呼び出し*/
+        	strPerSQL = "SELECT * FROM  " + serverName +".WORK_TRN　" + 
+        			"WHERE STAFF_ID = " + strUserid + 
+        			" AND YEAR = " + strYear + 
+        			" AND MONTH = "  + strMonth;
+        	ResultSet perrs = stmt.executeQuery(strPerSQL);   	
+        	/*勤怠データより枠を追加*/
+        	while(perrs.next()){
+
+        	}
+        }
 	
 	/*イベントの作成*/
 	
