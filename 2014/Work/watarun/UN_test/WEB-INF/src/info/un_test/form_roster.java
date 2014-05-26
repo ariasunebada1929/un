@@ -2,6 +2,11 @@ package info.un_test;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.awt.*;
@@ -34,7 +39,27 @@ throws IOException, ServletException
     //idをsessionスコープで保存
     session.setAttribute("userid", strUserid);
 	
-	/*当月分の日時取得処理*/
+    try {
+		Class.forName("com.mysql.jdbc.Driver");
+	} catch (ClassNotFoundException e) {
+		// TODO 自動生成された catch ブロック
+		e.printStackTrace();
+	}
+    
+    Connection conn = null;
+    String url = "jdbc:mysql://localhost/unserver";
+    String user = "root";
+    String password = "";
+    String msg = "";
+
+    try{
+    	
+    	conn = DriverManager.getConnection(url, user, password);
+
+        // データベースに対する処理
+    	msg = "データベース接続に成功しました";
+    
+	 /*当月分の日時取得処理*/
     Calendar cal = Calendar.getInstance();        
     SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
     sdf.applyPattern("yyyy");
@@ -42,12 +67,15 @@ throws IOException, ServletException
     sdf.applyPattern("MM");
     String strMonth = sdf.format(cal.getTime());
     
+    Statement stmt = conn.createStatement();
     
     /*初回登録有無の判定*/
-    String strInitSQL = "SELECT COUNT(*) FROM WORK_TRN　" + 
+    String strInitsql = "SELECT COUNT(*) FROM unserver.WORK_TRN " + 
                     	"WHERE STAFF_ID = " + strUserid + 
     		            " AND YEAR = " + strYear + 
     		            " AND MONTH = "  + strMonth;
+    
+    ResultSet rs = stmt.executeQuery(strInitsql);
     
     /*個人設定トランの呼出し*/
     String strPerSQL = "SELECT UNIT_CD, DETAIL, ZANGYO_ADJUST FROM PARSONAL_TRN " + 
@@ -75,6 +103,20 @@ throws IOException, ServletException
 	response.setContentType("text/html; charset=utf-8");
     this.getServletContext().getRequestDispatcher
                  ("/form_roster.jsp").include(request, response);
+    
+    }catch (SQLException e){
+    	msg = "ドライバのロードに失敗しました";
+    	//例外処理
+    }finally{   	
+    	try{
+    		if (conn != null){
+    	      conn.close();
+    	    }
+    	    }catch (SQLException e){
+    	    // 例外処理
+    	    }
+    	System.out.println(msg);
+    }
     
 }
 
@@ -113,6 +155,17 @@ throws ServletException, IOException
 	
 	//
 	
+}
+
+public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+    String msg = "";
+    try {
+      Class.forName("com.mysql.jdbc.Driver").newInstance();
+      msg = "ドライバのロードに成功しました";
+    } catch (ClassNotFoundException e){
+      msg = "ドライバのロードに失敗しました";
+    }
+    System.out.println(msg);
 }
 
 }
