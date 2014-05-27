@@ -1,46 +1,63 @@
 function btnRegist_Click(){
-	Kihon1= document.getElementById("id_kihon1").value;
-	Kihon2= document.getElementById("id_kihon2").value;
-	Jisseki1= document.getElementById("id_jisseki1").value;
-	Jisseki2= document.getElementById("id_jisseki2").value;
-	Jisseki3= document.getElementById("id_jisseki3").value;
-	Zangyo= document.getElementById("id_zangyou").value;
+
+	//月の最終日用変数
+	var maxdate;
 	
-	if(Kihon1 !=""){
-		if (!Kihon1.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
-			alert("基本勤務時間・出社に正しい時刻を入力してください");
-			return false;
+	//htmlの最終日チェック
+	if(document.getElementById("id_zangyou31") != null){
+		maxdate = 31;
+	}else if(document.getElementById("id_zangyou30") != null){
+		maxdate = 30;
+	}else{
+		maxdate = 28;
+	}
+	
+	//最終日まで入力をチェック
+	for(n = 1; n <=maxdate; n++){
+		KihonStart= document.getElementById("id_kihonS" + n).value;
+		KihonEnd= document.getElementById("id_kihonE" + n).value;
+		JissekiStart= document.getElementById("id_jissekiS" + n).value;
+		JissekiEnd= document.getElementById("id_jissekiE"+ n).value;
+		JissekiRest= document.getElementById("id_jissekiR" + n).value;
+		Zangyo= document.getElementById("id_zangyou" + n).value;
+	
+		if(KihonStart !=""){
+			if (!KihonStart.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
+				alert(n +"日の基本勤務時間・出社に正しい時刻を入力してください");
+				return false;
+			}
+		}
+		if(KihonEnd !=""){
+			if (!KihonEnd.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
+				alert(n +"日の基本勤務時間・退社に正しい時刻を入力してください");
+				return false;
+			}
+		}
+		if(JissekiStart !=""){
+			if (!JissekiStart.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
+				alert(n +"日の実績勤務時間・出社に正しい時刻を入力してください");
+				return false;
+			}
+		}
+		if(JissekiEnd !=""){
+			if (!JissekiEnd.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
+				alert(n +"日の実績勤務時間・退社に正しい時刻を入力してください");
+				return false;
+			}
+		}
+		if(JissekiRest !=""){
+			if (!JissekiRest.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
+				alert(n +"日の実績勤務時間・休憩に正しい時刻を入力してください");
+				return false;
+			}
+		}
+		if(Zangyo !=""){
+			if (!Zangyo.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
+				alert(n +"日の残業調整に正しい時間を入力してください");
+				return false;
+			}
 		}
 	}
-	if(Kihon2 !=""){
-		if (!Kihon2.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
-			alert("基本勤務時間・退社に正しい時刻を入力してください");
-			return false;
-		}
-	}
-	if(Jisseki1 !=""){
-		if (!Jisseki1.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
-			alert("実績勤務時間・出社に正しい時刻を入力してください");
-			return false;
-		}
-	}
-	if(Jisseki2 !=""){
-		if (!Jisseki2.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
-			alert("実績勤務時間・退社に正しい時刻を入力してください");
-			return false;
-		}
-	}
-	if(Jisseki3 !=""){
-		if (!Jisseki3.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
-			alert("実績勤務時間・休憩に正しい時刻を入力してください");
-			return false;
-		}
-	}
-	if(Zangyo !=""){
-		if (!Zangyo.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
-			alert("残業調整に正しい時刻を入力してください");
-			return false;
-		}
-	}
+	
 	return true;
 }
