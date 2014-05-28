@@ -3,27 +3,35 @@
 <head>
 	<title>勤務表入力 -らくらく勤怠（仮）</title>
 	<link rel="stylesheet" type="text/css" href="form_roster.css">
+	<script type="text/javascript" src="D:\UNdir\2014\Work\ikedaWork\btnRegist.js"></script>
+	<script type="text/javascript" src="D:\UNdir\2014\Work\ikedaWork\zangyoCheck.js"></script>
 </head>
 
 <body>
 <!-- ヘッダー-->
+<div id="container">
 <div id="header">
+<form method="post">
 <ul>
 	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
-	<li><button ID="btnRegist"   OnClick="">勤怠情報登録</button></li>
+	<!-- html4の場合 
+	<li><input type="button" value="勤怠情報登録" OnClick="return btnRegist_Click();"></li>
+	-->
+	<li><button value="勤怠情報登録" id="btnOutput" OnClick="return btnRegist_Click();">勤務表出力</button></li>
 	<li><button id="btnOutput"   OnClick="">勤務表出力</button></li>
 	<li id="login_panel">ログイン者</li>
 </ul>
 <hr>
 </div>
 <!--勤務表-->
+<div id="header_roster">
 <h1>5月勤務表</h1>
 <table border="0" cellspacing="0" id="table_caption">
 <!--<caption>5月勤務表</caption>-->
 	<tr>
 		<td class="column_name2">残業調整</td>
 		<td>
-		<select name="zangyo">
+		<select name="zangyo" onChange="zangyou_Change()" id="Zangyo_chousei">
 		<option value="No">×</option>
 		<option value="Yes">○</option>
 		</td>
@@ -51,7 +59,9 @@
 		<td>池田忠繁</td>
 	</tr>
 </table>
+</div>
 <!---勤務表各種項目名 -->
+<div id="main_roster">
 <table border="0" cellspacing="0" id="table_roster">
 	<tr>
 		<td rowspan="2" class="column_name1" id="column_day">日</td>
@@ -75,7 +85,6 @@
 			</tr>
 	</tr>
 	<!---入力フォーム -->
-	<form>
 	
 	<tr>
 		<td class="row_day">1</td>
@@ -108,14 +117,14 @@
 			<option value="サンプル3">サンプル3</option>
 			</select>
 		</td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" id="id_furikae"></td>
+		<td><input type="text" class="input_text2"  maxlength="20" id="id_syousai"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS1"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE1"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE1"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou1"  readonly="readonly" style="background-color:#808080;" ></td>
 	</tr>
 	<tr>
 		<td class="row_day">2</td>
@@ -150,15 +159,15 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR2"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou2"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 		<tr>
-		<td class="holiday_color"><p class="holiday_day">3</p></td>
+		<td class="holiday_day">3</td>
 		<td class="holiday_youbi">土</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -190,15 +199,15 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR3"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou3"  readonly="readonly" style="background-color:#808080;" ></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">4</p></td>
+		<td class="holiday_day">4</td>
 		<td class="holiday_youbi">日</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -230,15 +239,15 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR4"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou4"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">5</p></td>
+		<td class="holiday_day">5</td>
 		<td class="holiday_youbi">月</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -270,15 +279,15 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR5"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou5"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">6</p></td>
+		<td class="holiday_day">6</td>
 		<td class="holiday_youbi">火</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -310,12 +319,12 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR6"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou6"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">7</td>
@@ -350,12 +359,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR7"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou7"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">8</td>
@@ -390,12 +399,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR8"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou8"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">9</td>
@@ -430,15 +439,15 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR9"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou9"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">10</p></td>
+		<td class="holiday_day">10</td>
 		<td class="holiday_youbi">土</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -470,15 +479,15 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR10"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou10"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">11</p></td>
+		<td class="holiday_day">11</td>
 		<td class="holiday_youbi">日</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -510,12 +519,12 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR11"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou11"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">12</td>
@@ -550,12 +559,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR12"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou12"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">13</td>
@@ -590,12 +599,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR13"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou13"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">14</td>
@@ -630,12 +639,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR14"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou14"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">15</td>
@@ -670,12 +679,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR15"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou15"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">16</td>
@@ -710,15 +719,15 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR16"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou16"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">17</p></td>
+		<td class="holiday_day">17</td>
 		<td class="holiday_youbi">土</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -750,15 +759,15 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR17"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou17"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">18</p></td>
+		<td class="holiday_day">18</td>
 		<td class="holiday_youbi">日</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -790,12 +799,12 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR18"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou18"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">19</td>
@@ -830,12 +839,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR19"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou19"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">20</td>
@@ -870,12 +879,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR20"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou20"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">21</td>
@@ -910,12 +919,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR21"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou21"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">22</td>
@@ -950,12 +959,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR22"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou22"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">23</td>
@@ -990,15 +999,15 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR23"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou23"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">24</p></td>
+		<td class="holiday_day">24</td>
 		<td class="holiday_youbi">土</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -1030,15 +1039,15 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR24"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou24"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">25</p></td>
+		<td class="holiday_day">25</td>
 		<td class="holiday_youbi">日</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -1070,12 +1079,12 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR25"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou25"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">26</td>
@@ -1110,12 +1119,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR26"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou26"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">27</td>
@@ -1150,12 +1159,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR27"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou27"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">28</td>
@@ -1190,12 +1199,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR28"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou28"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">29</td>
@@ -1230,12 +1239,12 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR29"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou29"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
 		<td class="row_day">30</td>
@@ -1270,15 +1279,15 @@
 		</td>
 		<td><input type="text" class="input_text1"></td>
 		<td><input type="text" class="input_text2"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR30"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou30"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	<tr>
-		<td class="holiday_color"><p class="holiday_day">31</p></td>
+		<td class="holiday_day">31</td>
 		<td class="holiday_youbi">土</td>
 		<td class="holiday_color">
 			<select name="example1" size="1" class="input_select">
@@ -1310,16 +1319,21 @@
 		</td>
 		<td class="holiday_color"><input type="text" class="input_text1"></td>
 		<td class="holiday_color"><input type="text" class="input_text2"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="holiday_color"><input type="text" class="input_text1"></td>
-		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR31"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou31"  readonly="readonly" style="background-color:#808080;"></td>
 	</tr>
 	</form>
 </table>
-
+</div>
+<!-- フッター --> 
+<div id="footer">
+<p>らくらく勤務表 Version 0.0.0 20140524 Copyright (C) 2014 UN ROOM</p>
+</div>
+</div>
 </body>
 
 </html>

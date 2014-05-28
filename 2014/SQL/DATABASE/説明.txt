@@ -1,0 +1,2 @@
+DEFAULT CHARACTER SET cp932 COLLATE cp932_japanese_ci
+上記の記載がないとInsert文で日本語を入れることができない。
