@@ -9,8 +9,6 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.awt.*;
-import java.awt.event.*;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -32,8 +30,8 @@ public class form_roster extends HttpServlet {
 public void doGet(HttpServletRequest request, HttpServletResponse response)
 throws IOException, ServletException
 {
-	String strUserid = "1234";	
-	int iRecordCount = 0;	
+	String strUserid = "00001";	
+	int iRecordCount = 0;
 	//HttpSessionインタフェースのオブジェクトを取得
     HttpSession session = request.getSession();
     //idをsessionスコープで保存
@@ -47,7 +45,7 @@ throws IOException, ServletException
 	}
     
     Connection conn = null;
-    String serverName = "unserver";
+    String serverName = "unserver2014";
     String url = "jdbc:mysql://localhost/" + serverName;
     String user = "root";
     String password = "";
@@ -81,17 +79,20 @@ throws IOException, ServletException
         //レコード数の取得
         rs.next();
         int cnt = rs.getInt("cnt");
-        String strPerSQL = "";
-    
+        String strPerSQL = "";       
+        cnt = 0;
+        
         if (cnt == 0){
         	/*初回登録の場合*/
-        	/*個人設定トランの呼出し*/
-        	strPerSQL = "SELECT UNIT_CD, DETAIL, ZANGYO_ADJUST FROM " + serverName +".PARSONAL_TRN " + 
-        			"WHERE STAFF_ID = " + strUserid;
-        	ResultSet perrs = stmt.executeQuery(strPerSQL);
+        	/*個人設定トランの呼出し*/   	
+        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
+        	rs = stmt.executeQuery(strPerSQL);
         	/*個人設定トラン情報より枠を追加*/
-        	while(perrs.next()){
-
+        	while(rs.next()){
+            	int work_start = rs.getInt("work_start");
+            	int work_end = rs.getInt("work_end");
+        		String detail = rs.getString("detail");
+        		int zangyo = rs.getInt("adjust");
         	}
         } else {
         	/*勤怠トランのデータ呼び出し*/
