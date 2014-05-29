@@ -12,19 +12,19 @@ function zangyou_Change(){
 		maxdate = 28;
 	}
 	
+	var obj = document.getElementById("Zangyo_chousei");
+	var index= obj.selectedIndex;
 	//最終日まで残業調整テキストボックスを変更
 	for(n = 1; n <=maxdate; n++){
-		obj = document.getElementById("Zangyo_chousei");
-		index= obj.selectedIndex;
 		 // IDをキーにしてテキストボックスエレメントの参照を取得する
         var targetElement = document.getElementById('id_zangyou' + n);
 		if(index != 0){
-        // テキストボックス入力不可
+        // テキストボックス入力可
         targetElement.readOnly = false;
 		targetElement.style.backgroundColor='#FFFFFF';
 		}
 		else{
-        // テキストボックス入力可
+        // テキストボックス入力不可
         targetElement.readOnly = true;
 		targetElement.style.backgroundColor='#808080';
         }

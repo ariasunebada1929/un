@@ -5,6 +5,8 @@
 	<link rel="stylesheet" type="text/css" href="form_roster.css">
 	<script type="text/javascript" src="D:\UNdir\2014\Work\ikedaWork\btnRegist.js"></script>
 	<script type="text/javascript" src="D:\UNdir\2014\Work\ikedaWork\zangyoCheck.js"></script>
+	<script type="text/javascript" src="D:\UNdir\2014\Work\ikedaWork\mailCheck.js"></script>
+	<script type="text/javascript" src="D:\UNdir\2014\Work\ikedaWork\validate.js"></script>
 </head>
 
 <body>
@@ -90,10 +92,15 @@
 		<td class="row_day">1</td>
 		<td class="row_youbi">木</td>
 		<td>
-			<select name="example1" size="1" class="input_select">
-			<option value="サンプル1">サンプル1</option>
-			<option value="サンプル2">サンプル2</option>
-			<option value="サンプル3">サンプル3</option>
+			<select name="example1" size="1" class="input_select" id="id_Kyuka1" onchange="mailCheck();">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
 			</select>
 		</td>
 		<td>
@@ -121,7 +128,7 @@
 		<td><input type="text" class="input_text2"  maxlength="20" id="id_syousai" name="syousai_1"></td>
 		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS1" name="kihonS_1"></td>
 		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE1" name="kihonE_1"></td>
-		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1" name="jissekiS_1"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1" name="jissekiS_1" onBlur="return validate();"></td>
 		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE1" name="jissekiE_1"></td>
 		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR1" name="jiseekiR_1"></td>
 		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou1" name="zangyou_1" readonly="readonly" style="background-color:#808080;" ></td>
