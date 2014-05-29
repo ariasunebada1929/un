@@ -22,6 +22,9 @@ public void jspInit() {
 
 <body>
 <!-- ヘッダー-->
+<div id="container">
+<div id="header">
+<form method="post">
 <ul>
 	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
 	<li><button ID="btnRegist"   OnClick="">勤怠情報登録</button></li>
@@ -29,41 +32,69 @@ public void jspInit() {
 	<li id="login_panel">ログイン者</li>
 </ul>
 <hr>
+</div>
 <!--勤務表-->
-<!-- <ul>
-	<li id="zangyo_panel">残業調整</li>
-	<li>
-	<select name="zangyo">
-	<option value="No">×</option>
-	<option value="Yes">○</option>
-	</li>
-</ul>
--->
-<table border="0" cellspacing="0">
+<div id="header_roster">
+<h1>5月勤務表</h1>
+<table border="0" cellspacing="0" id="table_caption">
+<!--<caption>5月勤務表</caption>-->
 	<tr>
-		<td rowspan="2">日</td>
-		<td rowspan="2">曜日</td>
-		<td colspan="4">メール届出申請</td>
-		<td rowspan="2">振替日</td>
-		<td rowspan="2">詳細</td>
-		<td colspan="2">基本勤務時間</td>
-		<td colspan="3">実績勤務時間</td>
-		<td rowspan="2">残業調整</td>
+		<td class="column_name2">残業調整</td>
+		<td>
+		<select name="zangyo" onChange="zangyou_Change()" id="Zangyo_chousei">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+	<tr>
+		<td class="column_name2">時短勤務</td>
+		<td>
+		<select name="jitan">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+</table>
+<table border="0" cellspacing="0" id="table_personalinfo">
+	<tr>
+		<td class="column_name2">社員番号</td>
+		<td>000208</td>
+	</tr>
+	<tr>
+		<td class="column_name1">所属</td>
+		<td>BI課</td>
+	</tr>
+	<tr>
+		<td class="column_name1">氏名</td>
+		<td>池田忠繁</td>
+	</tr>
+</table>
+</div>
+<!---勤務表各種項目名 -->
+<div id="main_roster">
+<table border="0" cellspacing="0" id="table_roster">
+	<tr>
+		<td rowspan="2" class="column_name1" id="column_day">日</td>
+		<td rowspan="2" class="column_name1" id="column_youbi">曜日</td>
+		<td colspan="4" class="column_name2" id="column_mail">メール届出申請</td>
+		<td rowspan="2" class="column_name2" id="column_Furikae">振替日</td>
+		<td rowspan="2" class="column_name2" id="column_detail">詳細</td>
+		<td colspan="2" class="column_name2" id="column_kihon">基本勤務時間</td>
+		<td colspan="3" class="column_name2" id="column_jisseki">実績勤務時間</td>
+		<td rowspan="2" class="column_name2" id="column_zangyo">残業調整</td>
 			<tr>
-				<td>休暇</td>
-				<td>休出/振代休</td>
-				<td>通院/電遅</td>
-				<td>A/B変</td>
-				<td>出社</td>
-				<td>退社</td>
-				<td>出社</td>
-				<td>退社</td>
-				<td>休憩</td>
+				<td class="column_name2" id="column_mail1">休暇</td>
+				<td class="column_name2" id="column_mail2">休出/振代休</td>
+				<td class="column_name2" id="column_mail3">通院/電遅</td>
+				<td class="column_name2" id="column_mail4">A/B変</td>
+				<td class="column_name2" id="column_kihon1">出社</td>
+				<td class="column_name2" id="column_kihon2">退社</td>
+				<td class="column_name2" id="column_jisseki1">出社</td>
+				<td class="column_name2" id="column_jisseki2">退社</td>
+				<td class="column_name2" id="column_jisseki3">休憩</td>
 			</tr>
 	</tr>
 	<!---入力フォーム -->
-	<form>
-	
 	<%
         // データベースへのアクセス開始
         Connection con = null;
@@ -116,10 +147,10 @@ public void jspInit() {
 				
 				while(i < 32){
 					out.println("<tr>");
-					out.println("<td>" + i +"</td>");
-					out.println("<td></td>");
+					out.println("<td class=\"row_day\">" + i + "</td>");
+					out.println("<td class=\"row_youbi\"></td>");
 					out.println("<td>");
-					out.println("<select name=\"example1\" size=\"1\">");						
+					out.println("<select name=\"example1\" size=\"1\" class=\"input_select\">");						
 					String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
 	        	    rs = stmt.executeQuery(strSeq1);
 					
@@ -130,7 +161,7 @@ public void jspInit() {
 					
 					out.println("</td>");
 					out.println("<td>");
-					out.println("<select name=\"example2\" size=\"1\">");
+					out.println("<select name=\"example2\" size=\"1\" class=\"input_select\">");
 					String strSeq2 = "SELECT SUBMIT_REQUEST_2_CD req_value, SUBMIT_REQUEST_2_NAME req_name FROM unserver2014.SUBMIT_REQUEST_2_MST WHERE VALID_FLAG = \'1\'";
 	        	    rs = stmt.executeQuery(strSeq2);		
 					while(rs.next()){
@@ -140,7 +171,7 @@ public void jspInit() {
 					out.println("</td>");
 					out.println("<td>");
 					
-					out.println("<select name=\"example3\" size=\"1\">");
+					out.println("<select name=\"example3\" size=\"1\" class=\"input_select\">");
 					String strSeq3 = "SELECT SUBMIT_REQUEST_3_CD req_value, SUBMIT_REQUEST_3_NAME req_name FROM unserver2014.SUBMIT_REQUEST_3_MST WHERE VALID_FLAG = \'1\'";
 	        	    rs = stmt.executeQuery(strSeq3);		
 					while(rs.next()){
@@ -149,7 +180,7 @@ public void jspInit() {
 					out.println("</select>");
 					out.println("</td>");
 					out.println("<td>");
-					out.println("<select name=\"example4\" size=\"1\">");
+					out.println("<select name=\"example4\" size=\"1\" class=\"input_select\">");
 					String strSeq4 = "SELECT SUBMIT_REQUEST_4_CD req_value, SUBMIT_REQUEST_4_NAME req_name FROM unserver2014.SUBMIT_REQUEST_4_MST WHERE VALID_FLAG = \'1\'";
 	        	    rs = stmt.executeQuery(strSeq4);		
 					while(rs.next()){
@@ -157,14 +188,14 @@ public void jspInit() {
 					}	
 					out.println("</select>");
 					out.println("</td>");
-					out.println("<td><input type=\"text\"></td>");
-					out.println("<td><input type=\"text\" value=" + detail + "></td>");
-					out.println("<td><input type=\"text\" value=" + work_start + "></td>");
-					out.println("<td><input type=\"text\" value=" + work_end + "></td>");
-					out.println("<td><input type=\"text\"></td>");
-					out.println("<td><input type=\"text\"></td>");
-					out.println("<td><input type=\"text\"></td>");
-					out.println("<td><input type=\"text\"></td>");
+					out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_1\"></td>");
+					out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_1\" value=" + detail + "></td>");
+					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_1\" value=" + work_start + "></td>");
+					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_1\" value=" + work_end + "></td>");
+					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\"></td>");
+					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_1\"></td>");
+					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_1\"></td>");
+					out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_1\" readonly=\"readonly\" style=\"background-color:#808080;\" ></td>");
 	                out.println("</tr>");
 					i = i + 1;
 				}
@@ -193,7 +224,12 @@ public void jspInit() {
     %>
 	</form>
 </table>
-
+</div>
+<!-- フッター --> 
+<div id="footer">
+<p>らくらく勤務表 Version 0.0.0 20140524 Copyright (C) 2014 UN ROOM</p>
+</div>
+</div>
 </body>
 
 </html>
