@@ -15,4 +15,28 @@ function mailCheck(){
     	document.getElementById('id_jissekiR1').readOnly = true;
     	return true;
     }
+    if(value=="02"){
+    	document.getElementById('id_jissekiS1').readOnly = true;
+    	document.getElementById('id_jissekiE1').readOnly = true;
+    	document.getElementById('id_jissekiR1').readOnly = true;
+    	return true;
+    }
+     if(value=="03"){
+    	document.getElementById('id_jissekiS1').readOnly = true;
+    	document.getElementById('id_jissekiE1').readOnly = true;
+    	document.getElementById('id_jissekiR1').readOnly = true;
+    	return true;
+    }
+    if(value=="06"){
+    	document.getElementById('id_jissekiS1').readOnly = true;
+    	document.getElementById('id_jissekiE1').readOnly = true;
+    	document.getElementById('id_jissekiR1').readOnly = true;
+    	return true;
+    }
+    if(value=="07"){
+    	document.getElementById('id_jissekiS1').readOnly = true;
+    	document.getElementById('id_jissekiE1').readOnly = true;
+    	document.getElementById('id_jissekiR1').readOnly = true;
+    	return true;
+    }
 }
