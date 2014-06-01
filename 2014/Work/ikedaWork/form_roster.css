@@ -140,6 +140,9 @@ td{
 .row_youbi{
 	text-align:center;
 }
+.furikaebi_column{
+	background-color:#808080;
+}
 /*残業調整*/
 .zangyou_coloumn{
 	width:50px;
