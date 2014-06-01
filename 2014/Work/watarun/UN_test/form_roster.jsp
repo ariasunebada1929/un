@@ -2,6 +2,7 @@
 <%@ page import="java.sql.*"%>
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.text.SimpleDateFormat"%>
+<%@ page import="javax.swing.JTextField"%>
 <%!
 // サーブレットのinitメソッドに相当
 public void jspInit() {
@@ -176,7 +177,7 @@ public void jspInit() {
 				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\" name=\"jissekiS_" + i + "\"></td>");
 				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_" + i + "\"></td>");
 				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_" + i + "\"></td>");
-				out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\" ></td>");
+				out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\"></td>");
                 out.println("</tr>");
 				i = i + 1;
 			}         
@@ -220,7 +221,8 @@ public void jspInit() {
             	            "       SUBMIT_REQUEST_4_CD req_4, DETAIL detail, " +
             	            "       BASIC_WORK_START work_start, BASIC_WORK_END work_end, " +
             	            "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
-            	            "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj " +
+            	            "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj, " +
+            	            "       DETAIL detail " +
             	            "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
     	    	rs = stmt.executeQuery(strPerSQL);
         		/*勤怠データより枠を追加*/
@@ -232,12 +234,16 @@ public void jspInit() {
         			String strreq_2 = rs.getString("req_2");
         			String strreq_3 = rs.getString("req_3");
         			String strreq_4 = rs.getString("req_4");
+        			String strdetail = rs.getString("detail");
         			int iwork_start = rs.getInt("work_start");
         			int work_end = rs.getInt("work_end");
         			int act_start = rs.getInt("act_start");
         			int act_end = rs.getInt("act_end");
         			int rest_hours = rs.getInt("rest_hours");
         			int zan_adj = rs.getInt("zan_adj");
+        			request.setCharacterEncoding("windows-31j");
+        			JTextField text1 = new JTextField("syousai_" + i);
+        			text1.setText(strdetail);
         		}
             }
             	     
