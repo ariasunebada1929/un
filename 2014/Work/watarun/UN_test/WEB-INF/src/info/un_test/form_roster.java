@@ -65,6 +65,8 @@ throws IOException, ServletException
         String strYear = sdf.format(cal.getTime());
         sdf.applyPattern("MM");
         String strMonth = sdf.format(cal.getTime());
+        
+        int Maxday = cal.getActualMaximum(cal.DATE);
     
         Statement stmt = conn.createStatement();
     
@@ -79,14 +81,14 @@ throws IOException, ServletException
         //レコード数の取得
         rs.next();
         int cnt = rs.getInt("cnt");
-        String strPerSQL = "";       
-        cnt = 0;
+        String strPerSQL = "";
+        rs.close();
         
         if (cnt == 0){
         	/*初回登録の場合*/
         	/*個人設定トランの呼出し*/   	
         	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
-        	rs = stmt.executeQuery(strPerSQL);
+    	    rs = stmt.executeQuery(strPerSQL);
         	/*個人設定トラン情報より枠を追加*/
         	while(rs.next()){
             	int work_start = rs.getInt("work_start");
@@ -95,15 +97,31 @@ throws IOException, ServletException
         		int zangyo = rs.getInt("adjust");
         	}
         } else {
-        	/*勤怠トランのデータ呼び出し*/
-        	strPerSQL = "SELECT * FROM  " + serverName +".WORK_TRN　" + 
-        			"WHERE STAFF_ID = " + strUserid + 
-        			" AND YEAR = " + strYear + 
-        			" AND MONTH = "  + strMonth;
-        	ResultSet perrs = stmt.executeQuery(strPerSQL);   	
+    	    /*勤怠トランのデータ呼び出し*/
+    	    strPerSQL = "SELECT YEAR year, MONTH month, DAY day, SUBMIT_REQUEST_1_CD req_1, " + 
+                        "       SUBMIT_REQUEST_2_CD req_2, SUBMIT_REQUEST_3_CD req_3, " +
+                        "       SUBMIT_REQUEST_4_CD req_4, DETAIL detail, " +
+                        "       BASIC_WORK_START work_start, BASIC_WORK_END work_end, " +
+                        "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
+                        "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj " +
+                        "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
+    	    rs = stmt.executeQuery(strPerSQL);
         	/*勤怠データより枠を追加*/
-        	while(perrs.next()){
-
+        	while(rs.next()){
+            	int iyear = rs.getInt("year");
+            	int imonth = rs.getInt("month");
+            	int iday = rs.getInt("day");
+        		String strreq_1 = rs.getString("req_1");
+        		String strreq_2 = rs.getString("req_2");
+        		String strreq_3 = rs.getString("req_3");
+        		String strreq_4 = rs.getString("req_4");
+        		int iwork_start = rs.getInt("work_start");
+        		int work_end = rs.getInt("work_end");
+        		int act_start = rs.getInt("act_start");
+        		int act_end = rs.getInt("act_end");
+        		int rest_hours = rs.getInt("rest_hours");
+        		int zan_adj = rs.getInt("zan_adj");
+        		
         	}
         }
 	
@@ -122,7 +140,7 @@ throws IOException, ServletException
     }catch (SQLException e){
     	msg = "ドライバのロードに失敗しました";
     	//例外処理
-    }finally{   	
+    }finally{
     	try{
     		if (conn != null){
     	      conn.close();
