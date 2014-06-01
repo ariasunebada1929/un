@@ -1,0 +1,31 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>掲示板</title>
+<style type="text/css">
+
+body {line-height : 200% ; }
+
+</style>
+</head>
+<body>
+<FORM METHOD="post" ACTION="servlet/keiziban">
+		<center>
+		<H1>
+			<b>掲示板</b>
+		</H1>
+		</center>
+<div style="text-alingn:center">
+<p style="width:40%; margin-left:auto;margin-right:auto;text-align:left;">
+		名前 <INPUT TYPE="TEXT" NAME="NAME" SIZE="20" MAXLENGTH="15"><br>
+		件名 <INPUT TYPE="TEXT" NAME="KENMEI" SIZE="40" MAXLENGTH="30"><br>
+		<TEXTAREA NAME="KOMENT" ROWS="10" COLS="60"></TEXTAREA>
+		<INPUT TYPE="button" VALUE="投稿">
+
+
+</p>
+</div>
+</FORM>
+</body>
+</html>

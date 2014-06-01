@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="Shift_JIS"?>
+<web-app xmlns="http://java.sun.com/xml/ns/j2ee"
+xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+xsi:schemaLocation="http://java.sun.com/xml/ns/j2ee http://java.sun.com/xml/ns/j2ee/web-app_2_4.xsd"
+version="2.4">
+<servlet>
+<servlet-name>hello</servlet-name>
+<servlet-class>info.searchman.HelloWorld</servlet-class>
+</servlet>
+
+<servlet-mapping>
+<servlet-name>hello</servlet-name>
+<url-pattern>/servlet/hello</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>HelloWorldServlet2</servlet-name>
+<servlet-class>kadai.HelloWorldServlet2</servlet-class>
+
+  <init-param>
+    <param-name>javaEncoding</param-name>
+    <param-value>Shift_JIS</param-value>
+  </init-param>
+
+</servlet>
+
+<servlet-mapping>
+<servlet-name>HelloWorldServlet2</servlet-name>
+<url-pattern>/servlet/HelloWorldServlet2</url-pattern>
+</servlet-mapping>
+
+<servlet>
+<servlet-name>Form_input</servlet-name>
+<servlet-class>test_input.Form_input</servlet-class>
+
+  <init-param>
+    <param-name>javaEncoding</param-name>
+    <param-value>Shift_JIS</param-value>
+  </init-param>
+
+</servlet>
+
+<servlet-mapping>
+<servlet-name>Form_input</servlet-name>
+<url-pattern>/servlet/Form_input</url-pattern>
+</servlet-mapping>
+
+ <servlet>
+ <servlet-name>form_roster</servlet-name>
+ <servlet-class>info.un_test.form_roster</servlet-class>
+      <init-param>
+          <param-name>javaEncoding</param-name>
+          <param-value>Windows-31J</param-value>
+      </init-param>
+ </servlet>
+
+ <servlet-mapping>
+ <servlet-name>
+ form_roster
+ </servlet-name>
+ <url-pattern>
+ /servlet/form_roster
+ </url-pattern>
+ </servlet-mapping>
+ 
+</web-app>

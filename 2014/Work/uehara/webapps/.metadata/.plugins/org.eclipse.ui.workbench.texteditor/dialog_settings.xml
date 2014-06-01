@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog_dialogBounds">
+		<item value="373" key="DIALOG_WIDTH"/>
+		<item value="509" key="DIALOG_Y_ORIGIN"/>
+		<item value="1547" key="DIALOG_X_ORIGIN"/>
+		<item value="432" key="DIALOG_HEIGHT"/>
+		<item value="1|Meiryo UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Meiryo UI" key="DIALOG_FONT_NAME"/>
+	</section>
+	<section name="org.eclipse.ui.texteditor.FindReplaceDialog">
+		<item value="true" key="wrap"/>
+		<item value="false" key="casesensitive"/>
+		<item value="false" key="isRegEx"/>
+		<item value="false" key="incremental"/>
+		<item value="true" key="wholeword"/>
+		<item value="UnServer" key="selection"/>
+		<list key="findhistory">
+			<item value="unserver"/>
+			<item value="UnServer_01"/>
+			<item value="unserver2014"/>
+			<item value="Keiziban_Customer"/>
+			<item value="input_text1"/>
+		</list>
+		<list key="replacehistory">
+			<item value="unserver_01"/>
+			<item value="UnServer_01"/>
+			<item value="unserver"/>
+		</list>
+	</section>
+</section>
