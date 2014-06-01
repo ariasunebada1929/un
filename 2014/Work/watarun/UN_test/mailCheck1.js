@@ -1,14 +1,14 @@
 function mailCheck1(){
-	
-	//池田 休暇リストボックス
-	
+	//var select =document.getElementById('id_Kyuka1');
+    //var options = document.getElementById('id_Kyuka1').options;
+    //var value = options.item(select.selectedIndex).value;
+    
     var select =document.activeElement.id;
     if(select.length ==9){
     	var num = select.slice(-1);
     }else{
     	var num = select.slice(-2);
     }
-    
     var options = document.getElementById('id_Kyuka' + num).options;
     var value = options.item(document.activeElement.selectedIndex).value;
     

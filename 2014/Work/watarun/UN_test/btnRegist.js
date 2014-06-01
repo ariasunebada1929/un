@@ -1,7 +1,5 @@
 function btnRegist_Click(){
-	//池田 勤務表登録ボタン
-	
-	
+
 	//月の最終日用変数
 	var maxdate;
 	//エラーメッセージ格納配列
@@ -25,8 +23,6 @@ function btnRegist_Click(){
 		JissekiRest= document.getElementById("id_jissekiR" + n).value;
 		Zangyo= document.getElementById("id_zangyou" + n).value;
 	
-		
-		
 		if(KihonStart !=""){
 			if (!KihonStart.match(/^[0-9][0-5][0-9]+$|[1][0-9][0-5][0-9]+$|[2][0-4][0-5][0-9]+$/)) {
 				strMessage += n +"日の基本勤務時間・出社に正しい時刻を入力してください\n";
@@ -58,7 +54,6 @@ function btnRegist_Click(){
 			}
 		}
 	}
-	
 	
 	//エラーメッセージを表示
 	if(strMessage ==""){
