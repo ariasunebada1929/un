@@ -18,6 +18,13 @@ public void jspInit() {
 <head>
 	<title>勤務表入力 -らくらく勤怠（仮）</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/form_roster.css" />
+	<title>勤務表入力 -らくらく勤怠（仮）</title>
+	<link rel="stylesheet" type="text/css" href="form_roster.css">
+	<script type="text/javascript" src="${pageContext.request.contextPath}/btnRegist.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/zangyoCheck.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck1.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck2.js"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/validate.js"></script>	
 </head>
 
 <body>
@@ -109,15 +116,78 @@ public void jspInit() {
                 "root", "");
             // データベース操作を行うためのStatementオブジェクトの取得
             stmt = con.createStatement();
+            String serverName = "unserver2014";
+	    	/*当月分の日時取得処理*/
+        	Calendar cal = Calendar.getInstance();                
+        	int Maxday = cal.getActualMaximum(cal.DATE);
+ 
+ 			int i = 1;
             
-	        /*当月分の日時取得処理*/
-            Calendar cal = Calendar.getInstance();        
+			while(i < Maxday + 1){
+				out.println("<tr>");
+				out.println("<td class=\"row_day\">" + i + "</td>");
+				out.println("<td class=\"row_youbi\"></td>");
+				out.println("<td>");
+				out.println("<select name=\"example1-" + i + "\" size=\"1\" class=\"input_select\">");						
+				String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
+        	    rs = stmt.executeQuery(strSeq1);
+				out.println("<option value=" + "0" + "></option>");	
+				while(rs.next()){
+					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+				}			
+				out.println("</select>");
+				
+				out.println("</td>");
+				out.println("<td>");
+				out.println("<select name=\"example2-" + i + "\" size=\"1\" class=\"input_select\">");
+				String strSeq2 = "SELECT SUBMIT_REQUEST_2_CD req_value, SUBMIT_REQUEST_2_NAME req_name FROM unserver2014.SUBMIT_REQUEST_2_MST WHERE VALID_FLAG = \'1\'";
+        	    rs = stmt.executeQuery(strSeq2);
+        	    out.println("<option value=" + "0" + "></option>");
+				while(rs.next()){
+					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+				}		
+				out.println("</select>");
+				out.println("</td>");
+				out.println("<td>");
+				
+				out.println("<select name=\"example3-" + i + "\" size=\"1\" class=\"input_select\">");
+				String strSeq3 = "SELECT SUBMIT_REQUEST_3_CD req_value, SUBMIT_REQUEST_3_NAME req_name FROM unserver2014.SUBMIT_REQUEST_3_MST WHERE VALID_FLAG = \'1\'";
+        	    rs = stmt.executeQuery(strSeq3);
+        	    out.println("<option value=" + "0" + "></option>");	
+				while(rs.next()){
+					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+				}	
+				out.println("</select>");
+				out.println("</td>");
+				out.println("<td>");
+				out.println("<select name=\"example4-" + i + "\" size=\"1\" class=\"input_select\">");
+				String strSeq4 = "SELECT SUBMIT_REQUEST_4_CD req_value, SUBMIT_REQUEST_4_NAME req_name FROM unserver2014.SUBMIT_REQUEST_4_MST WHERE VALID_FLAG = \'1\'";
+        	    rs = stmt.executeQuery(strSeq4);
+        	    out.println("<option value=" + "0" + "></option>");
+				while(rs.next()){
+					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+				}	
+				out.println("</select>");
+				out.println("</td>");
+				out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_" + i + "\"></td>");
+				out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_" + i + "\"></td>");
+				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_" + i + "\"></td>");
+				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_" + i + "\"></td>");
+				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\" name=\"jissekiS_" + i + "\"></td>");
+				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_" + i + "\"></td>");
+				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_" + i + "\"></td>");
+				out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\" ></td>");
+                out.println("</tr>");
+				i = i + 1;
+			}         
+            
+	        /*当月分の日時取得処理*/      
             SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
             sdf.applyPattern("yyyy");
             String strYear = sdf.format(cal.getTime());
             sdf.applyPattern("MM");
             String strMonth = sdf.format(cal.getTime());
-    
+                
             /*初回登録有無の判定*/
             String strInitsql = "SELECT COUNT(*) cnt FROM unserver2014.WORK_TRN " + 
         	    	"WHERE STAFF_ID = " + strUserid + 
@@ -130,86 +200,45 @@ public void jspInit() {
             rs.next();
             int cnt = rs.getInt("cnt");
             String strPerSQL = "";       
-            cnt = 0;
             
             if (cnt == 0){
-           	    /*初回登録の場合*/
-        	    /*個人設定トランの呼出し*/   	
-				strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM unserver2014.PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
-				rs = stmt.executeQuery(strPerSQL);
-				/*個人設定トラン情報より枠を追加*/
-				rs.next();
-				int work_start = rs.getInt("work_start");
-				int work_end = rs.getInt("work_end");
-				String detail = rs.getString("detail");
-				int zangyo = rs.getInt("adjust");		
-				int i = 1;
-				
-				while(i < 32){
-					out.println("<tr>");
-					out.println("<td class=\"row_day\">" + i + "</td>");
-					out.println("<td class=\"row_youbi\"></td>");
-					out.println("<td>");
-					out.println("<select name=\"example1\" size=\"1\" class=\"input_select\">");						
-					String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
-	        	    rs = stmt.executeQuery(strSeq1);
-					
-					while(rs.next()){
-						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
-					}			
-					out.println("</select>");
-					
-					out.println("</td>");
-					out.println("<td>");
-					out.println("<select name=\"example2\" size=\"1\" class=\"input_select\">");
-					String strSeq2 = "SELECT SUBMIT_REQUEST_2_CD req_value, SUBMIT_REQUEST_2_NAME req_name FROM unserver2014.SUBMIT_REQUEST_2_MST WHERE VALID_FLAG = \'1\'";
-	        	    rs = stmt.executeQuery(strSeq2);		
-					while(rs.next()){
-						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
-					}		
-					out.println("</select>");
-					out.println("</td>");
-					out.println("<td>");
-					
-					out.println("<select name=\"example3\" size=\"1\" class=\"input_select\">");
-					String strSeq3 = "SELECT SUBMIT_REQUEST_3_CD req_value, SUBMIT_REQUEST_3_NAME req_name FROM unserver2014.SUBMIT_REQUEST_3_MST WHERE VALID_FLAG = \'1\'";
-	        	    rs = stmt.executeQuery(strSeq3);		
-					while(rs.next()){
-						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
-					}	
-					out.println("</select>");
-					out.println("</td>");
-					out.println("<td>");
-					out.println("<select name=\"example4\" size=\"1\" class=\"input_select\">");
-					String strSeq4 = "SELECT SUBMIT_REQUEST_4_CD req_value, SUBMIT_REQUEST_4_NAME req_name FROM unserver2014.SUBMIT_REQUEST_4_MST WHERE VALID_FLAG = \'1\'";
-	        	    rs = stmt.executeQuery(strSeq4);		
-					while(rs.next()){
-						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
-					}	
-					out.println("</select>");
-					out.println("</td>");
-					out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_1\"></td>");
-					out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_1\" value=" + detail + "></td>");
-					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_1\" value=" + work_start + "></td>");
-					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_1\" value=" + work_end + "></td>");
-					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\"></td>");
-					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_1\"></td>");
-					out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_1\"></td>");
-					out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_1\" readonly=\"readonly\" style=\"background-color:#808080;\" ></td>");
-	                out.println("</tr>");
-					i = i + 1;
-				}
+	        	/*初回登録の場合*/
+	        	/*個人設定トランの呼出し*/   	
+	        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
+	    	    rs = stmt.executeQuery(strPerSQL);
+	        	/*個人設定トラン情報より枠を追加*/
+	        	while(rs.next()){
+	            	int work_start = rs.getInt("work_start");
+	            	int work_end = rs.getInt("work_end");
+	        		String detail = rs.getString("detail");
+	        		int zangyo = rs.getInt("adjust");
+	        	}
             } else {
-        	    /*勤怠トランのデータ呼び出し*/
-        	    strPerSQL = "SELECT * FROM unserver2014.WORK_TRN　" + 
-        		    	"WHERE STAFF_ID = " + strUserid + 
-        			    " AND YEAR = " + strYear + 
-        			    " AND MONTH = "  + strMonth;
-        	    ResultSet perrs = stmt.executeQuery(strPerSQL);   	
-        	    /*勤怠データより枠を追加*/
-        	    while(perrs.next()){
-
-        	    }
+    	    	/*勤怠トランのデータ呼び出し*/
+    	    	strPerSQL = "SELECT YEAR year, MONTH month, DAY day, SUBMIT_REQUEST_1_CD req_1, " + 
+            	            "       SUBMIT_REQUEST_2_CD req_2, SUBMIT_REQUEST_3_CD req_3, " +
+            	            "       SUBMIT_REQUEST_4_CD req_4, DETAIL detail, " +
+            	            "       BASIC_WORK_START work_start, BASIC_WORK_END work_end, " +
+            	            "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
+            	            "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj " +
+            	            "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
+    	    	rs = stmt.executeQuery(strPerSQL);
+        		/*勤怠データより枠を追加*/
+        		while(rs.next()){
+            		int iyear = rs.getInt("year");
+            		int imonth = rs.getInt("month");
+            		int iday = rs.getInt("day");
+        			String strreq_1 = rs.getString("req_1");
+        			String strreq_2 = rs.getString("req_2");
+        			String strreq_3 = rs.getString("req_3");
+        			String strreq_4 = rs.getString("req_4");
+        			int iwork_start = rs.getInt("work_start");
+        			int work_end = rs.getInt("work_end");
+        			int act_start = rs.getInt("act_start");
+        			int act_end = rs.getInt("act_end");
+        			int rest_hours = rs.getInt("rest_hours");
+        			int zan_adj = rs.getInt("zan_adj");
+        		}
             }
             	     
         } catch (Exception e) {
