@@ -1,4 +1,7 @@
 function mailCheck2(){
+	//池田 休出/振代休リストボックス
+	
+	//idから日付を取得
     var select =document.activeElement.id;
     if(select.length ==19){
     	var num = select.slice(-1);
@@ -15,5 +18,7 @@ function mailCheck2(){
     if(value=="03" || value=="04"){
     	document.getElementById('id_furikae' + num).readOnly = false;
     	document.getElementById('id_furikae' + num).style.backgroundColor='#FFFFFF';
+    	alert(num + "日の振替日を入力してください");
+    	jAlert(num + "日の振替日を入力してください", '確認');
     }
 }
