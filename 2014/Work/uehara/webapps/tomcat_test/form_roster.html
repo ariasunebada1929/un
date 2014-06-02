@@ -1,0 +1,1325 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<title>勤務表入力 -らくらく勤怠（仮）</title>
+	<link rel="stylesheet" type="text/css" href="form_roster.css">
+</head>
+
+<body>
+<!-- ヘッダー-->
+<div id="header">
+<ul>
+	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
+	<li><button ID="btnRegist"   OnClick="">勤怠情報登録</button></li>
+	<li><button id="btnOutput"   OnClick="">勤務表出力</button></li>
+	<li id="login_panel">ログイン者</li>
+</ul>
+<hr>
+</div>
+<!--勤務表-->
+<h1>5月勤務表</h1>
+<table border="0" cellspacing="0" id="table_caption">
+<!--<caption>5月勤務表</caption>-->
+	<tr>
+		<td class="column_name2">残業調整</td>
+		<td>
+		<select name="zangyo">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+	<tr>
+		<td class="column_name2">時短勤務</td>
+		<td>
+		<select name="jitan">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+</table>
+<table border="0" cellspacing="0" id="table_personalinfo">
+	<tr>
+		<td class="column_name2">社員番号</td>
+		<td>000208</td>
+	</tr>
+	<tr>
+		<td class="column_name1">所属</td>
+		<td>BI課</td>
+	</tr>
+	<tr>
+		<td class="column_name1">氏名</td>
+		<td>池田忠繁</td>
+	</tr>
+</table>
+<!---勤務表各種項目名 -->
+<table border="0" cellspacing="0" id="table_roster">
+	<tr>
+		<td rowspan="2" class="column_name1" id="column_day">日</td>
+		<td rowspan="2" class="column_name1" id="column_youbi">曜日</td>
+		<td colspan="4" class="column_name2" id="column_mail">メール届出申請</td>
+		<td rowspan="2" class="column_name2" id="column_Furikae">振替日</td>
+		<td rowspan="2" class="column_name2" id="column_detail">詳細</td>
+		<td colspan="2" class="column_name2" id="column_kihon">基本勤務時間</td>
+		<td colspan="3" class="column_name2" id="column_jisseki">実績勤務時間</td>
+		<td rowspan="2" class="column_name2" id="column_zangyo">残業調整</td>
+			<tr>
+				<td class="column_name2" id="column_mail1">休暇</td>
+				<td class="column_name2" id="column_mail2">休出/振代休</td>
+				<td class="column_name2" id="column_mail3">通院/電遅</td>
+				<td class="column_name2" id="column_mail4">A/B変</td>
+				<td class="column_name2" id="column_kihon1">出社</td>
+				<td class="column_name2" id="column_kihon2">退社</td>
+				<td class="column_name2" id="column_jisseki1">出社</td>
+				<td class="column_name2" id="column_jisseki2">退社</td>
+				<td class="column_name2" id="column_jisseki3">休憩</td>
+			</tr>
+	</tr>
+	<!---入力フォーム -->
+	<form>
+	
+	<tr>
+		<td class="row_day">1</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">2</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+		<tr>
+		<td class="holiday_color"><p class="holiday_day">3</p></td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">4</p></td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">5</p></td>
+		<td class="holiday_youbi">月</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">6</p></td>
+		<td class="holiday_youbi">火</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">7</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">8</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">9</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">10</p></td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">11</p></td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">12</td>
+		<td class="row_youbi">月</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">13</td>
+		<td class="row_youbi">火</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">14</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">15</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">16</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">17</p></td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">18</p></td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">19</td>
+		<td class="row_youbi">月</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">20</td>
+		<td class="row_youbi">火</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">21</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">22</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">23</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">24</p></td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">25</p></td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">26</td>
+		<td class="row_youbi">月</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">27</td>
+		<td class="row_youbi">火</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">28</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">29</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">30</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text2"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_color"><p class="holiday_day">31</p></td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="サンプル1">サンプル1</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select">
+			<option value="サンプル1">サンプル2</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text2"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="holiday_color"><input type="text" class="input_text1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1" ></td>
+	</tr>
+	</form>
+</table>
+
+</body>
+
+</html>

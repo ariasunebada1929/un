@@ -1,0 +1,1813 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN">
+<html>
+<head>
+	<title>勤務表入力 -らくらく勤怠（仮）</title>
+	<link rel="stylesheet" type="text/css" href="C:\Git\2014\source\style\form_roster.css">
+	<script type="text/javascript" src="C:\Git\2014\source\javascript\btnRegist.js"></script>
+	<script type="text/javascript" src="C:\Git\2014\source\javascript\zangyoCheck.js"></script>
+	<script type="text/javascript" src="C:\Git\2014\source\javascript\mailCheck1.js"></script>
+	<script type="text/javascript" src="C:\Git\2014\source\javascript\mailCheck2.js"></script>
+	<!--<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\validate.js">
+	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\jquery.alerts.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery.alerts.css">
+	</script>-->
+</head>
+
+<body>
+<!-- ヘッダー-->
+<div id="container">
+<div id="header">
+<form method="post" name="form_roster">
+<ul>
+	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
+	<!-- html4の場合 
+	<li><input type="button" value="勤怠情報登録" OnClick="return btnRegist_Click();"></li>
+	-->
+	<li><button value="勤怠情報登録" id="btnOutput" OnClick="return btnRegist_Click();">勤務表登録</button></li>
+	<li><button id="btnOutput"   OnClick="">勤務表出力</button></li>
+	<li id="login_panel">ログイン者</li>
+</ul>
+<hr>
+</div>
+<!--勤務表-->
+<div id="header_roster">
+<h1>5月勤務表</h1>
+<table border="0" cellspacing="0" id="table_caption">
+	<tr>
+		<td class="column_name2">残業調整</td>
+		<td>
+		<select name="zangyo" onChange="zangyou_Change()" id="Zangyo_chousei">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+	<tr>
+		<td class="column_name2">時短勤務</td>
+		<td>
+		<select name="jitan">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+</table>
+<table border="0" cellspacing="0" id="table_personalinfo">
+	<tr>
+		<td class="column_name2">社員番号</td>
+		<td>000208</td>
+	</tr>
+	<tr>
+		<td class="column_name1">所属</td>
+		<td>BI課</td>
+	</tr>
+	<tr>
+		<td class="column_name1">氏名</td>
+		<td>池田忠繁</td>
+	</tr>
+</table>
+</div>
+<!---勤務表各種項目名 -->
+<div id="main_roster">
+<table border="0" cellspacing="0" id="table_roster">
+	<tr>
+		<td rowspan="2" class="column_name1" id="column_day">日</td>
+		<td rowspan="2" class="column_name1" id="column_youbi">曜日</td>
+		<td colspan="4" class="column_name2" id="column_mail">メール届出申請</td>
+		<td rowspan="2" class="column_name2" id="column_Furikae">振替日</td>
+		<td rowspan="2" class="column_name2" id="column_detail">詳細</td>
+		<td colspan="2" class="column_name2" id="column_kihon">基本勤務時間</td>
+		<td colspan="3" class="column_name2" id="column_jisseki">実績勤務時間</td>
+		<td rowspan="2" class="column_name2" id="column_zangyo">残業調整</td>
+			<tr>
+				<td class="column_name2" id="column_mail1">休暇</td>
+				<td class="column_name2" id="column_mail2">休出/振代休</td>
+				<td class="column_name2" id="column_mail3">通院/電遅</td>
+				<td class="column_name2" id="column_mail4">A/B変</td>
+				<td class="column_name2" id="column_kihon1">出社</td>
+				<td class="column_name2" id="column_kihon2">退社</td>
+				<td class="column_name2" id="column_jisseki1">出社</td>
+				<td class="column_name2" id="column_jisseki2">退社</td>
+				<td class="column_name2" id="column_jisseki3">休憩</td>
+			</tr>
+	</tr>
+	<!---入力フォーム -->
+	
+	<tr>
+		<td class="row_day">1</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select" id="id_Kyuka1" onchange="mailCheck1();">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai1" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae1" name="furikae_1" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2"  maxlength="20" id="id_syousai" name="syousai_1"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS1" name="kihonS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE1" name="kihonE_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1" name="jissekiS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE1" name="jissekiE_1" onBlur="return validate(this);"></td>
+		<!--<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS1" name="kihonS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE1" name="kihonE_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1" name="jissekiS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE1" name="jissekiE_1" onBlur="return validate(this);"></td>-->
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR1" name="jiseekiR_1"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou1" name="zangyou_1" readonly="readonly" style="background-color:#808080;" ></td>
+	</tr>
+	<tr>
+		<td class="row_day">2</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai2" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae2" name="furikae_2" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS2" name="kihonS_2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE2" name="kihonE_2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS2" name="jissekiS_2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE2" name="jissekiE_2"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR2" name="jiseekiR_2"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou2" name="zangyou_2" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+		<tr>
+		<td class="holiday_day">3</td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai3" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column""><input type="text" class="input_text1" id="id_furikae3" name="furikae_3" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS3" name="kihonS_3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE3" name="kihonE_3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS3" name="jissekiS_3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE3" name="jissekiE_3"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR3" name="jiseekiR_3"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou3" name="zangyou_3" readonly="readonly" style="background-color:#808080;" ></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">4</td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai4" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae4" name="furikae_4" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS4" name="kihonS_4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE4" name="kihonE_4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS4" name="jissekiS_4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE4" name="jissekiE_4"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR4" name="jiseekiR_4"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou4" name="zangyou_4" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">5</td>
+		<td class="holiday_youbi">月</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai5" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae5" name="furikae_5" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS5" name="kihonS_5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE5" name="kihonE_5 "></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS5" name="jissekiS_5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE5" name="jissekiE_5"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR5" name="jiseekiR_5"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou5" name="zangyou_5" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">6</td>
+		<td class="holiday_youbi">火</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai6" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae6" name="furikae_6" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS6" name="kihonS_6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE6" name="kihonE_6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS6" name="jissekiS_6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE6" name="jissekiE_6"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR6" name="jiseekiR_6"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou6" name="zangyou_6" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">7</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai7" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae7" name="furikae_7" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS7" name="kihonS_7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE7" name="kihonE_7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS7" name="jissekiS_7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE7" name="jissekiE_7"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR7" name="jiseekiR_7"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou7" name="zangyou_7" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">8</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai8" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae8" name="furikae_8" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS8" name="kihonS_8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE8" name="kihonE_8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS8" name="jissekiS_8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE8" name="jissekiE_8"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR8" name="jiseekiR_8"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou8" name="zangyou_8" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">9</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai9" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1"  id="id_furikae9" name="furikae_9" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS9" name="kihonS_9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE9" name="kihonE_9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS9" name="jissekiS_9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE9" name="jissekiE_9"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR9" name="jiseekiR_9"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou9" name="zangyou_9" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">10</td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai10" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae10" name="furikae_10" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS10" name="kihonS_10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE10" name="kihonE_10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS10" name="jissekiS_10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE10" name="jissekiE_10"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR10" name="jiseekiR_10"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou10" name="zangyou_10" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">11</td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai11" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae11" name="furikae_11" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS11" name="kihonS_11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE11" name="kihonE_11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS11" name="jissekiS_11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE11" name="jissekiE_11"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR11" name="jiseekiR_11"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou11" name="zangyou_11" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">12</td>
+		<td class="row_youbi">月</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai12" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae12" name="furikae_12" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS12" name="kihonS_12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE12" name="kihonE_12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS12" name="jissekiS_12"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE12" name="jissekiE_12 "></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR12" name="jiseekiR_12"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou12" name="zangyou_12" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">13</td>
+		<td class="row_youbi">火</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai13" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae13" name="furikae_13" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS13" name="kihonS_13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE13" name="kihonE_13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS13" name="jissekiS_13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE13" name="jissekiE_13"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR13" name="jiseekiR_13"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou13" name="zangyou_13" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">14</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai14" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae14" name="furikae_14" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS14" name="kihonS_14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE14" name="kihonE_14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS14" name="jissekiS_14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE14" name="jissekiE_14"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR14" name="jiseekiR_14"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou14" name="zangyou_14" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">15</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai15" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae15" name="furikae_15" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS15" name="kihonS_15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE15" name="kihonE_15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS15" name="jissekiS_15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE15" name="jissekiE_15"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR15" name="jiseekiR_15"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou15" name="zangyou_15" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">16</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai16" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae16" name="furikae_16" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS16" name="kihonS_16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE16" name="kihonE_16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS16" name="jissekiS_16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE16" name="jissekiE_16"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR16" name="jiseekiR_16"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou16" name="zangyou_16" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">17</td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai17" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae17" name="furikae_17" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS17" name="kihonS_17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE17" name="kihonE_17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS17" name="jissekiS_17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE17" name="jissekiE_17"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR17" name="jiseekiR_17"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou17" name="zangyou_17" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">18</td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai18" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae18" name="furikae_18" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS18" name="kihonS_18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE18" name="kihonE_18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS18" name="jissekiS_18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE18" name="jissekiE_18"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR18" name="jiseekiR_18"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou18" name="zangyou_18" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">19</td>
+		<td class="row_youbi">月</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai19" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae19" name="furikae_19" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS19" name="kihonS_19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE19" name="kihonE_19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS19" name="jissekiS_19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE19" name="jissekiE_19"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR19" name="jiseekiR_19"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou19" name="zangyou_19" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">20</td>
+		<td class="row_youbi">火</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai20" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae20" name="furikae_20" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS20" name="kihonS_20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE20" name="kihonE_20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS20" name="jissekiS_20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE20" name="jissekiE_20"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR20" name="jiseekiR_20"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou20" name="zangyou_20" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">21</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai21" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae21" name="furikae_21" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS21" name="kihonS_21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE21" name="kihonE_21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS21" name="jissekiS_21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE21" name="jissekiE_21"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR21" name="jiseekiR_21"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou21" name="zangyou_21" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">22</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai22" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae22" name="furikae_22" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS22" name="kihonS_22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE22" name="kihonE_22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS22" name="jissekiS_22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE22" name="jissekiE_22"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR22" name="jiseekiR_22"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou22" name="zangyou_22" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">23</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai23" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae23" name="furikae_23" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS23" name="kihonS_23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE23" name="kihonE_23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS23" name="jissekiS_23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE23" name="jissekiE_23"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR23" name="jiseekiR_23"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou23" name="zangyou_23" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">24</td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai24" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae24" name="furikae_24" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS24" name="kihonS_24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE24" name="kihonE_24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS24" name="jissekiS_24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE24" name="jissekiE_24"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR24" name="jiseekiR_24"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou24" name="zangyou_24" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">25</td>
+		<td class="holiday_youbi">日</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai25" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae25" name="furikae_25" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS25" name="kihonS_25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE25" name="kihonE_25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS25" name="jissekiS_25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE25" name="jissekiE_25"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR25" name="jiseekiR_25"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou25" name="zangyou_25" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">26</td>
+		<td class="row_youbi">月</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai26" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae26" name="furikae_26" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS26" name="kihonS_26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE26" name="kihonE_26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS26" name="jissekiS_26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE26" name="jissekiE_26"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR26" name="jiseekiR_26"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou26" name="zangyou_26"  readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">27</td>
+		<td class="row_youbi">火</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai27" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae27" name="furikae_27" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS27" name="kihonS_27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE27" name="kihonE_27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS27" name="jissekiS_27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE27" name="jissekiE_27"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR27" name="jiseekiR_27"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou27" name="zangyou_27" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">28</td>
+		<td class="row_youbi">水</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai28" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae28" name="furikae_28" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS28" name="kihonS_28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE28" name="kihonE_28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS28" name="jissekiS_28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE28" name="jissekiE_28"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR28" name="jiseekiR_28"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou28" name="zangyou_28" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">29</td>
+		<td class="row_youbi">木</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai29" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae29" name="furikae_29" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS29" name="kihonS_29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE29" name="kihonE_29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS29" name="jissekiS_29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE29" name="jissekiE_29"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR29" name="jiseekiR_29"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou29" name="zangyou_29" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="row_day">30</td>
+		<td class="row_youbi">金</td>
+		<td>
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td>
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai30" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td>
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td>
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae30" name="furikae_30" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td><input type="text" class="input_text2" name="syousai_30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS30" name="kihonS_30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE30" name="kihonE_30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS30" name="jissekiS_30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE30" name="jissekiE_30"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR30" name="jiseekiR_30"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou30" name="zangyou_30" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	<tr>
+		<td class="holiday_day">31</td>
+		<td class="holiday_youbi">土</td>
+		<td class="holiday_color">
+			<select name="example1" size="1" class="input_select">
+			<option value="00"></option>
+			<option value="01">夏季休暇</option>
+			<option value="02">年末年始休暇</option>
+			<option value="03">有休（全日）</option>
+			<option value="04">有休（午前）</option>
+			<option value="05">有休（午後）</option>
+			<option value="06">誕生日休暇 </option>
+			<option value="07">慶事休暇</option>
+			<option value="08">弔事休暇</option>
+			<option value="09">社員旅行</option>
+			<option value="10">臨時</option>
+			<option value="11">産前</option>
+			<option value="12">産後</option>
+			<option value="13">育児</option>
+			<option value="14">介護</option>
+			<option value="15">看護</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example2" size="1" class="input_select" id="id_KyusyutuFuridai31" onchange="mailCheck2();">
+			<option value="00"></option>
+			<option value="01">休出</option>
+			<option value="02">振出</option>
+			<option value="03">代休</option>
+			<option value="04">振休</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example3" size="1" class="input_select">
+			<option value="サンプル1">サンプル3</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="holiday_color">
+			<select name="example4" size="1" class="input_select">
+			<option value="サンプル1">サンプル4</option>
+			<option value="サンプル2">サンプル2</option>
+			<option value="サンプル3">サンプル3</option>
+			</select>
+		</td>
+		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae31" name="furikae_31" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
+		<td class="holiday_color"><input type="text" class="input_text2" name="syousai_31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonS31" name="kihonS_31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_kihonE31" name="kihonE_31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiS31" name="jissekiS_31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiE31" name="jissekiE_31"></td>
+		<td class="holiday_color"><input type="text" class="input_text1" maxlength="5" id="id_jissekiR31" name="jiseekiR_31"></td>
+		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou31" name="zangyou_31" readonly="readonly" style="background-color:#808080;"></td>
+	</tr>
+	</form>
+</table>
+</div>
+<!-- フッター --> 
+<div id="footer">
+<p>らくらく勤務表 Version 0.0.0 20140524 Copyright (C) 2014 UN ROOM</p>
+</div>
+</div>
+</body>
+
+</html>

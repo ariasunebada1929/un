@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<section name="Workbench">
+	<item value="163" key="org.eclipse.jdt.debug.ui.jre_preference_page_context.columnWidth0"/>
+	<item value="219" key="org.eclipse.jdt.debug.ui.jre_preference_page_context.columnWidth1"/>
+	<item value="1" key="org.eclipse.jdt.debug.ui.jre_preference_page_context.sortColumn"/>
+	<item value="71" key="org.eclipse.jdt.debug.ui.jre_preference_page_context.columnWidth2"/>
+	<section name="org.eclipse.jdt.debug.ui.MAIN_METHOD_SELECTION_DIALOG">
+		<item value="true" key="ShowStatusLine"/>
+		<item value="&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;&#x0D;&#x0A;&lt;History&gt;&#x0D;&#x0A;&lt;historyRootNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=tomcat_test/C:\/Tomcat7\/lib\/jasper.jar&amp;lt;org.apache.jasper(JspC.class[JspC&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=tomcat_test/WEB-INF\/src&amp;lt;test_db{Connect_test.java[Connect_test&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=tomcat_test/WEB-INF\/src&amp;lt;form_roster{Form_roster.java[Form_roster&lt;/infoNode&gt;&#x0D;&#x0A;&lt;infoNode&gt;=tomcat_test/WEB-INF\/src&amp;lt;test_input{main_class.java[main_class&lt;/infoNode&gt;&#x0D;&#x0A;&lt;/historyRootNode&gt;&#x0D;&#x0A;&lt;/History&gt;" key="History"/>
+		<section name="DialogBoundsSettings">
+			<item value="600" key="DIALOG_WIDTH"/>
+			<item value="192" key="DIALOG_Y_ORIGIN"/>
+			<item value="669" key="DIALOG_X_ORIGIN"/>
+			<item value="500" key="DIALOG_HEIGHT"/>
+			<item value="1|Meiryo UI|9.0|0|WINDOWS|1|-15|0|0|0|400|0|0|0|1|0|0|0|0|Meiryo UI" key="DIALOG_FONT_NAME"/>
+		</section>
+	</section>
+	<section name="org.eclipse.jdt.internal.debug.ui.ExpressionInformationControlCreator$ExpressionInformationControl">
+		<item value="500" key="SashWeightDetails"/>
+		<item value="500" key="SashWeightTree"/>
+		<item value="244" key="HEIGHT"/>
+		<item value="816" key="WIDTH"/>
+	</section>
+</section>

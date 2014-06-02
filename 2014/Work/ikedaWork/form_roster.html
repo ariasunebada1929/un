@@ -7,14 +7,17 @@
 	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\zangyoCheck.js"></script>
 	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\mailCheck1.js"></script>
 	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\mailCheck2.js"></script>
-	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\validate.js"></script>
+	<!--<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\validate.js">
+	<script type="text/javascript" src="C:\Git\2014\Work\ikedaWork\jquery.alerts.js"></script>
+	<link rel="stylesheet" type="text/css" href="jquery.alerts.css">
+	</script>-->
 </head>
 
 <body>
 <!-- ヘッダー-->
 <div id="container">
 <div id="header">
-<form method="post">
+<form method="post" name="form_roster">
 <ul>
 	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
 	<!-- html4の場合 
@@ -30,7 +33,6 @@
 <div id="header_roster">
 <h1>5月勤務表</h1>
 <table border="0" cellspacing="0" id="table_caption">
-<!--<caption>5月勤務表</caption>-->
 	<tr>
 		<td class="column_name2">残業調整</td>
 		<td>
@@ -137,10 +139,14 @@
 		</td>
 		<td class="furikaebi_column"><input type="text" class="input_text1" id="id_furikae1" name="furikae_1" readonly="readonly" style="background-color:#808080;" maxlength="5"></td>
 		<td><input type="text" class="input_text2"  maxlength="20" id="id_syousai" name="syousai_1"></td>
-		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS1" name="kihonS_1" onBlur="return validate();"></td>
-		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE1" name="kihonE_1" onBlur="return validate();"></td>
-		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1" name="jissekiS_1" onBlur="return validate();"></td>
-		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE1" name="jissekiE_1" onBlur="return validate();"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS1" name="kihonS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE1" name="kihonE_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1" name="jissekiS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE1" name="jissekiE_1" onBlur="return validate(this);"></td>
+		<!--<td><input type="text" class="input_text1" maxlength="5" id="id_kihonS1" name="kihonS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_kihonE1" name="kihonE_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiS1" name="jissekiS_1" onBlur="return validate(this);"></td>
+		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiE1" name="jissekiE_1" onBlur="return validate(this);"></td>-->
 		<td><input type="text" class="input_text1" maxlength="5" id="id_jissekiR1" name="jiseekiR_1"></td>
 		<td class="zangyou_coloumn"><input type="text" class="input_text1"  maxlength="5" id="id_zangyou1" name="zangyou_1" readonly="readonly" style="background-color:#808080;" ></td>
 	</tr>

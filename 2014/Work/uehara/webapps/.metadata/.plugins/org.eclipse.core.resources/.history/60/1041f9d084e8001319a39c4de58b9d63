@@ -1,0 +1,66 @@
+package test_db;
+
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+public class Connect_test {
+    public static void main(String[] args) throws Exception{
+
+        //螟画焚螳夂ｾｩ
+        Connection conn = null;
+        PreparedStatement ps = null;
+        ResultSet rs = null;
+
+        //DB謗･邯壽ュ蝣ｱ繧定ｨｭ螳壹☆繧�
+        //String path = "jdbc:oracle:thin:@127.0.0.1:1521:UnServer";  //謗･邯壹ヱ繧ｹ
+        String path = "jdbc:mysql://localhost/UnServer";  //謗･邯壹ヱ繧ｹ
+        String id = "root";    //繝ｭ繧ｰ繧､繝ｳID
+        String pw = "root";  //繝ｭ繧ｰ繧､繝ｳ繝代せ繝ｯ繝ｼ繝�
+
+        //SQL譁�ｒ螳夂ｾｩ縺吶ｋ
+        //繧ｵ繝ｳ繝励Ν�售tring sql = "SELECT * FROM user_master WHERE no >= ?";
+        String sql = "SELECT * FROM unserver.`parsonal_auth_trn`";
+
+        try{
+            //JDBC繝峨Λ繧､繝舌ｒ繝ｭ繝ｼ繝峨☆繧�
+            //Class.forName("oracle.jdbc.driver.OracleDriver");
+        	Class.forName("com.mysql.jdbc.Driver");
+        	System.out.println("接続ができました");
+
+            //DB縺ｸ縺ｮ繧ｳ繝阪け繧ｷ繝ｧ繝ｳ繧剃ｽ懈�縺吶ｋ
+            conn = DriverManager.getConnection(path, id, pw);
+
+            //螳溯｡後☆繧鬼QL譁�→繝代Λ繝｡繝ｼ繧ｿ繧呈欠螳壹☆繧�
+            ps = conn.prepareStatement(sql);
+            //繧ｵ繝ｳ繝励Ν�嗔s.setString(1, "2");
+
+            //SELECT繧貞ｮ溯｡後☆繧�
+            rs = ps.executeQuery();
+
+            //縺薙ｓ縺ｪ縺ｵ縺�↓繧ｫ繝ｩ繝�焚縺ｪ縺ｩ繧ょ叙蠕励〒縺阪■繧�≧
+            int colCount = rs.getMetaData().getColumnCount();
+            System.out.println("蜿門ｾ励＠縺溘き繝ｩ繝�焚:" + colCount);
+
+            //蜿門ｾ励＠縺溽ｵ先棡繧貞�莉ｶ蜃ｺ蜉帙☆繧�
+            while(rs.next()){
+                System.out.print(rs.getString("STAFF_ID"));
+                System.out.print("/" + rs.getString("PASSWORD"));
+                //System.out.print("/" + rs.getString("ADDRESS"));
+                //System.out.print("/" + rs.getString("TEL"));
+                System.out.println();
+            }
+
+        }catch(Exception ex){
+            //萓句､也匱逕滓凾縺ｮ蜃ｦ逅�
+            ex.printStackTrace();  //繧ｨ繝ｩ繝ｼ蜀�ｮｹ繧偵さ繝ｳ繧ｽ繝ｼ繝ｫ縺ｫ蜃ｺ蜉帙☆繧�
+            
+        }finally{
+            //繧ｯ繝ｭ繝ｼ繧ｺ蜃ｦ逅�
+            if(rs != null) rs.close();
+            if(ps != null) ps.close();
+            if(conn != null) conn.close();
+        }
+    }
+}

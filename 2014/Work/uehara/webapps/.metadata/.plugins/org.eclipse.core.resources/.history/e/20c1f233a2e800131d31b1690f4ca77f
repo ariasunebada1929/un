@@ -1,0 +1,12 @@
+package test_input;
+
+import java.sql.SQLException;
+import db_action.Set_db;
+
+public class main_class {
+	public static void set_db(String[] args) throws SQLException{
+		Set_db set_db = null;
+		set_db.main_action(null);
+	
+	}
+}
