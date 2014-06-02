@@ -3,6 +3,7 @@
 <%@ page import="java.util.Calendar"%>
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="javax.swing.JTextField"%>
+<%@ page import="java.util.GregorianCalendar"%>
 <%!
 // サーブレットのinitメソッドに相当
 public void jspInit() {
@@ -131,6 +132,9 @@ public void jspInit() {
             String strYear = sdf.format(cal.getTime());
             sdf.applyPattern("MM");
             String strMonth = sdf.format(cal.getTime());
+            String[] strweek_name = {"日", "月", "火", "水", 
+                                  "木", "金", "土"};
+            
                 
             /*初回登録有無の判定*/
             String strInitsql = "SELECT COUNT(*) cnt FROM unserver2014.WORK_TRN " + 
@@ -203,7 +207,8 @@ public void jspInit() {
 			while(i < iMaxday + 1){
 				out.println("<tr>");
 				out.println("<td class=\"row_day\">" + i + "</td>");
-				out.println("<td class=\"row_youbi\"></td>");
+				GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(strYear), Integer.parseInt(strMonth) - 1, i);
+				out.println("<td class=\"row_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
 				out.println("<td>");
 				out.println("<select name=\"example1-" + i + "\" size=\"1\" class=\"input_select\">");						
 				String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
@@ -284,10 +289,6 @@ public void jspInit() {
     %>
 	</form>
 </table>
-</div>
-<!-- フッター --> 
-<div id="footer">
-<p>らくらく勤務表 Version 0.0.0 20140524 Copyright (C) 2014 UN ROOM</p>
 </div>
 </div>
 </body>
