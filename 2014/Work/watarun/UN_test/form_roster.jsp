@@ -108,6 +108,7 @@ public void jspInit() {
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
+        ResultSet Perrs = null;
         String strUserid = "00001";
         
         try {
@@ -120,11 +121,79 @@ public void jspInit() {
             String serverName = "unserver2014";
 	    	/*当月分の日時取得処理*/
         	Calendar cal = Calendar.getInstance();                
-        	int Maxday = cal.getActualMaximum(cal.DATE);
+        	int iMaxday = cal.getActualMaximum(cal.DATE);
  
  			int i = 1;
+ 			
+ 			/*当月分の日時取得処理*/      
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+            sdf.applyPattern("yyyy");
+            String strYear = sdf.format(cal.getTime());
+            sdf.applyPattern("MM");
+            String strMonth = sdf.format(cal.getTime());
+                
+            /*初回登録有無の判定*/
+            String strInitsql = "SELECT COUNT(*) cnt FROM unserver2014.WORK_TRN " + 
+        	    	"WHERE STAFF_ID = " + strUserid + 
+        	    	" AND YEAR = " + strYear + 
+        	    	" AND MONTH = "  + strMonth;
+    
+            Perrs = stmt.executeQuery(strInitsql);
             
-			while(i < Maxday + 1){
+            //レコード数の取得
+            Perrs.next();
+            int cnt = Perrs.getInt("cnt");
+            String strPerSQL = "";  
+            ResultSet Ors = null;
+        	String[] strreq_1 = new String[iMaxday];
+        	String[] strreq_2 = new String[iMaxday];
+        	String[] strreq_3 = new String[iMaxday];
+        	String[] strreq_4 = new String[iMaxday];
+        	String[] strdetail = new String[iMaxday];
+        	int[] iwork_start = new int[iMaxday];
+        	int[] iwork_end = new int[iMaxday];
+        	int[] iact_start = new int[iMaxday];
+        	int[] iact_end = new int[iMaxday];
+        	int[] irest_hours = new int[iMaxday];
+        	int[] izan_adj = new int[iMaxday];
+            
+            if (cnt == 0){
+	        	/*初回登録の場合*/
+	        	/*個人設定トランの呼出し*/   	
+	        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
+	    	    Ors = stmt.executeQuery(strPerSQL);
+	        	/*個人設定トラン情報より枠を追加*/
+            } else {
+    	    	/*勤怠トランのデータ呼び出し*/
+    	    	strPerSQL = "SELECT YEAR year, MONTH month, DAY day, SUBMIT_REQUEST_1_CD req_1, " + 
+            	            "       SUBMIT_REQUEST_2_CD req_2, SUBMIT_REQUEST_3_CD req_3, " +
+            	            "       SUBMIT_REQUEST_4_CD req_4, DETAIL detail, " +
+            	            "       BASIC_WORK_START work_start, BASIC_WORK_END work_end, " +
+            	            "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
+            	            "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj, " +
+            	            "       DETAIL detail " +
+            	            "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
+    	    	Ors = stmt.executeQuery(strPerSQL);
+        		/*勤怠データより枠を追加*/
+        		i = 0;
+        		while(Ors.next()){
+        			strreq_1[i] = Ors.getString("req_1");
+        			strreq_2[i]  = Ors.getString("req_2");
+        			strreq_3[i]  = Ors.getString("req_3");
+        			strreq_4[i]  = Ors.getString("req_4");
+        			strdetail[i] = Ors.getString("detail");
+        			iwork_start[i] = Ors.getInt("work_start");
+        			iwork_end[i] = Ors.getInt("work_end");
+        			iact_start[i] = Ors.getInt("act_start");
+        			iact_end[i] = Ors.getInt("act_end");
+        			irest_hours[i] = Ors.getInt("rest_hours");
+        			izan_adj[i] = Ors.getInt("zan_adj");
+        			i = i + 1;
+        		}
+        		i = 1;	
+            }
+            
+			while(i < iMaxday + 1){
 				out.println("<tr>");
 				out.println("<td class=\"row_day\">" + i + "</td>");
 				out.println("<td class=\"row_youbi\"></td>");
@@ -170,82 +239,31 @@ public void jspInit() {
 				}	
 				out.println("</select>");
 				out.println("</td>");
-				out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_" + i + "\"></td>");
-				out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_" + i + "\"></td>");
-				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_" + i + "\"></td>");
-				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_" + i + "\"></td>");
-				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\" name=\"jissekiS_" + i + "\"></td>");
-				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_" + i + "\"></td>");
-				out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_" + i + "\"></td>");
-				out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\"></td>");
-                out.println("</tr>");
+				
+				if (cnt == 0){
+				    out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_" + i + "\"></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_" + i + "\"></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_" + i + "\"></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_" + i + "\"></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\" name=\"jissekiS_" + i + "\"></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_" + i + "\"></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_" + i + "\"></td>");
+				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\"></td>");
+                    out.println("</tr>");
+                }else{  
+				    out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_" + i + "\"></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_" + i + "\" value=" + strdetail[i-1] + "></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_" + i + "\" value=" + iwork_start[i-1] + "></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_" + i + "\" value=" + iwork_end[i-1] + "></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\" name=\"jissekiS_" + i + "\" value=" + iact_start[i-1] + " ></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_" + i + "\" value=" + iact_end[i-1] + "></td>");
+				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_" + i + "\" value=" + irest_hours[i-1] + "></td>");
+				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\"></td>");
+                    out.println("</tr>");
+                }
 				i = i + 1;
 			}         
-            
-	        /*当月分の日時取得処理*/      
-            SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
-            sdf.applyPattern("yyyy");
-            String strYear = sdf.format(cal.getTime());
-            sdf.applyPattern("MM");
-            String strMonth = sdf.format(cal.getTime());
-                
-            /*初回登録有無の判定*/
-            String strInitsql = "SELECT COUNT(*) cnt FROM unserver2014.WORK_TRN " + 
-        	    	"WHERE STAFF_ID = " + strUserid + 
-        	    	" AND YEAR = " + strYear + 
-        	    	" AND MONTH = "  + strMonth;
-    
-            rs = stmt.executeQuery(strInitsql);
-            
-            //レコード数の取得
-            rs.next();
-            int cnt = rs.getInt("cnt");
-            String strPerSQL = "";       
-            
-            if (cnt == 0){
-	        	/*初回登録の場合*/
-	        	/*個人設定トランの呼出し*/   	
-	        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
-	    	    rs = stmt.executeQuery(strPerSQL);
-	        	/*個人設定トラン情報より枠を追加*/
-	        	while(rs.next()){
-	            	int work_start = rs.getInt("work_start");
-	            	int work_end = rs.getInt("work_end");
-	        		String detail = rs.getString("detail");
-	        		int zangyo = rs.getInt("adjust");
-	        	}
-            } else {
-    	    	/*勤怠トランのデータ呼び出し*/
-    	    	strPerSQL = "SELECT YEAR year, MONTH month, DAY day, SUBMIT_REQUEST_1_CD req_1, " + 
-            	            "       SUBMIT_REQUEST_2_CD req_2, SUBMIT_REQUEST_3_CD req_3, " +
-            	            "       SUBMIT_REQUEST_4_CD req_4, DETAIL detail, " +
-            	            "       BASIC_WORK_START work_start, BASIC_WORK_END work_end, " +
-            	            "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
-            	            "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj, " +
-            	            "       DETAIL detail " +
-            	            "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
-    	    	rs = stmt.executeQuery(strPerSQL);
-        		/*勤怠データより枠を追加*/
-        		while(rs.next()){
-            		int iyear = rs.getInt("year");
-            		int imonth = rs.getInt("month");
-            		int iday = rs.getInt("day");
-        			String strreq_1 = rs.getString("req_1");
-        			String strreq_2 = rs.getString("req_2");
-        			String strreq_3 = rs.getString("req_3");
-        			String strreq_4 = rs.getString("req_4");
-        			String strdetail = rs.getString("detail");
-        			int iwork_start = rs.getInt("work_start");
-        			int work_end = rs.getInt("work_end");
-        			int act_start = rs.getInt("act_start");
-        			int act_end = rs.getInt("act_end");
-        			int rest_hours = rs.getInt("rest_hours");
-        			int zan_adj = rs.getInt("zan_adj");
-        			request.setCharacterEncoding("windows-31j");
-        			JTextField text1 = new JTextField("syousai_" + i);
-        			text1.setText(strdetail);
-        		}
-            }
+     
             	     
         } catch (Exception e) {
             e.printStackTrace();
