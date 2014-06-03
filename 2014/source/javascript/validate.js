@@ -18,13 +18,13 @@ function validate(){
     	}
     }
    
-	var value1 = document.getElementById('id_Kyuka' + num);
-    var options = document.getElementById('id_Kyuka' + num).options;
+	var value1 = document.getElementById('id_Kyuka_' + num);
+    var options = document.getElementById('id_Kyuka_' + num).options;
     var value = options.item(value1.selectedIndex).value;
-    var KihonStart =document.getElementById('id_kihonS' + num).value;
-    var KihonEnd =document.getElementById('id_kihonE' + num).value;
-    var JissekiStart = document.getElementById('id_jissekiS' + num).value;
-    var JissekiEnd = document.getElementById('id_jissekiE' + num).value;
+    var KihonStart =document.getElementById('id_kihonS_' + num).value;
+    var KihonEnd =document.getElementById('id_kihonE_' + num).value;
+    var JissekiStart = document.getElementById('id_jissekiS_' + num).value;
+    var JissekiEnd = document.getElementById('id_jissekiE_' + num).value;
     
     
     //Œß‘O‹x

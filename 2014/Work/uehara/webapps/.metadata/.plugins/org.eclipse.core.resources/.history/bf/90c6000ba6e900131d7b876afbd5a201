@@ -1,0 +1,12 @@
+package db_action;
+
+public class Check_time {
+	//時間のチェック
+	public Set_db check(String time){
+		Set_db set = new Set_db();
+		
+		
+		
+		return null;	
+	}
+}

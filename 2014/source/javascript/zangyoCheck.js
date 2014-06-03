@@ -4,9 +4,9 @@ function zangyou_Change(){
 	var maxdate;
 	
 	//htmlの最終日チェック
-	if(document.getElementById("id_zangyou31") != null){
+	if(document.getElementById("id_zangyou_31") != null){
 		maxdate = 31;
-	}else if(document.getElementById("id_zangyou30") != null){
+	}else if(document.getElementById("id_zangyou_30") != null){
 		maxdate = 30;
 	}else{
 		maxdate = 28;
@@ -17,7 +17,7 @@ function zangyou_Change(){
 	//最終日まで残業調整テキストボックスを変更
 	for(n = 1; n <=maxdate; n++){
 		 // IDをキーにしてテキストボックスエレメントの参照を取得する
-        var targetElement = document.getElementById('id_zangyou' + n);
+        var targetElement = document.getElementById('id_zangyou_' + n);
 		if(index != 0){
         // テキストボックス入力可
         targetElement.readOnly = false;

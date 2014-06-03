@@ -1,0 +1,223 @@
+package info.un_test;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.sql.Connection;
+import java.sql.DriverManager;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import javax.swing.JTextField;
+
+public class form_roster extends HttpServlet {
+
+/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+/**
+	 * 
+	 */
+
+public void doGet(HttpServletRequest request, HttpServletResponse response)
+throws IOException, ServletException
+{
+	String strUserid = "00001";	
+	int iRecordCount = 0;
+	//HttpSessionインタフェースのオブジェクトを取得
+    HttpSession session = request.getSession();
+    //idをsessionスコープで保存
+    session.setAttribute("userid", strUserid);
+	
+    try {
+		Class.forName("com.mysql.jdbc.Driver");
+	} catch (ClassNotFoundException e) {
+		// TODO 自動生成された catch ブロック
+		e.printStackTrace();
+	}
+    
+    Connection conn = null;
+    String serverName = "unserver2014";
+    String url = "jdbc:mysql://localhost/" + serverName;
+    String user = "root";
+    String password = "";
+    String msg = "";
+
+    try{
+    	
+    	conn = DriverManager.getConnection(url, user, password);
+
+        // データベースに対する処理
+    	msg = "データベース接続に成功しました";
+    
+	    /*当月分の日時取得処理*/
+        Calendar cal = Calendar.getInstance();        
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
+        sdf.applyPattern("yyyy");
+        String strYear = sdf.format(cal.getTime());
+        sdf.applyPattern("MM");
+        String strMonth = sdf.format(cal.getTime());
+        
+        int Maxday = cal.getActualMaximum(cal.DATE);
+    
+        Statement stmt = conn.createStatement();
+    
+        /*初回登録有無の判定*/
+        String strInitsql = "SELECT COUNT(*) cnt FROM " + serverName +".WORK_TRN " + 
+        		"WHERE STAFF_ID = " + strUserid + 
+        		" AND YEAR = " + strYear + 
+        		" AND MONTH = "  + strMonth;
+    
+        ResultSet rs = stmt.executeQuery(strInitsql);
+    
+        //レコード数の取得
+        rs.next();
+        int cnt = rs.getInt("cnt");
+        String strPerSQL = "";
+        rs.close();
+        
+     	int iMaxday = cal.getActualMaximum(cal.DATE);
+	    
+    	/*勤怠データより枠を追加*/
+    	String[] strreq_1 = new String[iMaxday];
+    	String[] strreq_2 = new String[iMaxday];
+    	String[] strreq_3 = new String[iMaxday];
+    	String[] strreq_4 = new String[iMaxday];
+    	String[] strdetail = new String[iMaxday];
+    	int[] iwork_start = new int[iMaxday];
+    	int[] iwork_end = new int[iMaxday];
+    	int[] iact_start = new int[iMaxday];
+    	int[] iact_end = new int[iMaxday];
+    	int[] irest_hours = new int[iMaxday];
+    	int[] izan_adj = new int[iMaxday];
+        
+        if (cnt == 0){
+        	/*初回登録の場合*/
+        	/*個人設定トランの呼出し*/   	
+        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
+        	ResultSet Ors = stmt.executeQuery(strPerSQL);
+        	/*個人設定トラン情報より枠を追加*/
+    		int i = 0;
+    		Ors.next();
+    		strdetail[i] = Ors.getString("detail");
+    		iwork_start[i] = Ors.getInt("work_start");
+    		iwork_end[i] = Ors.getInt("work_end");
+    		izan_adj[i] = Ors.getInt("zan_adj");
+    		i = 1;	
+        } else {
+    	    /*勤怠トランのデータ呼び出し*/
+    	    strPerSQL = "SELECT YEAR year, MONTH month, DAY day, SUBMIT_REQUEST_1_CD req_1, " + 
+                        "       SUBMIT_REQUEST_2_CD req_2, SUBMIT_REQUEST_3_CD req_3, " +
+                        "       SUBMIT_REQUEST_4_CD req_4, DETAIL detail, " +
+                        "       BASIC_WORK_START work_start, BASIC_WORK_END work_end, " +
+                        "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
+                        "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj, " +
+        	            "       DETAIL detail " +
+                        "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
+    	    ResultSet Ors = stmt.executeQuery(strPerSQL);
+        	
+		    int i = 0;
+			while(Ors.next()){
+			    strreq_1[i] = Ors.getString("req_1");
+			    strreq_2[i]  = Ors.getString("req_2");
+			    strreq_3[i]  = Ors.getString("req_3");
+			    strreq_4[i]  = Ors.getString("req_4");
+			    strdetail[i] = Ors.getString("detail");
+			    iwork_start[i] = Ors.getInt("work_start");
+			    iwork_end[i] = Ors.getInt("work_end");
+			    iact_start[i] = Ors.getInt("act_start");
+			    iact_end[i] = Ors.getInt("act_end");
+			    irest_hours[i] = Ors.getInt("rest_hours");
+			    izan_adj[i] = Ors.getInt("zan_adj");
+			    i = i + 1;
+		    }
+        	
+        }
+        
+	/*イベントの作成*/
+	
+	/*登録イベントの作成*/
+	/*ゆっこさん*/
+    
+	/*Excel出力の作成*/
+	
+	/*勤怠入力フォームのロード処理*/
+	response.setContentType("text/html; charset=utf-8");
+    this.getServletContext().getRequestDispatcher
+                 ("/form_roster.jsp").include(request, response);
+    
+    }catch (SQLException e){
+    	msg = "ドライバのロードに失敗しました";
+    	//例外処理
+    }finally{
+    	try{
+    		if (conn != null){
+    	      conn.close();
+    	    }
+    	    }catch (SQLException e){
+    	    // 例外処理
+    	    }
+    	System.out.println(msg);
+    }
+    
+}
+
+public void doPost(HttpServletRequest request, HttpServletResponse response)
+throws ServletException, IOException 
+{
+	response.setContentType("text/html");
+	PrintWriter out = response.getWriter();
+	out.println("<html>");
+	out.println("<head>");
+	out.println("<title>Hello World!</title>");
+	out.println("</head>");
+	out.println("<body>");
+	out.println("<h1>Hello World!</h1>");
+	out.println("</body>");
+	out.println("</html>");
+}
+
+public void Click(HttpServletRequest request, HttpServletResponse response)
+throws ServletException, IOException 
+{
+	//画面の入力項目取ってきて登録用のデータにする。
+	
+	//DBをIDとパスワード呼び出す
+	
+	//登録用のデータをSQLに入れ込む処理を作成する登録する
+	PrintWriter out = response.getWriter();
+	out.println("<html>");
+	out.println("<head>");
+	out.println("<title>Hello World!</title>");
+	out.println("</head>");
+	out.println("<body>");
+	out.println("<h1>Hello World!</h1>");
+	out.println("</body>");
+	out.println("</html>");
+	
+	//
+	
+}
+
+public static void main(String[] args) throws InstantiationException, IllegalAccessException {
+    String msg = "";
+    try {
+      Class.forName("com.mysql.jdbc.Driver").newInstance();
+      msg = "ドライバのロードに成功しました";
+    } catch (ClassNotFoundException e){
+      msg = "ドライバのロードに失敗しました";
+    }
+    System.out.println(msg);
+}
+
+}
+
