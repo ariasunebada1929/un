@@ -33,7 +33,7 @@ public void jspInit() {
 <!-- ヘッダー-->
 <div id="container">
 <div id="header">
-<form method="post">
+<form method="post" name="form_roster">
 <ul>
 	<li><button id="btnView"   OnClick="">勤務表閲覧</button></li>
 	<li><button ID="btnRegist"   OnClick="">勤怠情報登録</button></li>
@@ -173,7 +173,8 @@ public void jspInit() {
         		iwork_start[i] = Ors.getInt("work_start");
         		iwork_end[i] = Ors.getInt("work_end");
         		izan_adj[i] = Ors.getInt("zan_adj");
-        		i = 1;	
+        		i = 1;
+        		out.println("<input type=\"hidden\" name=\"hdn_worktrn\" value=\"0\" />");
             } else {
     	    	/*勤怠トランのデータ呼び出し*/
     	    	strPerSQL = "SELECT YEAR year, MONTH month, DAY day, SUBMIT_REQUEST_1_CD req_1, " + 
@@ -201,37 +202,53 @@ public void jspInit() {
         			izan_adj[i] = Ors.getInt("zan_adj");
         			i = i + 1;
         		}
-        		i = 1;	
+        		i = 1;
+        		out.println("<input type=\"hidden\" name=\"hdn_worktrn\" value=\"1\" />");
             }
+            
+            String strcolortd = "";
+            String strholiday = "";
             
 			while(i < iMaxday + 1){
 				out.println("<tr>");
-				out.println("<td class=\"row_day\">" + i + "</td>");
 				GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(strYear), Integer.parseInt(strMonth) - 1, i);
-				out.println("<td class=\"row_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
-				out.println("<td>");
-				out.println("<select name=\"example1-" + i + "\" size=\"1\" class=\"input_select\">");						
+				if (calendar.get(Calendar.DAY_OF_WEEK) - 1 == 0){
+					out.println("<td class=\"holiday_day\">" + i + "</td>");
+					out.println("<td class=\"holiday_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
+					strcolortd = "<td class=\"holiday_color\">";
+					out.println(strcolortd);
+				}else if (calendar.get(Calendar.DAY_OF_WEEK) - 1 == 6){
+					out.println("<td class=\"holiday_day\">" + i + "</td>");
+					out.println("<td class=\"holiday_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
+					strcolortd = "<td class=\"holiday_color\">";
+					out.println(strcolortd);
+				}else{
+					out.println("<td class=\"row_day\">" + i + "</td>");
+					out.println("<td class=\"row_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
+					strcolortd = "<td>";
+					out.println(strcolortd);
+				}
+				out.println("<select name=\"example1-" + i + "\" id=\"id_Kyuka_" + i + "\" size=\"1\" class=\"input_select\" onchange=\"mailCheck1();\">");						
 				String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq1);
 				out.println("<option value=" + "0" + "></option>");	
 				while(rs.next()){
 					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
-				}			
+				}
 				out.println("</select>");
 				
 				out.println("</td>");
-				out.println("<td>");
-				out.println("<select name=\"example2-" + i + "\" size=\"1\" class=\"input_select\">");
+				out.println(strcolortd);
+				out.println("<select name=\"example2-" + i + "\" id=\"id_KyusyutuFuridai_" + i + "\" size=\"1\" class=\"input_select\" onchange=\"mailCheck2();\">");
 				String strSeq2 = "SELECT SUBMIT_REQUEST_2_CD req_value, SUBMIT_REQUEST_2_NAME req_name FROM unserver2014.SUBMIT_REQUEST_2_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq2);
         	    out.println("<option value=" + "0" + "></option>");
 				while(rs.next()){
 					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
-				}		
+				}
 				out.println("</select>");
 				out.println("</td>");
-				out.println("<td>");
-				
+				out.println(strcolortd);	
 				out.println("<select name=\"example3-" + i + "\" size=\"1\" class=\"input_select\">");
 				String strSeq3 = "SELECT SUBMIT_REQUEST_3_CD req_value, SUBMIT_REQUEST_3_NAME req_name FROM unserver2014.SUBMIT_REQUEST_3_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq3);
@@ -241,7 +258,7 @@ public void jspInit() {
 				}	
 				out.println("</select>");
 				out.println("</td>");
-				out.println("<td>");
+				out.println(strcolortd);
 				out.println("<select name=\"example4-" + i + "\" size=\"1\" class=\"input_select\">");
 				String strSeq4 = "SELECT SUBMIT_REQUEST_4_CD req_value, SUBMIT_REQUEST_4_NAME req_name FROM unserver2014.SUBMIT_REQUEST_4_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq4);
@@ -253,29 +270,28 @@ public void jspInit() {
 				out.println("</td>");
 				
 				if (cnt == 0){
-				    out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_" + i + "\"></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_" + i + "\" value=" + strdetail[0] + "></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_" + i + "\" value=" + iwork_start[0] + "></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_" + i + "\" value=" + iwork_end[0] + "></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\" name=\"jissekiS_" + i + "\"></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_" + i + "\"></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_" + i + "\"></td>");
-				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\" value=" + izan_adj[0] + "></td>");
+				    out.println("<td class=\"furikaebi_column\"><input type=\"text\" class=\"input_text1\" id=\"id_furikae_" + i + "\" name=\"furikae\" style=\"background-color:#808080;\" maxlength=\"5\"></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai_" + i + "\" name=\"syousai\" value=" + strdetail[0] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS_" + i + "\" name=\"kihonS\" value=" + iwork_start[0] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE_" + i + "\" name=\"kihonE\" value=" + iwork_end[0] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS_" + i + "\" name=\"jissekiS\"></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE_" + i + "\" name=\"jissekiE\"></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR_" + i + "\" name=\"jiseekiR\"></td>");
+				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou_" + i + "\" name=\"zangyou\" readonly=\"readonly\" style=\"background-color:#808080;\" value=" + izan_adj[0] + "></td>");
                     out.println("</tr>");
                 }else{  
-				    out.println("<td><input type=\"text\" class=\"input_text1\" id=\"id_furikae\" name=\"hurikae_" + i + "\"></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai\" name=\"syousai_" + i + "\" value=" + strdetail[i-1] + "></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS1\" name=\"kihonS_" + i + "\" value=" + iwork_start[i-1] + "></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE1\" name=\"kihonE_" + i + "\" value=" + iwork_end[i-1] + "></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS1\" name=\"jissekiS_" + i + "\" value=" + iact_start[i-1] + " ></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE1\" name=\"jissekiE_" + i + "\" value=" + iact_end[i-1] + "></td>");
-				    out.println("<td><input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR1\" name=\"jiseekiR_" + i + "\" value=" + irest_hours[i-1] + "></td>");
-				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou1\" name=\"zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\" value=" + izan_adj[i-1] + "></td>");
+				    out.println("<td class=\"furikaebi_column\"><input type=\"text\" class=\"input_text1\" id=\"id_furikae_" + i + "\" name=\"furikae\" readonly=\"readonly\" style=\"background-color:#808080;\" maxlength=\"5\"></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai_" + i + "\" name=\"syousai\" value=" + strdetail[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS_" + i + "\" name=\"kihonS\" value=" + iwork_start[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE_" + i + "\" name=\"kihonE\" value=" + iwork_end[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS_" + i + "\" name=\"jissekiS\" value=" + iact_start[i-1] + " ></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE_" + i + "\" name=\"jissekiE\" value=" + iact_end[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR_" + i + "\" name=\"jiseekiR\" value=" + irest_hours[i-1] + "></td>");
+				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou_" + i + "\" name=\"zangyou\" readonly=\"readonly\" style=\"background-color:#808080;\" value=" + izan_adj[i-1] + "></td>");
                     out.println("</tr>");
                 }
 				i = i + 1;
-			}         
-     
+			}
             	     
         } catch (Exception e) {
             e.printStackTrace();
