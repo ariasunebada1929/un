@@ -22,11 +22,11 @@ public void jspInit() {
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/form_roster.css" />
 	<title>ãŒñ±ï\ì¸óÕ -ÇÁÇ≠ÇÁÇ≠ãŒë”ÅiâºÅj</title>
 	<link rel="stylesheet" type="text/css" href="form_roster.css">
-	<script type="text/javascript" src="${pageContext.request.contextPath}/btnRegist.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/zangyoCheck.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck1.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck2.js"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/validate.js"></script>	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/btnRegist.js" charset="shift_jis"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/zangyoCheck.js" charset="shift_jis"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck1.js" charset="shift_jis"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck2.js" charset="shift_jis"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/validate.js" charset="shift_jis"></script>	
 </head>
 
 <body>
@@ -213,21 +213,26 @@ public void jspInit() {
 				out.println("<tr>");
 				GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(strYear), Integer.parseInt(strMonth) - 1, i);
 				if (calendar.get(Calendar.DAY_OF_WEEK) - 1 == 0){
+					/*ì˙ójì˙*/
 					out.println("<td class=\"holiday_day\">" + i + "</td>");
 					out.println("<td class=\"holiday_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
 					strcolortd = "<td class=\"holiday_color\">";
 					out.println(strcolortd);
 				}else if (calendar.get(Calendar.DAY_OF_WEEK) - 1 == 6){
+					/*ìyójì˙*/
 					out.println("<td class=\"holiday_day\">" + i + "</td>");
 					out.println("<td class=\"holiday_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
 					strcolortd = "<td class=\"holiday_color\">";
 					out.println(strcolortd);
 				}else{
+					/*ïΩì˙*/
 					out.println("<td class=\"row_day\">" + i + "</td>");
 					out.println("<td class=\"row_youbi\">" + strweek_name[calendar.get(Calendar.DAY_OF_WEEK) - 1] + "</td>");
 					strcolortd = "<td>";
 					out.println(strcolortd);
 				}
+
+				/*ãxâ…óÒ*/
 				out.println("<select name=\"example1-" + i + "\" id=\"id_Kyuka_" + i + "\" size=\"1\" class=\"input_select\" onchange=\"mailCheck1();\">");						
 				String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq1);
@@ -236,8 +241,9 @@ public void jspInit() {
 					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
 				}
 				out.println("</select>");
-				
 				out.println("</td>");
+				
+				/*ãxèoÅEêUë„ãx*/
 				out.println(strcolortd);
 				out.println("<select name=\"example2-" + i + "\" id=\"id_KyusyutuFuridai_" + i + "\" size=\"1\" class=\"input_select\" onchange=\"mailCheck2();\">");
 				String strSeq2 = "SELECT SUBMIT_REQUEST_2_CD req_value, SUBMIT_REQUEST_2_NAME req_name FROM unserver2014.SUBMIT_REQUEST_2_MST WHERE VALID_FLAG = \'1\'";
@@ -248,6 +254,8 @@ public void jspInit() {
 				}
 				out.println("</select>");
 				out.println("</td>");
+				
+				/*í â@ÅEìdíx*/
 				out.println(strcolortd);	
 				out.println("<select name=\"example3-" + i + "\" size=\"1\" class=\"input_select\">");
 				String strSeq3 = "SELECT SUBMIT_REQUEST_3_CD req_value, SUBMIT_REQUEST_3_NAME req_name FROM unserver2014.SUBMIT_REQUEST_3_MST WHERE VALID_FLAG = \'1\'";
@@ -258,6 +266,8 @@ public void jspInit() {
 				}	
 				out.println("</select>");
 				out.println("</td>");
+				
+				/*AÅEBïœ*/
 				out.println(strcolortd);
 				out.println("<select name=\"example4-" + i + "\" size=\"1\" class=\"input_select\">");
 				String strSeq4 = "SELECT SUBMIT_REQUEST_4_CD req_value, SUBMIT_REQUEST_4_NAME req_name FROM unserver2014.SUBMIT_REQUEST_4_MST WHERE VALID_FLAG = \'1\'";
