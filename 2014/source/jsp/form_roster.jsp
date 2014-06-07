@@ -18,6 +18,7 @@ public void jspInit() {
 
 <html>
 <head>
+	<meta http-equiv="Content-Type" content="text/html; charset=Shift_JIS">
 	<title>勤務表入力 -らくらく勤怠（仮）</title>
 	<link rel="stylesheet" href="${pageContext.request.contextPath}/css/form_roster.css" />
 	<title>勤務表入力 -らくらく勤怠（仮）</title>
@@ -44,9 +45,9 @@ public void jspInit() {
 </div>
 <!--勤務表-->
 <div id="header_roster">
-<h1>5月勤務表</h1>
+<h1>6月勤務表</h1>
 <table border="0" cellspacing="0" id="table_caption">
-<!--<caption>5月勤務表</caption>-->
+<!--<caption>6月勤務表</caption>-->
 	<tr>
 		<td class="column_name2">残業調整</td>
 		<td>
@@ -67,7 +68,7 @@ public void jspInit() {
 <table border="0" cellspacing="0" id="table_personalinfo">
 	<tr>
 		<td class="column_name2">社員番号</td>
-		<td>000208</td>
+		<td>00208</td>
 	</tr>
 	<tr>
 		<td class="column_name1">所属</td>
@@ -104,14 +105,13 @@ public void jspInit() {
 			</tr>
 	</tr>
 	<!---入力フォーム -->
-	<% request.setCharacterEncoding("Windows-31J"); %>
 	<%
         // データベースへのアクセス開始
         Connection con = null;
         Statement stmt = null;
         ResultSet rs = null;
         ResultSet Perrs = null;
-        String strUserid = "00001";
+        String strUserid = "00002";
         
         try {
             // データベースに接続するConnectionオブジェクトの取得
