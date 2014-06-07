@@ -2,3 +2,9 @@ DELETE FROM unserver_01.`work_trn`
 WHERE STAFF_ID = '00001'
 AND   YEAR     = '2014'
 AND   MONTH    = '05'
+
+
+//ÉfÉäÅ[Égï∂
+String sql_del = "DELETE FROM unserver_01.`work_trn` WHERE STAFF_ID = '00001'"
+		                                             + " AND YEAR   = '2014'"
+		                                             + "AND MONTH   = '05'";
