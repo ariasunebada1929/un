@@ -31,9 +31,9 @@ function validate(){
     if(value=="04"){
     	if(KihonStart !=""){
 			if(KihonStart != '1300'){
-				alert( "1日の基本勤務時間・出社に13時を入力してください\n");
-				document.form_roster.kihonS_1.focus();
-				return false;
+				alert( "1日の基本勤務時間・出社に13時を入力してください2\n");
+				//document.form_roster.kihonS_1.focus();
+				//return false;
 			}
 		}
     	if(JissekiStart !=""){
@@ -43,7 +43,10 @@ function validate(){
 				return false;
 			}
 		}
+		//document.form_roster.kihonS_1.focus();
+		//return false;
     }
+    
     //午後休
     if(value=="05"){
     	if(KihonEnd !=""){
@@ -61,4 +64,5 @@ function validate(){
 			}
 		}
     }
+    
 }
