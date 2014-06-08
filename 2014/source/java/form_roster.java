@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -31,7 +32,8 @@ public class form_roster extends HttpServlet {
 public void doGet(HttpServletRequest request, HttpServletResponse response)
 throws IOException, ServletException
 {
-	String strUserid = "00001";	
+	response.setContentType("text/html; charset=Shift_JIS");
+	String strUserid = "00002";	
 	int iRecordCount = 0;
 	//HttpSessionインタフェースのオブジェクトを取得
     HttpSession session = request.getSession();
@@ -70,7 +72,7 @@ throws IOException, ServletException
         int Maxday = cal.getActualMaximum(cal.DATE);
     
         Statement stmt = conn.createStatement();
-    
+
         /*初回登録有無の判定*/
         String strInitsql = "SELECT COUNT(*) cnt FROM " + serverName +".WORK_TRN " + 
         		"WHERE STAFF_ID = " + strUserid + 
@@ -138,6 +140,7 @@ throws IOException, ServletException
 			    iact_end[i] = Ors.getInt("act_end");
 			    irest_hours[i] = Ors.getInt("rest_hours");
 			    izan_adj[i] = Ors.getInt("zan_adj");
+				GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(strYear), Integer.parseInt(strMonth), i + 1);
 			    i = i + 1;
 		    }
         	
@@ -151,7 +154,7 @@ throws IOException, ServletException
 	/*Excel出力の作成*/
 	
 	/*勤怠入力フォームのロード処理*/
-	response.setContentType("text/html; charset=utf-8");
+	response.setContentType("text/html; charset=Shift_JIS");
     this.getServletContext().getRequestDispatcher
                  ("/form_roster.jsp").include(request, response);
     
@@ -171,19 +174,31 @@ throws IOException, ServletException
     
 }
 
-public void doPost(HttpServletRequest request, HttpServletResponse response)
+public void doPost(HttpServletRequest req, HttpServletResponse response)
 throws ServletException, IOException 
 {
-	response.setContentType("text/html");
-	PrintWriter out = response.getWriter();
-	out.println("<html>");
-	out.println("<head>");
-	out.println("<title>Hello World!</title>");
-	out.println("</head>");
-	out.println("<body>");
-	out.println("<h1>Hello World!</h1>");
-	out.println("</body>");
-	out.println("</html>");
+	response.setContentType("text/html; charset=Shift_JIS");
+	String MyAction = req.getParameter("MySubmit"); 
+
+	 // 処理の実行 
+	if (MyAction.equals("Toroku")){
+		req.setCharacterEncoding("Shift_JIS");
+		//登録処理
+		Set_db myObj = new Set_db();
+
+			try {
+				myObj.main_action(req , String.valueOf(req.getParameter("hdn_worktrn")));
+			} catch (SQLException e) {
+				// TODO 自動生成された catch ブロック
+				e.printStackTrace();
+			}
+
+	}else if(MyAction.equals("Eturan")){
+		//勤務表閲覧
+		
+	}else if(MyAction.equals("ExcelOut")){
+		//Excel出力
+	}
 }
 
 public void Click(HttpServletRequest request, HttpServletResponse response)
