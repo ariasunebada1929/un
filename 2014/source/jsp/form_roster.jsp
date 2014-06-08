@@ -34,11 +34,11 @@ public void jspInit() {
 <!-- ヘッダー-->
 <div id="container">
 <div id="header">
-<form method="post" name="form_roster">
+<form method="post" name="form_roster" path="/UN_test">
 <ul>
 	<li><button id="btnView"   OnClick="func('Eturan');">勤務表閲覧</button></li>
 	<li><button ID="btnRegist"   OnClick="func('Toroku');">勤怠情報登録</button></li>
-	<li><button id="btnOutput"   OnClick="func('ExcelOut');">勤務表出力</button></li>
+	<li><button id="btnOutput" OnClick="func('ExcelOut');">勤務表出力</button></li>
 	<li id="login_panel">ログイン者</li>
 </ul>
 <hr>
@@ -155,12 +155,12 @@ public void jspInit() {
         	String[] strreq_3 = new String[iMaxday];
         	String[] strreq_4 = new String[iMaxday];
         	String[] strdetail = new String[iMaxday];
-        	int[] iwork_start = new int[iMaxday];
-        	int[] iwork_end = new int[iMaxday];
-        	int[] iact_start = new int[iMaxday];
-        	int[] iact_end = new int[iMaxday];
-        	int[] irest_hours = new int[iMaxday];
-        	int[] izan_adj = new int[iMaxday];
+        	String[] iwork_start = new String[iMaxday];
+        	String[] iwork_end = new String[iMaxday];
+        	String[] iact_start = new String[iMaxday];
+        	String[] iact_end = new String[iMaxday];
+        	String[] irest_hours = new String[iMaxday];
+        	String[] izan_adj = new String[iMaxday];
             out.println("<input type=\"hidden\" name=\"MySubmit\" />");
             
             if (cnt == 0){
@@ -172,9 +172,9 @@ public void jspInit() {
         		i = 0;
         		Ors.next();
         		strdetail[i] = Ors.getString("detail");
-        		iwork_start[i] = Ors.getInt("work_start");
-        		iwork_end[i] = Ors.getInt("work_end");
-        		izan_adj[i] = Ors.getInt("zan_adj");
+        		iwork_start[i] = Ors.getString("work_start");
+        		iwork_end[i] = Ors.getString("work_end");
+        		izan_adj[i] = Ors.getString("zan_adj");
         		i = 1;
         		out.println("<input type=\"hidden\" name=\"hdn_worktrn\" value=\"0\" />");
             } else {
@@ -191,17 +191,39 @@ public void jspInit() {
         		/*勤怠データより枠を追加*/
         		i = 0;
         		while(Ors.next()){
-        			strreq_1[i] = Ors.getString("req_1");
-        			strreq_2[i]  = Ors.getString("req_2");
-        			strreq_3[i]  = Ors.getString("req_3");
-        			strreq_4[i]  = Ors.getString("req_4");
-        			strdetail[i] = Ors.getString("detail");
-        			iwork_start[i] = Ors.getInt("work_start");
-        			iwork_end[i] = Ors.getInt("work_end");
-        			iact_start[i] = Ors.getInt("act_start");
-        			iact_end[i] = Ors.getInt("act_end");
-        			irest_hours[i] = Ors.getInt("rest_hours");
-        			izan_adj[i] = Ors.getInt("zan_adj");
+					if (Ors.getString("detail") != null){
+						strdetail[i] = Ors.getString("detail");
+					}
+					if (Ors.getString("work_start") == null){
+						iwork_start[i] = "";
+					} else{
+						iwork_start[i] = Ors.getString("work_start");						
+					}
+					if (Ors.getString("work_end") == null){
+						iwork_end[i] = "";
+					} else{
+						iwork_end[i] = Ors.getString("work_end");						
+					}
+					if (Ors.getString("act_start") == null){
+						iact_start[i] = "";
+					} else{
+						iact_start[i] = Ors.getString("act_start");						
+					}
+					if (Ors.getString("act_end") == null){
+						iact_end[i] = "";
+					} else{
+						iact_end[i] = Ors.getString("act_end");						
+					}
+					if (Ors.getString("rest_hours") == null){
+						irest_hours[i] = "";
+					} else{
+						irest_hours[i] = Ors.getString("rest_hours");						
+					}
+					if (Ors.getString("zan_adj") == null){
+						izan_adj[i] = "";
+					} else{
+						izan_adj[i] = Ors.getString("zan_adj");						
+					}
         			i = i + 1;
         		}
         		i = 1;
@@ -325,6 +347,9 @@ public void jspInit() {
 
 <script language="JavaScript"> 
  function func(MyCommand){ 
- document.form_roster.MySubmit.value=MyCommand;
+    document.form_roster.MySubmit.value=MyCommand;
+    if (MyCommand = "Toroku"){
+        return btnRegist_Click();
+    }
  } 
  </script> 
