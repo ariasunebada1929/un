@@ -1,6 +1,6 @@
 function btnRegist_Click(){
-	//池田 勤務表登録ボタン
-	
+
+	//池田 勤務表登録ボタン	
 	
 	//月の最終日用変数
 	var maxdate;
@@ -8,9 +8,9 @@ function btnRegist_Click(){
 	var strMessage = "";
 	
 	//htmlの最終日チェック
-	if(document.getElementById("id_zangyou31") != null){
+	if(document.getElementById("id_zangyou_31") != null){
 		maxdate = 31;
-	}else if(document.getElementById("id_zangyou30") != null){
+	}else if(document.getElementById("id_zangyou_30") != null){
 		maxdate = 30;
 	}else{
 		maxdate = 28;
@@ -18,12 +18,12 @@ function btnRegist_Click(){
 	
 	//最終日まで入力をチェック
 	for(n = 1; n <=maxdate; n++){
-		KihonStart= document.getElementById("id_kihonS" + n).value;
-		KihonEnd= document.getElementById("id_kihonE" + n).value;
-		JissekiStart= document.getElementById("id_jissekiS" + n).value;
-		JissekiEnd= document.getElementById("id_jissekiE"+ n).value;
-		JissekiRest= document.getElementById("id_jissekiR" + n).value;
-		Zangyo= document.getElementById("id_zangyou" + n).value;
+		KihonStart= document.getElementById("id_kihonS_" + n).value;
+		KihonEnd= document.getElementById("id_kihonE_" + n).value;
+		JissekiStart= document.getElementById("id_jissekiS_" + n).value;
+		JissekiEnd= document.getElementById("id_jissekiE_"+ n).value;
+		JissekiRest= document.getElementById("id_jissekiR_" + n).value;
+		Zangyo= document.getElementById("id_zangyou_" + n).value;
 	
 		
 		
