@@ -18,6 +18,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import javax.swing.JTextField;
 
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+
 public class form_roster extends HttpServlet {
 
 /**
@@ -95,25 +97,25 @@ throws IOException, ServletException
     	String[] strreq_3 = new String[iMaxday];
     	String[] strreq_4 = new String[iMaxday];
     	String[] strdetail = new String[iMaxday];
-    	int[] iwork_start = new int[iMaxday];
-    	int[] iwork_end = new int[iMaxday];
-    	int[] iact_start = new int[iMaxday];
-    	int[] iact_end = new int[iMaxday];
-    	int[] irest_hours = new int[iMaxday];
-    	int[] izan_adj = new int[iMaxday];
+    	String[] iwork_start = new String[iMaxday];
+    	String[] iwork_end = new String[iMaxday];
+    	String[] iact_start = new String[iMaxday];
+    	String[] iact_end = new String[iMaxday];
+    	String[] irest_hours = new String[iMaxday];
+    	String[] izan_adj = new String[iMaxday];
         
         if (cnt == 0){
         	/*初回登録の場合*/
         	/*個人設定トランの呼出し*/   	
-        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST adjust FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
+        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST zan_adj FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
         	ResultSet Ors = stmt.executeQuery(strPerSQL);
         	/*個人設定トラン情報より枠を追加*/
     		int i = 0;
     		Ors.next();
     		strdetail[i] = Ors.getString("detail");
-    		iwork_start[i] = Ors.getInt("work_start");
-    		iwork_end[i] = Ors.getInt("work_end");
-    		izan_adj[i] = Ors.getInt("zan_adj");
+    		iwork_start[i] = Ors.getString("work_start");
+    		iwork_end[i] = Ors.getString("work_end");
+    		izan_adj[i] = Ors.getString("zan_adj");
     		i = 1;	
         } else {
     	    /*勤怠トランのデータ呼び出し*/
@@ -134,12 +136,12 @@ throws IOException, ServletException
 			    strreq_3[i]  = Ors.getString("req_3");
 			    strreq_4[i]  = Ors.getString("req_4");
 			    strdetail[i] = Ors.getString("detail");
-			    iwork_start[i] = Ors.getInt("work_start");
-			    iwork_end[i] = Ors.getInt("work_end");
-			    iact_start[i] = Ors.getInt("act_start");
-			    iact_end[i] = Ors.getInt("act_end");
-			    irest_hours[i] = Ors.getInt("rest_hours");
-			    izan_adj[i] = Ors.getInt("zan_adj");
+			    iwork_start[i] = Ors.getString("work_start");
+			    iwork_end[i] = Ors.getString("work_end");
+			    iact_start[i] = Ors.getString("act_start");
+			    iact_end[i] = Ors.getString("act_end");
+			    irest_hours[i] = Ors.getString("rest_hours");
+			    izan_adj[i] = Ors.getString("zan_adj");
 				GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(strYear), Integer.parseInt(strMonth), i + 1);
 			    i = i + 1;
 		    }
@@ -186,18 +188,33 @@ throws ServletException, IOException
 		//登録処理
 		Set_db myObj = new Set_db();
 
-			try {
-				myObj.main_action(req , String.valueOf(req.getParameter("hdn_worktrn")));
-			} catch (SQLException e) {
-				// TODO 自動生成された catch ブロック
-				e.printStackTrace();
-			}
+		try {
+			myObj.main_action(req , String.valueOf(req.getParameter("hdn_worktrn")));
+		    this.getServletContext().getRequestDispatcher
+            ("/form_roster.jsp").include(req, response);
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}
 
 	}else if(MyAction.equals("Eturan")){
 		//勤務表閲覧
 		
 	}else if(MyAction.equals("ExcelOut")){
+		Excel_Edit myObj = new Excel_Edit();	
 		//Excel出力
+		try {
+			myObj.Excel_Edit();
+		} catch (InvalidFormatException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (SQLException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			// TODO 自動生成された catch ブロック
+			e.printStackTrace();
+		}		
 	}
 }
 
