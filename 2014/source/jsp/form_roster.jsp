@@ -34,11 +34,11 @@ public void jspInit() {
 <!-- ヘッダー-->
 <div id="container">
 <div id="header">
-<form method="post" name="form_roster">
+<form method="post" name="form_roster" path="/UN_test">
 <ul>
 	<li><button id="btnView"   OnClick="func('Eturan');">勤務表閲覧</button></li>
 	<li><button ID="btnRegist"   OnClick="func('Toroku');">勤怠情報登録</button></li>
-	<li><button id="btnOutput"   OnClick="func('ExcelOut');">勤務表出力</button></li>
+	<li><button id="btnOutput" OnClick="func('ExcelOut');">勤務表出力</button></li>
 	<li id="login_panel">ログイン者</li>
 </ul>
 <hr>
@@ -347,6 +347,9 @@ public void jspInit() {
 
 <script language="JavaScript"> 
  function func(MyCommand){ 
- document.form_roster.MySubmit.value=MyCommand;
+    document.form_roster.MySubmit.value=MyCommand;
+    if (MyCommand = "Toroku"){
+        return btnRegist_Click();
+    }
  } 
  </script> 
