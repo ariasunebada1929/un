@@ -32,6 +32,7 @@ public class Set_db extends HttpServlet{
 
 		//DB接続用変数定義
 		Connection conn = null;
+		boolean auto = false;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
 
@@ -64,40 +65,44 @@ public class Set_db extends HttpServlet{
 			conn = DriverManager.getConnection(path, props);
 			Statement stmt = conn.createStatement();
 			//conn.setAutoCommit(false);//オートコミットオフ
+			
+			 auto = conn.getAutoCommit(); 
+			 conn.setAutoCommit(false);
 
 			//処理
 			//if (flg.equals("1")){
-				//当月分の日時取得処理
-				Calendar cal = Calendar.getInstance();
-				int year  = cal.get(Calendar.YEAR);
-				int month = cal.get(Calendar.MONTH) + 1;
-				//月末取得
-				cal.set(Calendar.YEAR, year);
-				cal.set(Calendar.MONTH, month );                
-				int lastDayOfMonth = cal.getActualMaximum(Calendar.DATE);
+			//当月分の日時取得処理
+			Calendar cal = Calendar.getInstance();
+			int year  = cal.get(Calendar.YEAR);
+			int month = cal.get(Calendar.MONTH) + 1;
+			//月末取得
+			cal.set(Calendar.YEAR, year);
+			cal.set(Calendar.MONTH, month );                
+			int lastDayOfMonth = cal.getActualMaximum(Calendar.DATE);
 				
-				//削除文
-				String sql_del = "DELETE FROM unserver2014.`work_trn` WHERE STAFF_ID = '00002'"
+			//削除文
+			String sql_del = "DELETE FROM unserver2014.`work_trn` WHERE STAFF_ID = '00002'"
                         + " AND YEAR   = '2014'"
                         + "AND MONTH   = '06'";
-				stmt.execute(sql_del);
-
-				//HTMLからデータ取得
-				//for(int i=1; i<=lastDayOfMonth; i++){
-				String sql_in = "";
+	
+			int n = stmt.executeUpdate(sql_del);
 				
-				sql_in =  "INSERT INTO unserver2014.WORK_TRN "  
+			//HTMLからデータ取得
+			//for(int i=1; i<=lastDayOfMonth; i++){
+			String sql_in = "";
+				
+			sql_in =  "INSERT INTO unserver2014.WORK_TRN "  
 						+ "(STAFF_ID,YEAR,MONTH,DAY,"
 			            + "SUBMIT_REQUEST_1_CD,SUBMIT_REQUEST_2_CD,"
 			            + "SUBMIT_REQUEST_3_CD,SUBMIT_REQUEST_4_CD,"
 			            + "COMP_HOLIDAY,DETAIL,BASIC_WORK_START,BASIC_WORK_END,"
 			            + "ACTUAL_WORK_START,ACTUAL_WORK_END,RESTHOURS,ZANGYO_ADJUST) VALUES ";
 				
-				for(int i=1; i<=lastDayOfMonth - 1; i++){
+			for(int i=1; i<=lastDayOfMonth - 1; i++){
 					
-					String GetItem = new String (req.getParameter("nm_syousai_" + i).getBytes("ISO-8859-1"));
+				String GetItem = new String (req.getParameter("nm_syousai_" + i).getBytes("ISO-8859-1"));
 					
-					sql_in = sql_in + "(" 
+				sql_in = sql_in + "(" 
 				            + "'00002','"
 				            + year + "','" 
 				            + String.format("%1$02d", month) + "','" 
@@ -108,18 +113,20 @@ public class Set_db extends HttpServlet{
 			                + String.format("%1$02d",Integer.valueOf(req.getParameter("nm_Hendou_" + i))) + "','"			                
 			                + String.valueOf(req.getParameter("nm_furikae_" + i)) + "','"
 			                + String.valueOf(GetItem) + "',"
-			                + check(req.getParameter("nm_kihonS_" + i)) + ","
-			                + check(req.getParameter("nm_kihonE_" + i)) + ","
-			                + check(req.getParameter("nm_jissekiS_" + i)) + ","
-			                + check(req.getParameter("nm_jissekiE_" + i)) + ","
-			                + check(req.getParameter("nm_jiseekiR_" + i)) + ","
-			                + check(req.getParameter("nm_zangyou_" + i)) + "),";
+			                + check(req.getParameter("nm_kihonS_" + i),"3") + ","
+			                + check(req.getParameter("nm_kihonE_" + i),"3") + ","
+			                + check(req.getParameter("nm_jissekiS_" + i),"3") + ","
+			                + check(req.getParameter("nm_jissekiE_" + i),"3") + ","
+			                + check(req.getParameter("nm_jiseekiR_" + i),"0") + ","
+			                + check(req.getParameter("nm_zangyou_" + i),"0") + "),";
 				
-				}
-						
-				sql_in = sql_in.substring(0, sql_in.length()-1);
-				stmt.execute(sql_in);
+			}
 				
+			sql_in = sql_in.substring(0, sql_in.length()-1);
+			n = stmt.executeUpdate(sql_in);
+				 
+			stmt.close(); //コミットもしくはロールバックを実行する 
+			commit(conn, auto, true);
 			//} else if(flg == "2"){
 				//アップロード
 
@@ -129,7 +136,7 @@ public class Set_db extends HttpServlet{
 
 		}catch(Exception ex){
 			//例外発生時の処理
-			//conn.rollback();//ロールバック
+			conn.rollback();//ロールバック
 			ex.printStackTrace();  //エラー内容をコンソールに出力する
 		}finally{
 			//クローズ処理
@@ -142,15 +149,30 @@ public class Set_db extends HttpServlet{
 	}
 
 	//入力時間チェック
-	public static String check(String check_time){
+	public static String check(String check_time , String Keta){
 		String str = check_time;
 
 		//空値の場合は頭0を付ける
 		if(str != ""){
-			str = "'" + String.format("%1$04d",Integer.valueOf(str)) + "'";
+			str = "'" + String.format("%1$0" + Keta +"d",Integer.valueOf(str)) + "'";
 		}else{
 			str = "''";
 		}
 		return str;
 	}
+	
+	public static void commit(Connection con, boolean auto, boolean ret){
+		try {   
+				if (auto) {    
+					if(ret == true){
+						con.commit();
+					}else{
+						con.rollback();
+					    con.setAutoCommit(auto);   
+					} 
+				}
+			} catch (SQLException e) {
+				e.printStackTrace();
+		}
+	}	
 }

@@ -283,7 +283,7 @@ public void jspInit() {
         	    out.println("<option value=" + "0" + "></option>");
 				while(rs.next()){
 					if (cnt > 0 && rs.getString("req_value").equals(strreq_2[i-1])){
-						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
 					}else{
 						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
 					}
@@ -299,7 +299,7 @@ public void jspInit() {
         	    out.println("<option value=" + "0" + "></option>");	
 				while(rs.next()){
 					if (cnt > 0 && rs.getString("req_value").equals(strreq_3[i-1])){
-						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
 					}else{
 						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
 					}
@@ -315,7 +315,7 @@ public void jspInit() {
         	    out.println("<option value=" + "0" + "></option>");
 				while(rs.next()){
 					if (cnt > 0 && rs.getString("req_value").equals(strreq_4[i-1])){
-						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
 					}else{
 						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
 					}
