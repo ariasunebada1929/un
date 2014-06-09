@@ -1,0 +1,22 @@
+SELECT work_trn.YEAR year, work_trn.MONTH month, work_trn.DAY day,
+       req1_mst.SUBMIT_REQUEST_1_NAME,
+       req2_mst.SUBMIT_REQUEST_2_NAME,
+       req3_mst.SUBMIT_REQUEST_3_NAME,
+       req4_mst.SUBMIT_REQUEST_4_NAME,
+       work_trn.DETAIL,
+       work_trn.BASIC_WORK_START,
+       work_trn.BASIC_WORK_END,
+       work_trn.ACTUAL_WORK_START,
+       work_trn.ACTUAL_WORK_END,
+       work_trn.RESTHOURS, work_trn.ZANGYO_ADJUST
+       FROM unserver2014.WORK_TRN work_trn
+       LEFT JOIN unserver2014.SUBMIT_REQUEST_1_MST req1_mst ON
+       work_trn.SUBMIT_REQUEST_1_CD = req1_mst.SUBMIT_REQUEST_1_CD
+       LEFT JOIN unserver2014.SUBMIT_REQUEST_2_MST req2_mst ON
+       work_trn.SUBMIT_REQUEST_2_CD = req2_mst.SUBMIT_REQUEST_2_CD
+       LEFT JOIN unserver2014.SUBMIT_REQUEST_3_MST req3_mst ON
+       work_trn.SUBMIT_REQUEST_3_CD = req3_mst.SUBMIT_REQUEST_3_CD
+       LEFT JOIN unserver2014.SUBMIT_REQUEST_4_MST req4_mst ON
+       work_trn.SUBMIT_REQUEST_4_CD = req4_mst.SUBMIT_REQUEST_4_CD
+       WHERE unserver2014.WORK_TRN.STAFF_ID = 00002
+       AND  unserver2014.WORK_TRN.YEAR = 2014 AND unserver2014.WORK_TRN.MONTH = 6
