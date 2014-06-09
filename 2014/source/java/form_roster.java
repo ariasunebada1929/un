@@ -135,17 +135,47 @@ throws IOException, ServletException
 			    strreq_2[i]  = Ors.getString("req_2");
 			    strreq_3[i]  = Ors.getString("req_3");
 			    strreq_4[i]  = Ors.getString("req_4");
-			    strdetail[i] = Ors.getString("detail");
-			    iwork_start[i] = Ors.getString("work_start");
-			    iwork_end[i] = Ors.getString("work_end");
-			    iact_start[i] = Ors.getString("act_start");
-			    iact_end[i] = Ors.getString("act_end");
-			    irest_hours[i] = Ors.getString("rest_hours");
-			    izan_adj[i] = Ors.getString("zan_adj");
-				GregorianCalendar calendar = new GregorianCalendar(Integer.parseInt(strYear), Integer.parseInt(strMonth), i + 1);
-			    i = i + 1;
+				if (Ors.getString("detail") != null){
+					strdetail[i] = Ors.getString("detail");
+				}
+				if (Ors.getString("work_start") == null){
+					iwork_start[i] = "";
+				} else{
+					iwork_start[i] = Ors.getString("work_start");						
+				}
+				if (Ors.getString("work_end") == null){
+					iwork_end[i] = "";
+				} else{
+					iwork_end[i] = Ors.getString("work_end");						
+				}
+				if (Ors.getString("act_start") == null){
+					iact_start[i] = "";
+				} else{
+					iact_start[i] = Ors.getString("act_start");						
+				}
+				if (Ors.getString("act_end") == null){
+					iact_end[i] = "";
+				} else{
+					iact_end[i] = Ors.getString("act_end");						
+				}
+				if (Ors.getString("rest_hours") == null){
+					irest_hours[i] = "";
+				} else{
+					irest_hours[i] = Ors.getString("rest_hours");						
+				}
+				if (Ors.getString("zan_adj") == null){
+					izan_adj[i] = "";
+				} else{
+					izan_adj[i] = Ors.getString("zan_adj");						
+				}
+    			i = i + 1;
 		    }
-        	
+			
+			String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
+    	    rs = stmt.executeQuery(strSeq1);    
+			while(rs.next()){
+				rs.getString("req_value");
+			}
         }
         
 	/*ÉCÉxÉìÉgÇÃçÏê¨*/

@@ -191,6 +191,10 @@ public void jspInit() {
         		/*ãŒë”ÉfÅ[É^ÇÊÇËògÇí«â¡*/
         		i = 0;
         		while(Ors.next()){
+        			strreq_1[i] = Ors.getString("req_1");
+			        strreq_2[i]  = Ors.getString("req_2");
+			        strreq_3[i]  = Ors.getString("req_3");
+			        strreq_4[i]  = Ors.getString("req_4");
 					if (Ors.getString("detail") != null){
 						strdetail[i] = Ors.getString("detail");
 					}
@@ -262,7 +266,11 @@ public void jspInit() {
         	    rs = stmt.executeQuery(strSeq1);
 				out.println("<option value=" + "0" + "></option>");	
 				while(rs.next()){
-					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					if (cnt > 0 && rs.getString("req_value").equals(strreq_1[i-1])){
+						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}else{
+						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}
 				}
 				out.println("</select>");
 				out.println("</td>");
@@ -274,7 +282,11 @@ public void jspInit() {
         	    rs = stmt.executeQuery(strSeq2);
         	    out.println("<option value=" + "0" + "></option>");
 				while(rs.next()){
-					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					if (cnt > 0 && rs.getString("req_value").equals(strreq_2[i-1])){
+						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}else{
+						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}
 				}
 				out.println("</select>");
 				out.println("</td>");
@@ -286,7 +298,11 @@ public void jspInit() {
         	    rs = stmt.executeQuery(strSeq3);
         	    out.println("<option value=" + "0" + "></option>");	
 				while(rs.next()){
-					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					if (cnt > 0 && rs.getString("req_value").equals(strreq_3[i-1])){
+						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}else{
+						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}
 				}	
 				out.println("</select>");
 				out.println("</td>");
@@ -298,7 +314,11 @@ public void jspInit() {
         	    rs = stmt.executeQuery(strSeq4);
         	    out.println("<option value=" + "0" + "></option>");
 				while(rs.next()){
-					out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					if (cnt > 0 && rs.getString("req_value").equals(strreq_4[i-1])){
+						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}else{
+						out.println("<option value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
+					}
 				}	
 				out.println("</select>");
 				out.println("</td>");
@@ -306,21 +326,21 @@ public void jspInit() {
 				if (cnt == 0){
 				    out.println("<td class=\"furikaebi_column\"><input type=\"text\" class=\"input_text1\" id=\"id_furikae_" + i + "\" name=\"nm_furikae_" + i + "\" style=\"background-color:#808080;\" maxlength=\"5\"></td>");
 				    out.println( strcolortd + "<input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai_" + i + "\" name=\"nm_syousai_" + i + "\" value=" + strdetail[0] + "></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS_" + i + "\" name=\"nm_kihonS_" + i + "\" value=" + iwork_start[0] + "></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE_" + i + "\" name=\"nm_kihonE_" + i + "\" value=" + iwork_end[0] + "></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS_" + i + "\" name=\"nm_jissekiS_" + i + "\"></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE_" + i + "\" name=\"nm_jissekiE_" + i + "\"></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR_" + i + "\" name=\"nm_jiseekiR_" + i + "\"></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_kihonS_" + i + "\" name=\"nm_kihonS_" + i + "\" value=" + iwork_start[0] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_kihonE_" + i + "\" name=\"nm_kihonE_" + i + "\" value=" + iwork_end[0] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_jissekiS_" + i + "\" name=\"nm_jissekiS_" + i + "\"></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_jissekiE_" + i + "\" name=\"nm_jissekiE_" + i + "\"></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_jissekiR_" + i + "\" name=\"nm_jiseekiR_" + i + "\"></td>");
 				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou_" + i + "\" name=\"nm_zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\" value=" + izan_adj[0] + "></td>");
                     out.println("</tr>");
                 }else{  
 				    out.println("<td class=\"furikaebi_column\"><input type=\"text\" class=\"input_text1\" id=\"id_furikae_" + i + "\" name=\"nm_furikae_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\" maxlength=\"5\"></td>");
 				    out.println( strcolortd + "<input type=\"text\" class=\"input_text2\" maxlength=\"20\" id=\"id_syousai_" + i + "\" name=\"nm_syousai_" + i + "\" value=" + strdetail[i-1] + "></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonS_" + i + "\" name=\"nm_kihonS_" + i + "\" value=" + iwork_start[i-1] + "></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_kihonE_" + i + "\" name=\"nm_kihonE_" + i + "\" value=" + iwork_end[i-1] + "></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiS_" + i + "\" name=\"nm_jissekiS_" + i + "\" value=" + iact_start[i-1] + " ></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiE_" + i + "\" name=\"nm_jissekiE_" + i + "\" value=" + iact_end[i-1] + "></td>");
-				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"5\" id=\"id_jissekiR_" + i + "\" name=\"nm_jiseekiR_" + i + "\" value=" + irest_hours[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_kihonS_" + i + "\" name=\"nm_kihonS_" + i + "\" value=" + iwork_start[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_kihonE_" + i + "\" name=\"nm_kihonE_" + i + "\" value=" + iwork_end[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_jissekiS_" + i + "\" name=\"nm_jissekiS_" + i + "\" value=" + iact_start[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_jissekiE_" + i + "\" name=\"nm_jissekiE_" + i + "\" value=" + iact_end[i-1] + "></td>");
+				    out.println( strcolortd + "<input type=\"text\" class=\"input_text1\" maxlength=\"4\" id=\"id_jissekiR_" + i + "\" name=\"nm_jiseekiR_" + i + "\" value=" + irest_hours[i-1] + "></td>");
 				    out.println("<td class=\"zangyou_coloumn\"><input type=\"text\" class=\"input_text1\"  maxlength=\"5\" id=\"id_zangyou_" + i + "\" name=\"nm_zangyou_" + i + "\" readonly=\"readonly\" style=\"background-color:#808080;\" value=" + izan_adj[i-1] + "></td>");
                     out.println("</tr>");
                 }

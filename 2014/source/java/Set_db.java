@@ -17,6 +17,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 
 public class Set_db extends HttpServlet{
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	public String str_message;
 	public String true_time;
 
@@ -33,12 +37,10 @@ public class Set_db extends HttpServlet{
 
 		//DB接続情報を設定する
 		String path = "jdbc:mysql://localhost/unserver2014?useUnicode=true&characterEncoding=SJIS";  //接続パス
-		String id = "root";    //ログインID
-		String pw = "";  //ログインパスワード
-		
+
 	    Properties props = new Properties(); 
 	    props.put("user",       "root");                 // 任意 
-	    props.put("password",   "");                  // 任意 
+	    props.put("password",   "");                     // 任意 
 	    props.put("useUnicode", "true");                 // これが必要 
 	    props.put("characterEncoding", "SJIS");          // これが必要 
 
@@ -64,7 +66,7 @@ public class Set_db extends HttpServlet{
 			//conn.setAutoCommit(false);//オートコミットオフ
 
 			//処理
-			if (flg.equals("1")){
+			//if (flg.equals("1")){
 				//当月分の日時取得処理
 				Calendar cal = Calendar.getInstance();
 				int year  = cal.get(Calendar.YEAR);
@@ -105,23 +107,23 @@ public class Set_db extends HttpServlet{
 			                + String.format("%1$02d",Integer.valueOf(req.getParameter("nm_Shift_" + i))) + "','"
 			                + String.format("%1$02d",Integer.valueOf(req.getParameter("nm_Hendou_" + i))) + "','"			                
 			                + String.valueOf(req.getParameter("nm_furikae_" + i)) + "','"
-			                + String.valueOf(GetItem) + "','"
-			                + String.format("%1$04d",Integer.valueOf(req.getParameter("nm_kihonS_" + i))) + "','"
-			                + String.format("%1$04d",Integer.valueOf(req.getParameter("nm_kihonE_" + i))) + "','"
-			                + String.format("%1$04d",Integer.valueOf(req.getParameter("nm_jissekiS_" + i))) + "','"
-			                + String.format("%1$04d",Integer.valueOf(req.getParameter("nm_jissekiE_" + i))) + "','"
-			                + String.format("%1$04d",Integer.valueOf(req.getParameter("nm_jiseekiR_" + i))) + "','"
-			                + String.format("%1$04d",Integer.valueOf(req.getParameter("nm_zangyou_" + i))) + "'),";
+			                + String.valueOf(GetItem) + "',"
+			                + check(req.getParameter("nm_kihonS_" + i)) + ","
+			                + check(req.getParameter("nm_kihonE_" + i)) + ","
+			                + check(req.getParameter("nm_jissekiS_" + i)) + ","
+			                + check(req.getParameter("nm_jissekiE_" + i)) + ","
+			                + check(req.getParameter("nm_jiseekiR_" + i)) + ","
+			                + check(req.getParameter("nm_zangyou_" + i)) + "),";
 				
 				}
 						
 				sql_in = sql_in.substring(0, sql_in.length()-1);
 				stmt.execute(sql_in);
 				
-			} else if(flg == "2"){
+			//} else if(flg == "2"){
 				//アップロード
 
-			}
+			//}
 			
 			//conn.commit();//コミット
 
@@ -142,16 +144,13 @@ public class Set_db extends HttpServlet{
 	//入力時間チェック
 	public static String check(String check_time){
 		String str = check_time;
-		String zero = "0";
-		String time = null;
 
-		//桁を求める
-		int len = str.length();
-
-		//三桁の場合は頭0を付ける
-		if(len == 3){
-			time = zero + check_time;
+		//空値の場合は頭0を付ける
+		if(str != ""){
+			str = "'" + String.format("%1$04d",Integer.valueOf(str)) + "'";
+		}else{
+			str = "''";
 		}
-		return time;
+		return str;
 	}
 }
