@@ -117,8 +117,8 @@ public class Set_db extends HttpServlet{
 			                + check(req.getParameter("nm_kihonE_" + i),"3") + ","
 			                + check(req.getParameter("nm_jissekiS_" + i),"3") + ","
 			                + check(req.getParameter("nm_jissekiE_" + i),"3") + ","
-			                + check(req.getParameter("nm_jiseekiR_" + i),"0") + ","
-			                + check(req.getParameter("nm_zangyou_" + i),"0") + "),";
+			                + check(req.getParameter("nm_jiseekiR_" + i),"3") + ","
+			                + check(req.getParameter("nm_zangyou_" + i),"3") + "),";
 				
 			}
 				
