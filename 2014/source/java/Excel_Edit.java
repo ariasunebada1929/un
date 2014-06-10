@@ -54,16 +54,31 @@ public class Excel_Edit {
         Statement stmt = null;
 		stmt = conn.createStatement();
         String strPerSQL = "";
-		strPerSQL = "SELECT YEAR year, MONTH month, DAY day, SUBMIT_REQUEST_1_CD req_1, " + 
-                    "       SUBMIT_REQUEST_2_CD req_2, SUBMIT_REQUEST_3_CD req_3, " +
-                    "       SUBMIT_REQUEST_4_CD req_4, DETAIL detail, " +
-                    "       BASIC_WORK_START work_start, BASIC_WORK_END work_end, " +
-                    "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
-                    "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj, " +
-    	            "       DETAIL detail " +
-                    "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + "00002" + " AND " +   
-                    "       YEAR = " + year + " AND MONTH = " + month ;
-
+		
+		strPerSQL = "SELECT work_trn.YEAR year, work_trn.MONTH month, work_trn.DAY day, " + 
+				    "       req1_mst.SUBMIT_REQUEST_1_NAME req1_nm , " +
+				    "       req2_mst.SUBMIT_REQUEST_2_NAME req2_nm , " +
+				    "       req3_mst.SUBMIT_REQUEST_3_NAME req3_nm , " +
+				    "       req4_mst.SUBMIT_REQUEST_4_NAME req4_nm , " +
+				    "       work_trn.COMP_HOLIDAY comp_hol , " +				    
+				    "       work_trn.DETAIL detail , " +
+				    "       work_trn.BASIC_WORK_START work_start , " +
+				    "       work_trn.BASIC_WORK_END work_end , " +
+				    "       work_trn.ACTUAL_WORK_START act_start , " +
+				    "       work_trn.ACTUAL_WORK_END act_end , " +
+				    "       work_trn.RESTHOURS rest_hours , work_trn.ZANGYO_ADJUST zan_adj " +
+				    "       FROM unserver2014.WORK_TRN work_trn " +
+				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_1_MST req1_mst ON " +
+				    "       work_trn.SUBMIT_REQUEST_1_CD = req1_mst.SUBMIT_REQUEST_1_CD " +
+				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_2_MST req2_mst ON " +
+				    "       work_trn.SUBMIT_REQUEST_2_CD = req2_mst.SUBMIT_REQUEST_2_CD " +
+				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_3_MST req3_mst ON " +
+				    "       work_trn.SUBMIT_REQUEST_3_CD = req3_mst.SUBMIT_REQUEST_3_CD " +
+				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_4_MST req4_mst ON " +
+				    "       work_trn.SUBMIT_REQUEST_4_CD = req4_mst.SUBMIT_REQUEST_4_CD " +
+				    "       WHERE unserver2014.WORK_TRN.STAFF_ID = 00002 " +
+				    "       AND  unserver2014.WORK_TRN.YEAR = " + year + " AND unserver2014.WORK_TRN.MONTH = " + month ;
+		
 		ResultSet Ors = stmt.executeQuery(strPerSQL);
 		
 		// TODO 自動生成されたメソッド・スタブ
@@ -80,40 +95,55 @@ public class Excel_Edit {
  	    	Ors.next();
 		    Row row_day = sheet.getRow(i);
 		    Cell cell_Kyuka = row_day.getCell(2);
-		    Cell cell_KyusyutuFuridai = row_day.getCell(1);
-		    Cell cell_Shift = row_day.getCell(2);
-		    Cell cell_Hendou = row_day.getCell(3);
-		    Cell cell_furikaebi = row_day.getCell(4);
-		    Cell cell_syousai = row_day.getCell(5);
-		    Cell cell_kihonS = row_day.getCell(6);
-		    Cell cell_kihonE = row_day.getCell(7);
-		    Cell cell_jissekiS = row_day.getCell(8);
-		    Cell cell_jiseekiE = row_day.getCell(9);
-		    Cell cell_jissekiR = row_day.getCell(10);
-		    Cell cell_zangyou = row_day.getCell(11);
+		    Cell cell_KyusyutuFuridai = row_day.getCell(3);
+		    Cell cell_Shift = row_day.getCell(4);
+		    Cell cell_Hendou = row_day.getCell(5);
+		    Cell cell_furikaebi = row_day.getCell(6);
+		    Cell cell_syousai = row_day.getCell(7);
+		    Cell cell_kihonS = row_day.getCell(13);
+		    Cell cell_kihonE = row_day.getCell(14);
+		    Cell cell_jissekiS = row_day.getCell(15);
+		    Cell cell_jiseekiE = row_day.getCell(16);
+		    Cell cell_jissekiR = row_day.getCell(17);
+		    Cell cell_zangyou = row_day.getCell(18);
 		    
-		    if (Ors.getString("req_1") == "00"){
-		    	cell_Kyuka.setCellValue(2);
-		    }
-		    	    
-		    cell_KyusyutuFuridai.setCellValue(1);
-		    cell_Shift.setCellValue(2);
-		    cell_Hendou.setCellValue(3);
-		    cell_furikaebi.setCellValue(4);
-		    cell_syousai.setCellValue(5);
-		    cell_kihonS.setCellValue(6);
-		    cell_kihonE.setCellValue(7);
-		    cell_jissekiS.setCellValue(8);
-		    cell_jiseekiE.setCellValue(9);
-		    cell_jissekiR.setCellValue(10);
-		    cell_zangyou.setCellValue(11);
+		    cell_Kyuka.setCellValue(Ors.getString("req1_nm"));
+		    cell_KyusyutuFuridai.setCellValue(Ors.getString("req2_nm"));
+		    cell_Shift.setCellValue(Ors.getString("req3_nm"));
+		    cell_Hendou.setCellValue(Ors.getString("req4_nm"));
+		    cell_furikaebi.setCellValue(Ors.getString("comp_hol"));
+		    cell_syousai.setCellValue(Ors.getString("detail"));
+		    cell_kihonS.setCellValue(ConvertTime(Ors.getString("work_start")));
+		    cell_kihonE.setCellValue(ConvertTime(Ors.getString("work_end")));
+		    cell_jissekiS.setCellValue(ConvertTime(Ors.getString("act_start")));
+		    cell_jiseekiE.setCellValue(ConvertTime(Ors.getString("act_end")));
+		    cell_jissekiR.setCellValue(ConvertTime(Ors.getString("rest_hours")));
+		    cell_zangyou.setCellValue(Ors.getString("zan_adj"));
 		}
 	
  	   FileOutputStream out = null;
  	    
-	   out = new FileOutputStream("C:\\work\\sample1234.xlsx");
+	   out = new FileOutputStream("C:\\work\\sample_中村 亘.xlsx");
 	   wb.write(out);
 
 	}
-	
+
+	//時刻型フォーマット変換
+	public static String ConvertTime(String convert_time){
+		String str = convert_time;
+		String strMinute = "";
+		String strhour = "";
+		//空値の場合は頭0を付ける
+		if(!str.equals("")){
+			//最終文字の2文字手前から最終文字まで読み込む
+			strMinute = convert_time.substring(convert_time.length()-2,convert_time.length());
+			//1文字目から最終文字の2文字前まで読み込む
+			strhour = convert_time.substring(0,convert_time.length()-2);
+			str = strhour + ":" + strMinute;
+		}else{
+			str = "";
+		}
+		return str;
+	}
+
 }
