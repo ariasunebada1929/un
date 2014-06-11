@@ -1,0 +1,1 @@
+INSERT INTO PARSONAL_TRN VALUES ('00002','03','01','Next就業(菊名)','0900','1730','','')
