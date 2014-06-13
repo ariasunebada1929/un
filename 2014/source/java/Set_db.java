@@ -39,7 +39,7 @@ public class Set_db extends HttpServlet{
 		String serverName = "unserver2014";
 
 		//DB接続情報を設定する
-		String path = "jdbc:mysql://localhost/unserver2014?useUnicode=true&characterEncoding=SJIS";  //接続パス
+		String path = "jdbc:mysql://localhost/" + serverName + "?useUnicode=true&characterEncoding=SJIS";  //接続パス
 
 	    Properties props = new Properties(); 
 	    props.put("user",       "root");                 // 任意 

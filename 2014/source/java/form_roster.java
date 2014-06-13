@@ -137,7 +137,7 @@ throws IOException, ServletException
         if (cnt == 0){
         	/*初回登録の場合*/
         	/*個人設定トランの呼出し*/   	
-        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST zan_adj FROM " + serverName +".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
+        	strPerSQL = "SELECT BASIC_WORK_START work_start, BASIC_WORK_END work_end, DETAIL detail, ZANGYO_ADJUST zan_adj FROM " + serverName + ".PARSONAL_TRN WHERE STAFF_ID = " + strUserid;
         	ResultSet Ors = stmt.executeQuery(strPerSQL);
         	/*個人設定トラン情報より枠を追加*/
     		int i = 0;
@@ -156,7 +156,7 @@ throws IOException, ServletException
                         "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
                         "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj, " +
         	            "       DETAIL detail " +
-                        "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
+                        "       FROM " + serverName + ".WORK_TRN WHERE STAFF_ID = " + strUserid;    
     	    ResultSet Ors = stmt.executeQuery(strPerSQL);
         	
 		    int i = 0;
@@ -201,7 +201,7 @@ throws IOException, ServletException
     			i = i + 1;
 		    }
 			
-			String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
+			String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM " + serverName + ".SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
     	    rs = stmt.executeQuery(strSeq1);    
 			while(rs.next()){
 				rs.getString("req_value");
@@ -241,7 +241,7 @@ throws ServletException, IOException
 {
 	response.setContentType("text/html; charset=Shift_JIS");
 	String MyAction = req.getParameter("MySubmit"); 
-
+	
 	 // 処理の実行 
 	if (MyAction.equals("Toroku")){
 		req.setCharacterEncoding("Shift_JIS");

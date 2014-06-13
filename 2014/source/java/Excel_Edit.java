@@ -101,11 +101,11 @@ public class Excel_Edit {
 	    Cell cell_User_id = row_User_id.getCell(27); 
 	    cell_User_id.setCellValue(strUserid);
 
-	    Row row_User_nm = sheet.getRow(2);
+	    Row row_User_nm = sheet.getRow(3);
 	    Cell cell_User_nm = row_User_nm.getCell(27); 
 	    cell_User_nm.setCellValue(strUserName);
 
-	    Row row_User = sheet.getRow(3);
+	    Row row_User = sheet.getRow(4);
 	    Cell cell_User_secnm = row_User.getCell(27); 
 	    cell_User_secnm.setCellValue(strUserSec);
 

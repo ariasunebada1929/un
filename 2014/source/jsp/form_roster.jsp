@@ -111,10 +111,20 @@ public void jspInit() {
                          " WHERE par_trn.STAFF_ID = " + strUserid;
 
             Perrs = stmt.executeQuery(strUserSQL);
+            boolean bRecord = false;
+            String strUsername = "";
+            String strSectionname = "";
+
             //ƒŒƒR[ƒh”‚Ìæ“¾
-            Perrs.next();
-            String strUsername = Perrs.getString("fst_nm") + Perrs.getString("lst_nm");
-    	  	String strSectionname = Perrs.getString("sec_nm");
+            while(Perrs.next()){
+                strUsername = Perrs.getString("fst_nm") + Perrs.getString("lst_nm");
+    	      	strSectionname = Perrs.getString("sec_nm");
+    	      	bRecord = true;
+            }
+
+            if (bRecord == false){
+                session.removeAttribute("Pesonal_ID");
+            }
   
           	out.println("<input type=\"hidden\" name=\"hdn_strid\" value=" + strUserid + " />");
           	out.println("<input type=\"hidden\" name=\"hdn_strsecnm\" value=\"" + strSectionname + "\" />");
@@ -164,6 +174,9 @@ public void jspInit() {
 	<%
 
 	    	/*ª‚Ìˆ—‚Ì”h¶*/
+            if (bRecord == false){
+                System.exit(0);
+            }
 
 	    	/*“–Œ•ª‚Ì“úæ“¾ˆ—*/
         	Calendar cal = Calendar.getInstance();                
@@ -179,8 +192,7 @@ public void jspInit() {
             String strMonth = sdf.format(cal.getTime());
             String[] strweek_name = {"“ú", "Œ", "‰Î", "…", 
                                   "–Ø", "‹à", "“y"};
-            
-                
+                                      
             /*‰‰ñ“o˜^—L–³‚Ì”»’è*/
             String strInitsql = "SELECT COUNT(*) cnt FROM " + serverName + ".WORK_TRN " + 
         	    	"WHERE STAFF_ID = " + strUserid + 
