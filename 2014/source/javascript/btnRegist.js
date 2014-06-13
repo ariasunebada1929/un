@@ -61,12 +61,14 @@ function btnRegist_Click(){
 	
 	
 	//エラーメッセージを表示
-	if(strMessage ==""){
+	if(strMessage == ""){
 		alert("勤怠情報を登録しました");
 		return true;
 	}else{
 		alert(strMessage);
 		return false;
 	}
+	
+	return true;
 	
 }
