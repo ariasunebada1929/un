@@ -35,11 +35,13 @@ public void jspInit() {
 <div id="container">
 <div id="header">
 <form method="post" name="form_roster" path="/UN_test">
+<input type="hidden" name="hdn_sttafId" />
 <ul>
-	<li><button id="btnView"   OnClick="return func('Eturan');">勤務表閲覧</button></li>
-	<li><button ID="btnRegist"   OnClick="return　func('Toroku');">勤怠情報登録</button></li>
+	<li><button id="btnView" OnClick="return func('Eturan');">勤務表閲覧</button></li>
+	<li><button id="btnRegist" OnClick="return　func('Toroku');">勤怠情報登録</button></li>
 	<li><button id="btnOutput" OnClick="return　func('ExcelOut');">勤務表出力</button></li>
-	<li id="login_panel">ログイン者</li>
+	<li><input id="txtPersonal" type="text" maxlength=5></input></li>
+	<li><button id="btnPersonal" OnClick="return　func('Personal');">個人選択</button></li>
 </ul>
 <hr>
 </div>
@@ -65,19 +67,62 @@ public void jspInit() {
 		</td>
 	</tr>
 </table>
-<table border="0" cellspacing="0" id="table_personalinfo">
-	<tr>
-		<td class="column_name2">社員番号</td>
-		<td>00208</td>
-	</tr>
-	<tr>
-		<td class="column_name1">所属</td>
-		<td>BI課</td>
-	</tr>
-	<tr>
-		<td class="column_name1">氏名</td>
-		<td>池田忠繁</td>
-	</tr>
+	<%
+
+        // データベースへのアクセス開始
+        Connection con = null;
+        Statement stmt = null;
+        ResultSet rs = null;
+        ResultSet Countrs = null; // 初回登録判定用
+        ResultSet Perrs = null;   // 個人設定呼び出し用
+        ResultSet Ors = null;     // 勤怠データ呼び出し用
+        String strUserSQL = ""; 
+  
+        //固定タグの設定
+        
+        try {
+
+            String serverName = "unserver2014";
+            String strUserid = "00002";     
+
+            // データベースに接続するConnectionオブジェクトの取得
+            con = DriverManager.getConnection(
+                "jdbc:mysql://localhost/" + serverName,
+                "root", "");
+            // データベース操作を行うためのStatementオブジェクトの取得
+            stmt = con.createStatement();
+
+            /*個人データの取得*/
+            strUserSQL = "SELECT par_trn.STAFF_ID, per_mst.FIRST_NAME fst_nm, per_mst.LAST_NAME lst_nm, sec_mst.SECTION_NAME sec_nm, uni_mst.UNIT_NAME uni_nm " + 
+                         " FROM " + serverName + ".PARSONAL_TRN par_trn " + 
+                         "LEFT JOIN " + serverName + ".PERSONAL_MST per_mst ON " +
+                         "par_trn.STAFF_ID = per_mst.STAFF_ID " +
+                         "LEFT JOIN " + serverName + ".SECTION_MST sec_mst ON " +
+                         "par_trn.SECTION_CD = sec_mst.SECTION_CD " +
+                         "LEFT JOIN " + serverName + ".UNIT_MST uni_mst ON " +
+                         "par_trn.UNIT_CD = uni_mst.UNIT_CD " +
+                         " WHERE par_trn.STAFF_ID = " + strUserid ;
+
+            Perrs = stmt.executeQuery(strUserSQL);
+            //レコード数の取得
+            Perrs.next();
+            String strUsername = Perrs.getString("fst_nm") + Perrs.getString("lst_nm");
+    	  	String strSectionname = Perrs.getString("sec_nm");
+    	  	    	
+      		out.println("<table border=\"0\" cellspacing=\"0\" id=\"table_personalinfo\">");
+      		out.println("<tr>");
+      		out.println("<td class=\"column_name2\">社員番号</td>");
+      		out.println("<td>" + strUserid + "</td>");
+      		out.println("</tr>");
+      		out.println("<tr>");
+      		out.println("<td class=\"column_name1\">所属</td>");
+      		out.println("<td>" + strSectionname + "</td>");
+      		out.println("</tr>");
+      		out.println("<tr>");
+      		out.println("<td class=\"column_name1\">氏名</td>");
+      		out.println("<td>" + strUsername + "</td>");
+      		out.println("</tr>");
+	%>
 </table>
 </div>
 <!---勤務表各種項目名 -->
@@ -106,21 +151,9 @@ public void jspInit() {
 	</tr>
 	<!---入力フォーム -->
 	<%
-        // データベースへのアクセス開始
-        Connection con = null;
-        Statement stmt = null;
-        ResultSet rs = null;
-        ResultSet Perrs = null;
-        String strUserid = "00002";
-        
-        try {
-            // データベースに接続するConnectionオブジェクトの取得
-            con = DriverManager.getConnection(
-                "jdbc:mysql://localhost/unserver2014",
-                "root", "");
-            // データベース操作を行うためのStatementオブジェクトの取得
-            stmt = con.createStatement();
-            String serverName = "unserver2014";
+
+	    	/*↑の処理の派生*/
+
 	    	/*当月分の日時取得処理*/
         	Calendar cal = Calendar.getInstance();                
         	int iMaxday = cal.getActualMaximum(cal.DATE);
@@ -138,18 +171,17 @@ public void jspInit() {
             
                 
             /*初回登録有無の判定*/
-            String strInitsql = "SELECT COUNT(*) cnt FROM unserver2014.WORK_TRN " + 
+            String strInitsql = "SELECT COUNT(*) cnt FROM " + serverName + ".WORK_TRN " + 
         	    	"WHERE STAFF_ID = " + strUserid + 
         	    	" AND YEAR = " + strYear + 
         	    	" AND MONTH = "  + strMonth;
     
-            Perrs = stmt.executeQuery(strInitsql);
+            Countrs = stmt.executeQuery(strInitsql);
             
             //レコード数の取得
-            Perrs.next();
-            int cnt = Perrs.getInt("cnt");
+            Countrs.next();
+            int cnt = Countrs.getInt("cnt");
             String strPerSQL = "";  
-            ResultSet Ors = null;
         	String[] strreq_1 = new String[iMaxday];
         	String[] strreq_2 = new String[iMaxday];
         	String[] strreq_3 = new String[iMaxday];
@@ -186,7 +218,7 @@ public void jspInit() {
             	            "       ACTUAL_WORK_START act_start, ACTUAL_WORK_END act_end, " +
             	            "       RESTHOURS rest_hours, ZANGYO_ADJUST zan_adj, " +
             	            "       DETAIL detail " +
-            	            "       FROM unserver2014.WORK_TRN WHERE STAFF_ID = " + strUserid;    
+            	            "       FROM " + serverName + ".WORK_TRN WHERE STAFF_ID = " + strUserid;    
     	    	Ors = stmt.executeQuery(strPerSQL);
         		/*勤怠データより枠を追加*/
         		i = 0;
@@ -262,9 +294,9 @@ public void jspInit() {
 
 				/*休暇列*/
 				out.println("<select id=\"id_Kyuka_" + i + "\" name=\"nm_Kyuka_" + i + "\" size=\"1\" class=\"input_select\" onchange=\"mailCheck1();\">");						
-				String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM unserver2014.SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
+				String strSeq1 = "SELECT SUBMIT_REQUEST_1_CD req_value, SUBMIT_REQUEST_1_NAME req_name FROM " + serverName + ".SUBMIT_REQUEST_1_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq1);
-				out.println("<option value=" + "0" + "></option>");	
+				out.println("<option value=" + "00" + "></option>");	
 				while(rs.next()){
 					if (cnt > 0 && rs.getString("req_value").equals(strreq_1[i-1])){
 						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
@@ -278,9 +310,9 @@ public void jspInit() {
 				/*休出・振代休*/
 				out.println(strcolortd);
 				out.println("<select id=\"id_KyusyutuFuridai_" + i + "\" name=\"nm_KyusyutuFuridai_" + i + "\" size=\"1\" class=\"input_select\" onchange=\"mailCheck2();\">");
-				String strSeq2 = "SELECT SUBMIT_REQUEST_2_CD req_value, SUBMIT_REQUEST_2_NAME req_name FROM unserver2014.SUBMIT_REQUEST_2_MST WHERE VALID_FLAG = \'1\'";
+				String strSeq2 = "SELECT SUBMIT_REQUEST_2_CD req_value, SUBMIT_REQUEST_2_NAME req_name FROM " + serverName + ".SUBMIT_REQUEST_2_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq2);
-        	    out.println("<option value=" + "0" + "></option>");
+        	    out.println("<option value=" + "00" + "></option>");
 				while(rs.next()){
 					if (cnt > 0 && rs.getString("req_value").equals(strreq_2[i-1])){
 						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
@@ -294,9 +326,9 @@ public void jspInit() {
 				/*通院・電遅*/
 				out.println(strcolortd);	
 				out.println("<select id=\"id_Shift_" + i + "\" name=\"nm_Shift_" + i + "\" size=\"1\" class=\"input_select\">");
-				String strSeq3 = "SELECT SUBMIT_REQUEST_3_CD req_value, SUBMIT_REQUEST_3_NAME req_name FROM unserver2014.SUBMIT_REQUEST_3_MST WHERE VALID_FLAG = \'1\'";
+				String strSeq3 = "SELECT SUBMIT_REQUEST_3_CD req_value, SUBMIT_REQUEST_3_NAME req_name FROM " + serverName + ".SUBMIT_REQUEST_3_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq3);
-        	    out.println("<option value=" + "0" + "></option>");	
+        	    out.println("<option value=" + "00" + "></option>");	
 				while(rs.next()){
 					if (cnt > 0 && rs.getString("req_value").equals(strreq_3[i-1])){
 						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
@@ -310,9 +342,9 @@ public void jspInit() {
 				/*A・B変*/
 				out.println(strcolortd);
 				out.println("<select id=\"id_Hendou_" + i + "\" name=\"nm_Hendou_" + i + "\" size=\"1\" class=\"input_select\">");
-				String strSeq4 = "SELECT SUBMIT_REQUEST_4_CD req_value, SUBMIT_REQUEST_4_NAME req_name FROM unserver2014.SUBMIT_REQUEST_4_MST WHERE VALID_FLAG = \'1\'";
+				String strSeq4 = "SELECT SUBMIT_REQUEST_4_CD req_value, SUBMIT_REQUEST_4_NAME req_name FROM " + serverName + ".SUBMIT_REQUEST_4_MST WHERE VALID_FLAG = \'1\'";
         	    rs = stmt.executeQuery(strSeq4);
-        	    out.println("<option value=" + "0" + "></option>");
+        	    out.println("<option value=" + "00" + "></option>");
 				while(rs.next()){
 					if (cnt > 0 && rs.getString("req_value").equals(strreq_4[i-1])){
 						out.println("<option selected=\"selected\" value=" + rs.getString("req_value") + ">" + rs.getString("req_name") + "</option>");
@@ -372,6 +404,15 @@ public void jspInit() {
         return btnRegist_Click();
     }else if(MyCommand == "ExcelOut"){
 		alert("Excelを出力します。\n出力をする前にデータの登録を行って下さい。");
+		return true;
+    }else if(MyCommand == "Personal"){
+        var staff_id = document.getElementById("txtPersonal").value;
+ 		if (!staff_id.match(/[0-9][0-9][0-9][0-9][0-9]+$/)) {
+				alert("数値5桁のIDを入力してください。");
+				return false;
+		}
+		document.getElementById("hdn_sttafId").value = staff_id;
+		return true;
     }
  } 
  </script> 
