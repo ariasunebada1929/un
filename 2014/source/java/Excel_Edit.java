@@ -10,6 +10,9 @@ import java.sql.Statement;
 import java.util.Calendar;
 import java.util.Properties;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.Workbook;
 import org.apache.poi.ss.usermodel.Sheet;
@@ -19,7 +22,7 @@ import org.apache.poi.ss.usermodel.WorkbookFactory;
 
 public class Excel_Edit {
 
-	public void Excel_Edit() throws InvalidFormatException, IOException, SQLException, ClassNotFoundException {
+	public void Excel_Edit(HttpServletRequest req) throws InvalidFormatException, IOException, SQLException, ClassNotFoundException {
 		
 		//当月分の日時取得処理
 		Calendar cal = Calendar.getInstance();
@@ -29,10 +32,14 @@ public class Excel_Edit {
 		cal.set(Calendar.YEAR, year);
 		cal.set(Calendar.MONTH, month );                
 		int lastDayOfMonth = cal.getActualMaximum(Calendar.DATE);
+		String serverName = "unserver2014";
 		
 		//DB接続情報を設定する
-		String path = "jdbc:mysql://localhost/unserver2014?useUnicode=true&characterEncoding=SJIS";  //接続パス
-
+		String path = "jdbc:mysql://localhost/" + serverName + "?useUnicode=true&characterEncoding=SJIS";  //接続パス
+		String strUserid = String.valueOf(req.getParameter("hdn_strid"));
+		String strUserName = new String (req.getParameter("hdn_strnm").getBytes("ISO-8859-1"));
+		String strUserSec = new String (req.getParameter("hdn_strsecnm").getBytes("ISO-8859-1"));
+		
 	    Properties props = new Properties(); 
 	    props.put("user",       "root");                 // 任意 
 	    props.put("password",   "");                     // 任意 
@@ -67,17 +74,17 @@ public class Excel_Edit {
 				    "       work_trn.ACTUAL_WORK_START act_start , " +
 				    "       work_trn.ACTUAL_WORK_END act_end , " +
 				    "       work_trn.RESTHOURS rest_hours , work_trn.ZANGYO_ADJUST zan_adj " +
-				    "       FROM unserver2014.WORK_TRN work_trn " +
-				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_1_MST req1_mst ON " +
+				    "       FROM " + serverName + ".WORK_TRN work_trn " +
+				    "       LEFT JOIN " + serverName + ".SUBMIT_REQUEST_1_MST req1_mst ON " +
 				    "       work_trn.SUBMIT_REQUEST_1_CD = req1_mst.SUBMIT_REQUEST_1_CD " +
-				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_2_MST req2_mst ON " +
+				    "       LEFT JOIN " + serverName + ".SUBMIT_REQUEST_2_MST req2_mst ON " +
 				    "       work_trn.SUBMIT_REQUEST_2_CD = req2_mst.SUBMIT_REQUEST_2_CD " +
-				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_3_MST req3_mst ON " +
+				    "       LEFT JOIN " + serverName + ".SUBMIT_REQUEST_3_MST req3_mst ON " +
 				    "       work_trn.SUBMIT_REQUEST_3_CD = req3_mst.SUBMIT_REQUEST_3_CD " +
-				    "       LEFT JOIN unserver2014.SUBMIT_REQUEST_4_MST req4_mst ON " +
+				    "       LEFT JOIN " + serverName + ".SUBMIT_REQUEST_4_MST req4_mst ON " +
 				    "       work_trn.SUBMIT_REQUEST_4_CD = req4_mst.SUBMIT_REQUEST_4_CD " +
-				    "       WHERE unserver2014.WORK_TRN.STAFF_ID = 00002 " +
-				    "       AND  unserver2014.WORK_TRN.YEAR = " + year + " AND unserver2014.WORK_TRN.MONTH = " + month ;
+				    "       WHERE " + serverName + ".WORK_TRN.STAFF_ID = " + strUserid +
+				    "       AND  " + serverName + ".WORK_TRN.YEAR = " + year + " AND " + serverName + ".WORK_TRN.MONTH = " + month ;
 		
 		ResultSet Ors = stmt.executeQuery(strPerSQL);
 		
@@ -86,10 +93,22 @@ public class Excel_Edit {
 	    //Sheet sheet = wb.createSheet();
 	    // FileOutputStream out = null;
 	    
-	    InputStream in = new FileInputStream("C:\\work\\sample.xlsx");
+	    InputStream in = new FileInputStream("/work/sample.xlsx");
 	    Workbook wb = WorkbookFactory.create(in);
 	    Sheet sheet = wb.getSheetAt(0);
 	    
+	    Row row_User_id = sheet.getRow(1);
+	    Cell cell_User_id = row_User_id.getCell(27); 
+	    cell_User_id.setCellValue(strUserid);
+
+	    Row row_User_nm = sheet.getRow(2);
+	    Cell cell_User_nm = row_User_nm.getCell(27); 
+	    cell_User_nm.setCellValue(strUserName);
+
+	    Row row_User = sheet.getRow(3);
+	    Cell cell_User_secnm = row_User.getCell(27); 
+	    cell_User_secnm.setCellValue(strUserSec);
+
  	    for(int i=7; i <= lastDayOfMonth + 5; i++){
 			
  	    	Ors.next();
@@ -123,8 +142,13 @@ public class Excel_Edit {
 	
  	   FileOutputStream out = null;
  	    
-	   out = new FileOutputStream("C:\\work\\sample_中村 亘.xlsx");
+//	   out = new FileOutputStream("C:\\work\\sample_中村 亘.xlsx");
+	   out = new FileOutputStream("/work/ユーネット勤務表_" + strUserName + "（6月分）.xlsx");
 	   wb.write(out);
+	   
+	   //Excelに保存したIDをセッションに保存
+	   HttpSession prsonalSession = req.getSession();
+	   prsonalSession.setAttribute("Pesonal_ID", strUserid);	
 
 	}
 

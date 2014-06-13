@@ -264,7 +264,7 @@ throws ServletException, IOException
 		Excel_Edit myObj = new Excel_Edit();	
 		//ExcelèoóÕ
 		try {
-			myObj.Excel_Edit();
+			myObj.Excel_Edit(req);
 		    this.getServletContext().getRequestDispatcher
             ("/form_roster.jsp").include(req, response);
 		} catch (InvalidFormatException e) {

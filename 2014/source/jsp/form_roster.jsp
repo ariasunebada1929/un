@@ -115,11 +115,15 @@ public void jspInit() {
             Perrs.next();
             String strUsername = Perrs.getString("fst_nm") + Perrs.getString("lst_nm");
     	  	String strSectionname = Perrs.getString("sec_nm");
-    	  	    	
+  
+          	out.println("<input type=\"hidden\" name=\"hdn_strid\" value=" + strUserid + " />");
+          	out.println("<input type=\"hidden\" name=\"hdn_strsecnm\" value=\"" + strSectionname + "\" />");
+          	out.println("<input type=\"hidden\" name=\"hdn_strnm\" value=" + strUsername + " />");
+          	    	  	    	
       		out.println("<table border=\"0\" cellspacing=\"0\" id=\"table_personalinfo\">");
       		out.println("<tr>");
       		out.println("<td class=\"column_name2\">社員番号</td>");
-      		out.println("<td>" + strUserid + "</td>");
+      		out.println("<td id=\"lblPersonal_id\" name=\"lblPersonal_nm\">" + strUserid + "</td>");
       		out.println("</tr>");
       		out.println("<tr>");
       		out.println("<td class=\"column_name1\">所属</td>");
@@ -413,7 +417,7 @@ public void jspInit() {
 		alert("Excelを出力します。\n出力をする前にデータの登録を行って下さい。");
 		return true;
     }else if(MyCommand == "Personal"){
-        var staff_id = document.getElementById("txtPersonal").value;
+        var staff_id = document.getElementById("txtPersonal_id").value;
  		if (!staff_id.match(/[0-9][0-9][0-9][0-9][0-9]+$/)) {
 				alert("数値5桁のIDを入力してください。");
 				return false;

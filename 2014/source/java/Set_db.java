@@ -15,6 +15,7 @@ import java.util.Properties;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 public class Set_db extends HttpServlet{
 	/**
@@ -35,6 +36,7 @@ public class Set_db extends HttpServlet{
 		boolean auto = false;
 		PreparedStatement ps = null;
 		ResultSet rs = null;
+		String serverName = "unserver2014";
 
 		//DB接続情報を設定する
 		String path = "jdbc:mysql://localhost/unserver2014?useUnicode=true&characterEncoding=SJIS";  //接続パス
@@ -55,7 +57,7 @@ public class Set_db extends HttpServlet{
 				+ "VALUES ('00001','2014','05','06',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ',' ')";
 		 */
 		//編集アップロード命令
-		String sql_up = "SELECT * FROM unserver2014.`parsonal_auth_trn`";
+		String sql_up = "SELECT * FROM " + serverName + ".`parsonal_auth_trn`";
 
 		try{
 			//JDBCドライバをロードする
@@ -66,8 +68,8 @@ public class Set_db extends HttpServlet{
 			Statement stmt = conn.createStatement();
 			//conn.setAutoCommit(false);//オートコミットオフ
 			
-			 auto = conn.getAutoCommit(); 
-			 conn.setAutoCommit(false);
+			auto = conn.getAutoCommit(); 
+			conn.setAutoCommit(false);
 
 			//処理
 			//if (flg.equals("1")){
@@ -79,9 +81,10 @@ public class Set_db extends HttpServlet{
 			cal.set(Calendar.YEAR, year);
 			cal.set(Calendar.MONTH, month );                
 			int lastDayOfMonth = cal.getActualMaximum(Calendar.DATE);
+			String strUserid = String.valueOf(req.getParameter("hdn_strid"));
 				
 			//削除文
-			String sql_del = "DELETE FROM unserver2014.`work_trn` WHERE STAFF_ID = '00002'"
+			String sql_del = "DELETE FROM " + serverName + ".`work_trn` WHERE STAFF_ID = " + strUserid 
                         + " AND YEAR   = '2014'"
                         + "AND MONTH   = '06'";
 	
@@ -91,7 +94,7 @@ public class Set_db extends HttpServlet{
 			//for(int i=1; i<=lastDayOfMonth; i++){
 			String sql_in = "";
 				
-			sql_in =  "INSERT INTO unserver2014.WORK_TRN "  
+			sql_in =  "INSERT INTO " + serverName + ".WORK_TRN "  
 						+ "(STAFF_ID,YEAR,MONTH,DAY,"
 			            + "SUBMIT_REQUEST_1_CD,SUBMIT_REQUEST_2_CD,"
 			            + "SUBMIT_REQUEST_3_CD,SUBMIT_REQUEST_4_CD,"
@@ -102,8 +105,8 @@ public class Set_db extends HttpServlet{
 					
 				String GetItem = new String (req.getParameter("nm_syousai_" + i).getBytes("ISO-8859-1"));
 					
-				sql_in = sql_in + "(" 
-				            + "'00002','"
+				sql_in = sql_in + "('" 
+				            + strUserid + "','"
 				            + year + "','" 
 				            + String.format("%1$02d", month) + "','" 
 				            + String.format("%1$02d", i) + "','"
@@ -118,8 +121,7 @@ public class Set_db extends HttpServlet{
 			                + check(req.getParameter("nm_jissekiS_" + i),"3") + ","
 			                + check(req.getParameter("nm_jissekiE_" + i),"3") + ","
 			                + check(req.getParameter("nm_jiseekiR_" + i),"3") + ","
-			                + check(req.getParameter("nm_zangyou_" + i),"3") + "),";
-				
+			                + check(req.getParameter("nm_zangyou_" + i),"3") + "),";	
 			}
 				
 			sql_in = sql_in.substring(0, sql_in.length()-1);
@@ -127,12 +129,10 @@ public class Set_db extends HttpServlet{
 				 
 			stmt.close(); //コミットもしくはロールバックを実行する 
 			commit(conn, auto, true);
-			//} else if(flg == "2"){
-				//アップロード
 
-			//}
-			
-			//conn.commit();//コミット
+			//登録したIDをセッションに格納
+			HttpSession prsonalSession = req.getSession();
+			prsonalSession.setAttribute("Pesonal_ID", strUserid);	
 
 		}catch(Exception ex){
 			//例外発生時の処理
