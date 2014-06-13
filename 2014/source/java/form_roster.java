@@ -35,12 +35,8 @@ public void doGet(HttpServletRequest request, HttpServletResponse response)
 throws IOException, ServletException
 {
 	response.setContentType("text/html; charset=Shift_JIS");
-	String strUserid = "00002";	
+	String strUserid = "99999";	
 	int iRecordCount = 0;
-	//HttpSessionインタフェースのオブジェクトを取得
-    HttpSession session = request.getSession();
-    //idをsessionスコープで保存
-    session.setAttribute("userid", strUserid);
 	
     try {
 		Class.forName("com.mysql.jdbc.Driver");
@@ -58,11 +54,46 @@ throws IOException, ServletException
 
     try{
     	
+    	HttpSession hs1 = request.getSession();
+        if (hs1.isNew()) {
+            strUserid = "99999";
+        }else{
+            strUserid = String.valueOf(hs1.getAttribute("Pesonal_ID"));
+        }
+    	
     	conn = DriverManager.getConnection(url, user, password);
 
         // データベースに対する処理
     	msg = "データベース接続に成功しました";
-    
+
+        // データベースに接続するConnectionオブジェクトの取得
+        conn = DriverManager.getConnection(
+            "jdbc:mysql://localhost/" + serverName,
+            "root", "");
+        // データベース操作を行うためのStatementオブジェクトの取得
+        Statement stmt = conn.createStatement();
+
+        /*個人データの取得*/
+        String strUserSQL = "SELECT par_trn.STAFF_ID, per_mst.FIRST_NAME fst_nm, per_mst.LAST_NAME lst_nm, sec_mst.SECTION_NAME sec_nm, uni_mst.UNIT_NAME uni_nm " + 
+                     " FROM " + serverName + ".PARSONAL_TRN par_trn " + 
+                     "LEFT JOIN " + serverName + ".PERSONAL_MST per_mst ON " +
+                     "par_trn.STAFF_ID = per_mst.STAFF_ID " +
+                     "LEFT JOIN " + serverName + ".SECTION_MST sec_mst ON " +
+                     "par_trn.SECTION_CD = sec_mst.SECTION_CD " +
+                     "LEFT JOIN " + serverName + ".UNIT_MST uni_mst ON " +
+                     "par_trn.UNIT_CD = uni_mst.UNIT_CD " +
+                     " WHERE par_trn.STAFF_ID = " + "\"" + strUserid + "\"" + ";";
+
+        ResultSet Users = stmt.executeQuery(strUserSQL);
+        
+        String strUsername = "";
+        String strSectionname  = "";
+        //レコード数の取得
+        while(Users.next()){
+            strUsername = Users.getString("fst_nm") + Users.getString("lst_nm");
+    	  	strSectionname = Users.getString("sec_nm");
+        }
+        
 	    /*当月分の日時取得処理*/
         Calendar cal = Calendar.getInstance();        
         SimpleDateFormat sdf = new SimpleDateFormat("yyyyMM");
@@ -73,7 +104,6 @@ throws IOException, ServletException
         
         int Maxday = cal.getActualMaximum(cal.DATE);
     
-        Statement stmt = conn.createStatement();
 
         /*初回登録有無の判定*/
         String strInitsql = "SELECT COUNT(*) cnt FROM " + serverName +".WORK_TRN " + 
@@ -247,6 +277,12 @@ throws ServletException, IOException
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();
 		}		
+	}else if(MyAction.equals("Personal")){
+		//個人選択
+		HttpSession prsonalSession = req.getSession();
+		prsonalSession.setAttribute("Pesonal_ID", String.valueOf(req.getParameter("txtPersonal_nm")));	
+	    this.getServletContext().getRequestDispatcher
+        ("/form_roster.jsp").include(req, response);
 	}
 }
 
