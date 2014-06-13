@@ -40,7 +40,7 @@ public void jspInit() {
 	<li><button id="btnView" OnClick="return func('Eturan');">勤務表閲覧</button></li>
 	<li><button id="btnRegist" OnClick="return　func('Toroku');">勤怠情報登録</button></li>
 	<li><button id="btnOutput" OnClick="return　func('ExcelOut');">勤務表出力</button></li>
-	<li><input id="txtPersonal" type="text" maxlength=5></input></li>
+	<li><input id="txtPersonal_id" name="txtPersonal_nm" type="text" maxlength=5></input></li>
 	<li><button id="btnPersonal" OnClick="return　func('Personal');">個人選択</button></li>
 </ul>
 <hr>
@@ -81,9 +81,16 @@ public void jspInit() {
         //固定タグの設定
         
         try {
-
+        
+            String strUserid = "";
+            if (session.isNew()) {
+                strUserid = "99999";
+            }else{
+                strUserid = String.valueOf(session.getAttribute("Pesonal_ID"));
+            }
+            //idをsessionスコープで保存
+            //session.setAttribute("userid", strUserid);
             String serverName = "unserver2014";
-            String strUserid = "00002";     
 
             // データベースに接続するConnectionオブジェクトの取得
             con = DriverManager.getConnection(
@@ -101,7 +108,7 @@ public void jspInit() {
                          "par_trn.SECTION_CD = sec_mst.SECTION_CD " +
                          "LEFT JOIN " + serverName + ".UNIT_MST uni_mst ON " +
                          "par_trn.UNIT_CD = uni_mst.UNIT_CD " +
-                         " WHERE par_trn.STAFF_ID = " + strUserid ;
+                         " WHERE par_trn.STAFF_ID = " + strUserid;
 
             Perrs = stmt.executeQuery(strUserSQL);
             //レコード数の取得
@@ -411,7 +418,6 @@ public void jspInit() {
 				alert("数値5桁のIDを入力してください。");
 				return false;
 		}
-		document.getElementById("hdn_sttafId").value = staff_id;
 		return true;
     }
  } 
