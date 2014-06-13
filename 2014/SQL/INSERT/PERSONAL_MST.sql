@@ -1,1 +1,1 @@
-INSERT INTO PARSONAL_MST VALUES ('00002','池田','忠繁','ｲｹﾀﾞ','ﾀﾀﾞｼｹﾞ','1','1')
+INSERT INTO PERSONAL_MST VALUES ('00002','池田','忠繁','ｲｹﾀﾞ','ﾀﾀﾞｼｹﾞ','1','1')
