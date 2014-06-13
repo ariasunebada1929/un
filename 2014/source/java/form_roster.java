@@ -235,6 +235,8 @@ throws ServletException, IOException
 		//Excel出力
 		try {
 			myObj.Excel_Edit();
+		    this.getServletContext().getRequestDispatcher
+            ("/form_roster.jsp").include(req, response);
 		} catch (InvalidFormatException e) {
 			// TODO 自動生成された catch ブロック
 			e.printStackTrace();

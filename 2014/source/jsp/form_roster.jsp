@@ -368,8 +368,10 @@ public void jspInit() {
 <script language="JavaScript"> 
  function func(MyCommand){ 
     document.form_roster.MySubmit.value=MyCommand;
-    if (MyCommand = "Toroku"){
+    if (MyCommand == "Toroku"){
         return btnRegist_Click();
+    }else if(MyCommand == "ExcelOut"){
+		alert("Excelを出力します。\n出力をする前にデータの登録を行って下さい。");
     }
  } 
  </script> 
