@@ -4,6 +4,7 @@
 <%@ page import="java.text.SimpleDateFormat"%>
 <%@ page import="javax.swing.JTextField"%>
 <%@ page import="java.util.GregorianCalendar"%>
+
 <%!
 // サーブレットのinitメソッドに相当
 public void jspInit() {
@@ -27,7 +28,9 @@ public void jspInit() {
 	<script type="text/javascript" src="${pageContext.request.contextPath}/zangyoCheck.js" charset="shift_jis"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck1.js" charset="shift_jis"></script>
 	<script type="text/javascript" src="${pageContext.request.contextPath}/mailCheck2.js" charset="shift_jis"></script>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/validate.js" charset="shift_jis"></script>	
+	<script type="text/javascript" src="${pageContext.request.contextPath}/validate.js" charset="shift_jis"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/validate.js" charset="shift_jis"></script>
+	<script type="text/javascript" src="${pageContext.request.contextPath}/func.js" charset="shift_jis"></script>
 </head>
 
 <body>
@@ -44,29 +47,8 @@ public void jspInit() {
 	<li><button id="btnPersonal" OnClick="return　func('Personal');">個人選択</button></li>
 </ul>
 <hr>
-</div>
 <!--勤務表-->
 <div id="header_roster">
-<h1>6月勤務表</h1>
-<table border="0" cellspacing="0" id="table_caption">
-<!--<caption>6月勤務表</caption>-->
-	<tr>
-		<td class="column_name2">残業調整</td>
-		<td>
-		<select name="zangyo" onChange="zangyou_Change()" id="Zangyo_chousei">
-		<option value="No">×</option>
-		<option value="Yes">○</option>
-		</td>
-	</tr>
-	<tr>
-		<td class="column_name2">時短勤務</td>
-		<td>
-		<select name="jitan">
-		<option value="No">×</option>
-		<option value="Yes">○</option>
-		</td>
-	</tr>
-</table>
 	<%
 
         // データベースへのアクセス開始
@@ -81,7 +63,9 @@ public void jspInit() {
         //固定タグの設定
         
         try {
-        
+
+            out.println("<input type=\"hidden\" name=\"MySubmit\" />");
+    
             String strUserid = "";
             if (session.isNew()) {
                 strUserid = "99999";
@@ -123,8 +107,43 @@ public void jspInit() {
             }
 
             if (bRecord == false){
-                session.removeAttribute("Pesonal_ID");
+                out.println("<script language=\"JavaScript\">");
+                out.println("alert(\"該当する個人がいませんでした。\")");
+                out.println("</script>");
+
+                out.println("</form>");                          
+                out.println("</div>");  
+                out.println("</div>");  
+                out.println("</body>");  
+                out.println("</html>");  
+                out.close(); 
+	            return;
             }
+  
+  	%>
+  	
+<h1>6月勤務表</h1>
+<table border="0" cellspacing="0" id="table_caption">
+<!--<caption>6月勤務表</caption>-->
+	<tr>
+		<td class="column_name2">残業調整</td>
+		<td>
+		<select name="zangyo" onChange="zangyou_Change()" id="Zangyo_chousei">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+	<tr>
+		<td class="column_name2">時短勤務</td>
+		<td>
+		<select name="jitan">
+		<option value="No">×</option>
+		<option value="Yes">○</option>
+		</td>
+	</tr>
+</table>
+  	
+  	<%
   
           	out.println("<input type=\"hidden\" name=\"hdn_strid\" value=" + strUserid + " />");
           	out.println("<input type=\"hidden\" name=\"hdn_strsecnm\" value=\"" + strSectionname + "\" />");
@@ -216,7 +235,6 @@ public void jspInit() {
         	String[] iact_end = new String[iMaxday];
         	String[] irest_hours = new String[iMaxday];
         	String[] izan_adj = new String[iMaxday];
-            out.println("<input type=\"hidden\" name=\"MySubmit\" />");
             
             if (cnt == 0){
 	        	/*初回登録の場合*/
@@ -419,22 +437,3 @@ public void jspInit() {
 </body>
 
 </html>
-
-<script language="JavaScript"> 
- function func(MyCommand){ 
-    document.form_roster.MySubmit.value=MyCommand;
-    if (MyCommand == "Toroku"){
-        return btnRegist_Click();
-    }else if(MyCommand == "ExcelOut"){
-		alert("Excelを出力します。\n出力をする前にデータの登録を行って下さい。");
-		return true;
-    }else if(MyCommand == "Personal"){
-        var staff_id = document.getElementById("txtPersonal_id").value;
- 		if (!staff_id.match(/[0-9][0-9][0-9][0-9][0-9]+$/)) {
-				alert("数値5桁のIDを入力してください。");
-				return false;
-		}
-		return true;
-    }
- } 
- </script> 

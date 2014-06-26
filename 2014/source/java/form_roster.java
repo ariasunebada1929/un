@@ -9,14 +9,12 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.swing.JTextField;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 
@@ -58,7 +56,8 @@ throws IOException, ServletException
         if (hs1.isNew()) {
             strUserid = "99999";
         }else{
-            strUserid = String.valueOf(hs1.getAttribute("Pesonal_ID"));
+        	hs1.invalidate();
+            strUserid = "99999";
         }
     	
     	conn = DriverManager.getConnection(url, user, password);
@@ -103,8 +102,7 @@ throws IOException, ServletException
         String strMonth = sdf.format(cal.getTime());
         
         int Maxday = cal.getActualMaximum(cal.DATE);
-    
-
+        
         /*初回登録有無の判定*/
         String strInitsql = "SELECT COUNT(*) cnt FROM " + serverName +".WORK_TRN " + 
         		"WHERE STAFF_ID = " + strUserid + 
@@ -141,11 +139,14 @@ throws IOException, ServletException
         	ResultSet Ors = stmt.executeQuery(strPerSQL);
         	/*個人設定トラン情報より枠を追加*/
     		int i = 0;
-    		Ors.next();
-    		strdetail[i] = Ors.getString("detail");
-    		iwork_start[i] = Ors.getString("work_start");
-    		iwork_end[i] = Ors.getString("work_end");
-    		izan_adj[i] = Ors.getString("zan_adj");
+    		
+            //レコード数の取得
+            while(Ors.next()){
+        		strdetail[i] = Ors.getString("detail");
+        		iwork_start[i] = Ors.getString("work_start");
+        		iwork_end[i] = Ors.getString("work_end");
+        		izan_adj[i] = Ors.getString("zan_adj");
+            }
     		i = 1;	
         } else {
     	    /*勤怠トランのデータ呼び出し*/
