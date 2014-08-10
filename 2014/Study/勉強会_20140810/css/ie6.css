@@ -1,0 +1,9 @@
+@charset "utf-8";
+
+div#sub{
+	display: inline;
+}
+
+div#site-information{
+	zoom: 1;
+}
