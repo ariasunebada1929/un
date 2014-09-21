@@ -1,0 +1,146 @@
+@charset "utf-8";
+
+/*=body
+================================================*/
+body{
+	margin: 0 auto;
+	position: relative;
+	width: 960px;
+}
+
+
+/*=access-navigation
+================================================*/
+ul#access-navigation{
+	height: 0;
+	overflow: hidden;
+	position: absolute;
+}
+
+
+/*=branding
+================================================*/
+div#branding{
+	padding: 20px;
+}
+
+
+/*=global-navigation
+================================================*/
+div#global-navigation ul li{
+	display: inline;
+	float: left;	/* ここでfloatを掛けるのはIE6対策（inlineのみで横並びになる） */
+}
+
+div#global-navigation ul li a{
+	display: block;
+	padding: 15px 20px;
+}
+
+
+/*=future-navigation
+================================================*/
+ul#future-navigation{
+	position: absolute;
+		top: 10px;
+		right: 20px;
+	z-index: 10;
+}
+
+ul#future-navigation li{
+	display: inline;
+	float: left;
+}
+
+/*=bread-crumb
+================================================*/
+ol#bread-crumb{
+	clear: both;
+	padding: 10px 20px;
+}
+
+
+/*=main
+================================================*/
+#sp div#contents div#main{
+	float: left;
+	padding: 20px;
+	width: 560px;
+}
+
+#sp div#contents div#main h1{
+	margin-bottom: 30px;
+}
+
+#sp div#contents div#main p#intro{
+	margin-bottom: 30px;
+}
+
+#sp div#contents div#main h2{
+	margin-bottom: 20px;
+}
+
+#sp div#contents div#main ol{
+	margin-bottom: 30px;
+}
+
+#sp div#contents div#main dl{
+	overflow: hidden;
+}
+
+#sp div#contents div#main dl#dan,
+#sp div#contents div#main dl#andy,
+#sp div#contents div#main dl#jeremy{
+	margin-bottom: 40px;
+}
+
+#sp div#contents div#main dl dt img{
+	border: 1px solid #aaa;
+	padding: 2px;
+}
+
+#sp div#contents div#main dl#dan dt,
+#sp div#contents div#main dl#jeremy dt{
+	float: left;
+	margin-right: 10px;
+	width: 206px;
+}
+
+#sp div#contents div#main dl#andy,
+#sp div#contents div#main dl#jeremy{
+	clear: both;
+}
+
+#sp div#contents div#main dl#andy dt{
+	float: right;
+	margin-left: 10px;
+	width: 206px;
+}
+
+
+/*=sub
+================================================*/
+#sp div#contents div#sub{
+	float: right;
+	margin-right: 20px;
+	padding: 20px 0 20px;
+	width: 340px
+}
+
+#sp div#contents div#sub ul
+,#sp div#contents div#sub p{
+	margin-bottom: 40px;
+}
+
+
+/*=site-information
+================================================*/
+div#site-information{
+	clear: both;
+	padding: 80px 20px;
+}
+
+div#site-information ul li{
+	display: inline;
+	float: left;
+}
