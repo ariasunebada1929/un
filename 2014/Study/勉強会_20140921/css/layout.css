@@ -1,4 +1,4 @@
-@charset "utf-8";
+﻿@charset "utf-8";
 
 /*=body
 ================================================*/
@@ -69,15 +69,15 @@ ol#bread-crumb{
 }
 
 #sp div#contents div#main h1{
-	margin-bottom: 30px;
+/*	margin-bottom: 30px;*/
 }
 
 #sp div#contents div#main p#intro{
 	margin-bottom: 30px;
 }
 
-#sp div#contents div#main h2{
-	margin-bottom: 20px;
+#sp div#contents div#main p#feb{
+	margin-bottom: 10px;
 }
 
 #sp div#contents div#main ol{
