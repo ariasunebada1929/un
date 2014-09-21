@@ -144,3 +144,11 @@ div#site-information ul li{
 	display: inline;
 	float: left;
 }
+
+/*=else
+================================================*/
+a#totop{/*---seminar_20140921---*/
+	display: block;
+	text-align: center;
+	width: 100%;
+}
