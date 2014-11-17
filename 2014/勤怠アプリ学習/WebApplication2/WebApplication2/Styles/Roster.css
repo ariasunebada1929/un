@@ -1,0 +1,17 @@
+﻿body {
+}
+#calender
+{
+    float :left ;
+}
+#detail
+{
+    height:320px;
+    width:560px;
+    float:left;
+    margin :0px 0px 0px 32px;
+}
+#footer
+{
+    clear :both;
+}

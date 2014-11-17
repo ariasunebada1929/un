@@ -1,0 +1,16 @@
+﻿<%@ Master Language="C#" MasterPageFile="~/View/RakuKin.Master" AutoEventWireup="true" CodeBehind="Menu.master.cs" Inherits="WebApplication2.View.Menu" %>
+<asp:Content ID="Content1" ContentPlaceHolderID="cph1" runat="server">
+    <div >
+    <form id="logout" runat ="server">
+        <hr />
+         こんにちは&nbsp; <asp:Label ID="lblUserName" runat="server"></asp:Label>
+        さん
+        <asp:Button ID="btnLogout" runat="server" onclick="Button1_Click" 
+            Text="ログアウト" />
+         <hr />
+        
+         <asp:ContentPlaceHolder ID="cph2" runat="server">
+         </asp:ContentPlaceHolder>
+    </form>
+    </div>
+</asp:Content>
